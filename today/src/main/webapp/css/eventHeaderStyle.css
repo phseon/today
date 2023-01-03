@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+/*배경이미지*/
+#event_header{
+	width : 100%;
+	position : relative;
+	background-image:url(../images/event_disp.jpg);
+	background-position: center top;
+	padding : 100px 0;
+	
+}
+/*문구*/
+#event_header_notice{
+	background-color : gray;
+	width : 600px;
+	margin : auto;
+	padding : 70px 0;
+	position: relative;
+    text-align: center;
+    border: 15px solid rgba(255,255,255,0.3);
+    background: rgba(10,20,30,0.6);
+    font-weight : bold;
+    font-size : 40px;
+    color : white;
+}
+/*게시판 타이틀*/
+#event_title{
+	text-align : center;
+}
+#event_title h1{
+	margin-top : 50px;
+	margin-bottom : 20px;
+	font-size : 40px;
+}
+#event_title img{
+	width : 600px;
+}

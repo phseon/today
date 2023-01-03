@@ -1,0 +1,59 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이벤트 글쓰기 페이지</title>
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventHeaderStyle.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventBodyStyle.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventDetailStyle.css">
+</head>
+<body>
+	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
+	<jsp:include page="/WEB-INF/views/event/event_header.jsp"/>
+	<div>                      
+		<form id = "eventwrite_form" action="eventWrite.do" method = "post" enctype = "multipart/form-data">
+			<div class = "event-detail-title">
+				<label for = "e_title">이벤트제목</label> : <input type = "text" id = "e_title" name = "e_title" placeholder="제목을 입력하세요" maxlength = "50">
+			</div>
+			<div class = "event-detail">
+				<span class = "event-detail-left"><label for = "e_startdate">시작일</label> : </span>
+				<input type = "date" id = "e_startdate" name = "e_startdate">
+				<span class = "event-detail-left"><label for = "e_enddate">마감일</label> : </span>
+				<input type = "date" id = "e_enddate" name = "e_enddate">
+				<div class = "event-detail-right">
+					<span><label for = "e_rcheck">예약버튼</label> 표시 : </span>
+					<input type = "checkbox" id = "e_rcheck" name = "e_rcheck">
+				</div>
+			</div>				
+			<div style = "width : 1400px; margin : 0 auto;">
+				<span><label for = "filename">이미지파일</label> 첨부 : </span>
+				<input type = "file" name = "filename" id = "filename" accept = "image/gif, image/png, image/jpeg">
+			</div>
+			<div class = "event-detail-content">
+				<textarea placeholder = "내용을 입력하세요"></textarea>
+				
+				<input type = "button" value = "예약하기">
+			</div>
+		</form>
+	</div>
+	<div class = "e-buttons">
+		<%-- <c:if test = "${auth == 1}"> --%>
+			<span class = "show-event-list">
+				<a href = "eventPage.do">취소</a>
+			</span>
+			<span class = "show-event-list">
+				<a href = "eventPage.do">등록</a>
+			</span>
+		<%-- </c:if> --%>
+		<span class = "show-event-list">
+			<a href = "eventPage.do">목록</a>
+		</span>
+	</div>
+
+</body>
+</html>
