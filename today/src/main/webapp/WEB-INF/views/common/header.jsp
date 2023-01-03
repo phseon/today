@@ -10,7 +10,22 @@
 <div id="main_nav">
 	<ul>
 		<li>
-			<a href="${pageContext.request.contextPath}/board/list.do">게시판</a>
+			<a href="${pageContext.request.contextPath}/board/list.do">공지사항</a>
+		</li>
+		<li>
+			<a href="${pageContext.request.contextPath}/board/list.do">의사</a>
+		</li>
+		<li>
+			<a href="${pageContext.request.contextPath}/board/list.do">시술</a>
+		</li>
+		<li>
+			<a href="${pageContext.request.contextPath}/board/list.do">리뷰</a>
+		</li>
+		<li>
+			<a href="${pageContext.request.contextPath}/board/list.do">qna</a>
+		</li>
+		<li>
+			<a href="${pageContext.request.contextPath}/board/list.do">이벤트</a>
 		</li>
 		
 		<c:if test="${!empty user_num && user_auth == 2}">
