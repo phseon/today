@@ -16,6 +16,27 @@
 	<jsp:include page="/WEB-INF/views/event/event_header.jsp"/>
 <div class = "e-wrap"> 
 	<div class = "board-box">
+		<c:if test="${count == 0}">
+			<div>
+				표시할 게시물이 없습니다.
+			</div>
+		</c:if>
+		<c:if test="${count > 0}">
+			<ul class = "event-list">
+				<c:forEach var = "eList" items = "${list}">
+					<li>
+						<a href = "eventDetail.do?e_num=${eList.e_num}">
+							<span class = "thumb">
+								<img src = "${pageContext.request.contextPath}/upload/${eList.e_imgsrc}">
+								<em>이벤트보기</em>
+							</span>
+							<strong>${eList.e_title}</strong>
+						</a>
+						<p>기간 : ${eList.e_start}~${eList.e_end}</p>
+					</li>
+				</c:forEach>
+			</ul>
+		</c:if>
 		<ul class = "event-list">
 			<li>
 				<a href = "eventDetail.do">
@@ -57,6 +78,7 @@
 				</a>
 				<p>기간 : 2020-10-10~2020-12-12</p>
 			</li>
+			
 		</ul>
 	</div>
 </div>
@@ -65,8 +87,7 @@
 		<form id = "event-searchform" action="eventPage.do" method = "get">
 			<select name = "keyfield">
 				<option value = "1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
-				<option value = "2" <c:if test="${param.keyfield == 2}">selected</c:if>>작성자</option>
-				<option value = "3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>			
+				<option value = "2" <c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>			
 			</select>
 		<div class = "input-box">
 			<input type = "search" size = "16" name = "keyword" id = "keyword" value = "${param.keyword}">
@@ -78,7 +99,7 @@
 			<%-- <c:if test="${auth ==1}"> --%>
 				<span class = "show-event-list">
 					<a  href = "eventWriteFormPage.do">글쓰기</a>
-				</span>			
+				</span>
 			<%-- </c:if> --%>
 			<span class = "show-event-list">
 				<a  href = "eventPage.do">목록</a>

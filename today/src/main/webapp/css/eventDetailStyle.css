@@ -32,7 +32,7 @@
 	margin-bottom : 100px;
 	border-bottom : 2px solid rgba(0,0,0,0.3);
 }
-.event-detail-content textarea {
+.event-detail-content #e_content {
 	width : 1000px;
     height: 500px;
     resize: none;

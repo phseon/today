@@ -10,33 +10,67 @@
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventHeaderStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventBodyStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventDetailStyle.css">
+<script type="text/javascript" src = "${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	function submit_eventwrite_form() {
+		if ($('#e_title').val().trim() == '') {
+			alert('제목을 입력해주세요.');
+			$('#e_title').val('').focus();
+			return false;
+		}
+		if ($('#e_startdate').val() == '') {
+			alert('이벤트 시작일을 선택해주세요.');
+			$('#e_startdate').focus();
+			return false;
+		}
+		if ($('#e_enddate').val() == '') {
+			alert('이벤트 마감일을 선택해주세요.');
+			$('#e_enddate').focus();
+			return false;
+		}
+		if ($('#e_imgsrc').val() == '' && $('#e_content').val() == '') {
+			alert('이벤트 내용 입력 또는 이미지를 선택해주세요.');
+			$('#e_imgsrc').focus();
+			$('#e_content').focus();
+			return false;
+		}
+		$('#eventwrite_form').submit();
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
 	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<jsp:include page="/WEB-INF/views/event/event_header.jsp"/>
 	<div>                      
-		<form id = "eventwrite_form" action="eventWrite.do" method = "post" enctype = "multipart/form-data">
+		<form id = "eventwrite_form" action="eventWritePage.do" method = "post" enctype = "multipart/form-data">
 			<div class = "event-detail-title">
 				<label for = "e_title">이벤트제목</label> : <input type = "text" id = "e_title" name = "e_title" placeholder="제목을 입력하세요" maxlength = "50">
 			</div>
 			<div class = "event-detail">
-				<span class = "event-detail-left"><label for = "e_startdate">시작일</label> : </span>
+				<span class = "event-detail-left">
+				<label for = "e_startdate">시작일</label> : 
+				</span>
 				<input type = "date" id = "e_startdate" name = "e_startdate">
-				<span class = "event-detail-left"><label for = "e_enddate">마감일</label> : </span>
+				<span class = "event-detail-left">
+				<label for = "e_enddate">마감일</label> : 
+				</span>
 				<input type = "date" id = "e_enddate" name = "e_enddate">
 				<div class = "event-detail-right">
-					<span><label for = "e_rcheck">예약버튼</label> 표시 : </span>
+					<span>
+					<label for = "e_rcheck">예약버튼</label> 표시 : 
+					</span>
 					<input type = "checkbox" id = "e_rcheck" name = "e_rcheck">
 				</div>
 			</div>				
 			<div style = "width : 1400px; margin : 0 auto;">
-				<span><label for = "filename">이미지파일</label> 첨부 : </span>
-				<input type = "file" name = "filename" id = "filename" accept = "image/gif, image/png, image/jpeg">
+				<span>
+				<label for = "e_imgsrc">이미지파일</label> 첨부 : 
+				</span>
+				<input type = "file" name = "e_imgsrc" id = "e_imgsrc" accept = "image/gif, image/png, image/jpeg">
 			</div>
 			<div class = "event-detail-content">
-				<textarea placeholder = "내용을 입력하세요"></textarea>
-				
+				<textarea id = "e_content" placeholder = "내용을 입력하세요"></textarea>
 				<input type = "button" value = "예약하기">
 			</div>
 		</form>
@@ -47,7 +81,7 @@
 				<a href = "eventPage.do">취소</a>
 			</span>
 			<span class = "show-event-list">
-				<a href = "eventPage.do">등록</a>
+				<a href = "#" onclick = "return submit_eventwrite_form()">등록</a>
 			</span>
 		<%-- </c:if> --%>
 		<span class = "show-event-list">
