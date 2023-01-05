@@ -10,7 +10,9 @@ public class DeleteUserFormAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		return "/WEB-INF/views/myInfo/deleteUserForm.jsp";
+		
+		
+		return "/WEB-INF/views/myinfo/deleteUserForm.jsp";
 	}
 
 }

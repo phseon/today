@@ -10,7 +10,7 @@ public class MyPageAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		return "/WEB-INF/views/myInfo/myPage.jsp";
+		return "/WEB-INF/views/myinfo/myPage.jsp";
 	}
 
 }

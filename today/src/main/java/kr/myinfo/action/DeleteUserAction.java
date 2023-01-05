@@ -10,7 +10,7 @@ public class DeleteUserAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		return "/WEB-INF/views/myInfo/deleteUser.jsp";
+		return "/WEB-INF/views/myinfo/deleteUser.jsp";
 	}
 
 }
