@@ -9,7 +9,7 @@ body{
 	background: white;
 }
 
-/* 회원삭제 폼 */
+/* 회원삭제 폼, 비밀번호 변경 폼 */
 .content{
 	width: 1200px;
 	margin: 0 auto;
@@ -30,52 +30,123 @@ body{
 	height: 300px;
 	display: flex;
 }
-form{
+.content form{
 	width: 700px;
 	height: 300px;
 	border: 1px solid #797979;
 	margin: 0 auto;
 }
-form ul{
+.content form ul{
 	height: 150px;
-	padding: 70px 0 0 0;
+	padding: 50px 0 0 0;
 }
-form li{
+.content form li{
 	height: 50px;
-	padding: 0 180px 0 120px;
+	padding: 0 170px 0 110px;
 	float: right;
 }
-form li label{
+.content form li label{
 	width: 80px;
 	height: 30px;
 	font-size: 15px;
 	color: black;
 }
-form li input{
+.content form li input{
 	width: 300px;
 	height: 30px;
 	font-size: 12px;
 	color: black;
 }
-.main-button{
+.content .main-button{
 	width: 100%;
 	height: 50px;
 }
-.main-button input{
+.content .main-button input{
 	font-size: 15px;
 	background: white;
 	height: 30px;
+	padding: 3px;
 	border: 1px solid #797979;
 }
-.main-button input[type="submit"]{
-	float: left;
-	margin-left: 200px;
+.content .main-button input:hover{
+	cursor: pointer;
 }
-.main-button input[type="button"]{
+.content .main-button input[type="submit"]{
+	float: left;
+	margin-left: 225px;
+}
+.content .main-button input[type="button"]{
 	float: right;
-	margin-right: 200px;
+	margin-right: 170px;
 }
 
+
+/* 개인정보 변경 폼 */
+.inform{
+	width: 1200px;
+	margin: 0 auto;
+	margin-top: 5%;
+}
+.inform .inform-head{
+	width: 100%;
+	padding: 20px 0 50px 0;
+}
+.inform .inform-head p{
+	color: black;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+}
+.inform .inform-main{
+	width: 100%;
+	height: 300px;
+	display: flex;
+}
+.inform form{
+	width: 700px;
+	height: 410px;
+	border: 1px solid #797979;
+	margin: 0 auto;
+	padding: 30px 0 30px 0;
+}
+
+.inform form li{
+	height: 50px;
+	padding: 0 170px 0 110px;
+	float: right;
+	margin-bottom: 5px;
+}
+.inform form li label{
+	width: 80px;
+	height: 30px;
+	font-size: 15px;
+	color: black;
+}
+.inform form li input{
+	width: 300px;
+	height: 30px;
+	font-size: 12px;
+	color: black;
+}
+.inform .main-button{
+	width: 100%;
+	height: 50px;
+}
+.inform .main-button input{
+	font-size: 15px;
+	background: white;
+	height: 30px;
+	padding: 3px;
+	border: 1px solid #797979;
+}
+.inform .main-button input[type="submit"]{
+	float: left;
+	margin-left: 225px;
+}
+.inform .main-button input[type="button"]{
+	float: right;
+	margin-right: 170px;
+}
 
 
 
