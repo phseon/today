@@ -135,4 +135,39 @@ public class EventDAO {
 		
 		return list;
 	}
+	//이벤트 글상세
+	public EventVO getEvent(int e_num) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		EventVO event = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			
+			sql = "SELECT * FROM event WHERE e_num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, e_num);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				event = new EventVO();
+				event.setE_num(rs.getInt("e_num"));
+				event.setE_title(rs.getString("e_title"));
+				event.setE_start(rs.getString("e_start"));
+				event.setE_end(rs.getString("e_end"));
+				event.setE_imgsrc(rs.getString("e_imgsrc"));
+				event.setE_content(rs.getString("e_content"));
+				event.setE_date(rs.getDate("e_date"));
+				event.setM_num(rs.getInt("m_num"));
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+		return event;
+	}
 }

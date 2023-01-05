@@ -70,7 +70,7 @@
 				<input type = "file" name = "e_imgsrc" id = "e_imgsrc" accept = "image/gif, image/png, image/jpeg">
 			</div>
 			<div class = "event-detail-content">
-				<textarea id = "e_content" placeholder = "내용을 입력하세요"></textarea>
+				<textarea id = "e_content" name = "e_content" placeholder = "내용을 입력하세요"></textarea>
 				<input type = "button" value = "예약하기">
 			</div>
 		</form>

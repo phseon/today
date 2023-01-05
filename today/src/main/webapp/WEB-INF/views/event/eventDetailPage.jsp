@@ -17,24 +17,26 @@
 	<jsp:include page="/WEB-INF/views/event/event_header.jsp"/>
 	<div>
 		<div class = "event-detail-title">
-			이벤트 제목
+			${event.e_title}
 		</div>
 		<div class = "event-detail">
-			<span class = "event-detail-left">진행기간 : 2022-10-10 ~ 2022-12-12</span>
+			<span class = "event-detail-left">진행기간 : ${event.e_start} ~ ${event.e_end }</span>
 			<div class = "event-detail-right">
 				<span>작성자 : 관리자</span>
-				<span>작성일 : 2022-10-10</span>
+				<span>작성일 : ${event.e_date}</span>
 			</div>
 		</div>
 		<div class = "event-detail-content">
-			<c:if test="${!empty board.filename }">
+			<c:if test="${!empty event.e_imgsrc}">
 				<div align = "center">
-					<img src = "${pageContext.request.contextPath}/upload/${board.filename}" style = "max-width : 800px">
+					<img src = "${pageContext.request.contextPath}/upload/${event.e_imgsrc}" style = "max-width : 800px">
 				</div>		
 			</c:if>
-			<div align = "center">
-				<img src = "${pageContext.request.contextPath}/images/esample.jpg" style = "max-width : 800px">
-			</div>
+			<c:if test="${!empty event.e_content }">
+				<div align = "center">
+					${event.e_content}
+				</div>
+			</c:if>
 		</div>
 	</div>
 	<div class = "e-buttons">
