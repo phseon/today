@@ -170,4 +170,40 @@ public class EventDAO {
 		
 		return event;
 	}
+	//글수정
+	public void updateEvent(EventVO event) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		String sub_sql = "";
+		int cnt = 0;
+		
+		try {
+			conn = DBUtil.getConnection();
+			
+			//이미지 파일 체크
+			if(event.getE_imgsrc() != null) {
+				sub_sql += ", e_imgsrc = ?";
+			}
+			
+			sql = "UPDATE event SET e_title = ?, e_start = ?, e_end = ?" + sub_sql 
+				+ ", e_content = ?, e_date = sysdate WHERE e_num = ?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(++cnt, event.getE_title());
+			pstmt.setString(++cnt, event.getE_start());
+			pstmt.setString(++cnt, event.getE_end());
+			if(event.getE_imgsrc() != null) {
+				pstmt.setString(++cnt, event.getE_imgsrc());
+			}
+			pstmt.setString(++cnt, event.getE_content());
+			pstmt.setInt(++cnt, event.getE_num());
+			
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
 }

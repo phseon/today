@@ -42,7 +42,7 @@
 	<div class = "e-buttons">
 		<c:if test = "${auth == 1}">
 			<span class = "show-event-list">
-				<a  href = "eventPage.do">수정</a>
+				<a  href = "eventUpdateFormPage.do?e_num=${event.e_num}">수정</a>
 			</span>
 			<span class = "show-event-list">
 				<a  href = "eventPage.do">삭제</a>
