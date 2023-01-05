@@ -10,7 +10,7 @@ public class ModifyUserFormAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		return "/WEB-INF/views/myInfo/modifyUserForm.jsp";
+		return "/WEB-INF/views/myinfo/modifyUserForm.jsp";
 	}
 
 }

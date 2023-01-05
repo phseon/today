@@ -10,7 +10,7 @@ public class ModifyPasswordAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		return "/WEB-INF/views/myInfo/modifyPassword.jsp";
+		return "/WEB-INF/views/myinfo/modifyPassword.jsp";
 	}
 
 }
