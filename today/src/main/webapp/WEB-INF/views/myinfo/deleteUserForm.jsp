@@ -9,7 +9,21 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-
+$(function(){
+// 폼 전송버튼 눌렀을 때 안의 정보가 빈칸인지 확인하기
+	$('#delete_form').submit(function(){
+		if($('#id').val().trim()==''){
+			alert('아이디를 입력하세요.');
+			$('#id').val('').focus();
+			return false;
+		}
+		if($('#pwd').val().trim()==''){
+			alert('비밀번호를 입력하세요.');
+			$('#pwd').val('').focus();
+			return false;
+		}
+	})
+})
 </script>
 </head>
 <body>
@@ -25,11 +39,11 @@
 			<form id="delete_form" action="deleteUser.do" method="post">
 				<ul>
 					<li>
-						<label for="id">ID</label>
+						<label for="id">아이디</label>
 						<input type="text" name="id" id="id" maxlength="10" autocomplete="off">                       
 					</li>
 					<li>
-						<label for="pwd">PASSWORD</label>
+						<label for="pwd">비밀번호</label>
 						<input type="password" name="pwd" id="pwd" maxlength="15" autocomplete="off">
 					</li>
 				</ul>
