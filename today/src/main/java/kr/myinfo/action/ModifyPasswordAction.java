@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.controller.Action;
+import kr.member.vo.MemberVO;
 import kr.myinfo.dao.MyInfoDAO;
 
 public class ModifyPasswordAction implements Action{
@@ -17,7 +18,7 @@ public class ModifyPasswordAction implements Action{
 				(Integer)session.getAttribute("user_num");
 		if(user_num==null) {//로그인이 되지 않은 경우
 			return "redirect:/member/loginForm.jsp";
-		} */
+		} 
 		
 		// 로그인된 경우
 		request.setCharacterEncoding("utf-8");
@@ -28,9 +29,23 @@ public class ModifyPasswordAction implements Action{
 		String pwd = request.getParameter("pwd");
 		String check_pwd = request.getParameter("check_pwd");
 		
-		// 로그인 dao 생성되면 하기 (아이디 체크 메서드 생성되면 하기)
+		현재 로그인한 아이디 변수에 저장
+		String user_id = (String)session.getAttribute("user_id"); 
 		
+		MyInfoDAO dao = MyInfoDAO.getInstance();
+		MemberVO member = dao.checkMemberExist(id);
+		boolean check = false;
 		
+		// 현재 로그인아이디(user_id)와 내가 입력한 정보가 동일하고, db에 내가 입력한 id의 정보가 있다면
+		if(member!=null && id.equals(user_id)) {
+			check = member.isCheckedPassword(origin_pwd);
+		}
+		if(check) { // check까지 통과되면 비밀번호 변경하기
+			dao.updateMemberPassword(pwd,user_num);
+		}
+		request.setAttribute("check", check);
+		
+		*/
 		return "/WEB-INF/views/myinfo/modifyPassword.jsp";
 	}
 

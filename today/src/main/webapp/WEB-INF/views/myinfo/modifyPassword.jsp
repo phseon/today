@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-</body>
-</html>
+<c:if test="${check}">
+	<script>
+		alert('비밀번호를 수정했습니다.');
+		location.href='myPage.do';
+	</script>
+</c:if>
+<c:if test="${!check}">
+	<script>
+		alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+		history.go(-1);
+	</script>
+</c:if>
