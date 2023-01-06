@@ -9,7 +9,108 @@
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/member.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-
+ 	$(function(){
+ 		let idChecked = 0; //0:id중복 체크 미실시 또는 중복
+ 							//1:id 미중복
+ 		//아이디 중복 체크
+ 		$('#id_check').click(function(){
+ 			if($('#id').val().trim()==''){
+ 				alert('아이디를 입력하세요!');
+ 				$('#id').val('').focus();
+ 				return;
+ 			}
+ 			//서버와 통신
+ 			$.ajax({
+ 				url:'checkDuplicatedId.do',
+ 				type:'post',
+ 				data:{id:$('#id').val()},
+ 				dataType:'json',
+ 				success:function(param){
+ 					if(param.result=='idNotFound'){
+ 						idChecked = 1;
+ 						$('#message_id').css('color','#000000').text('등록 가능 ID');
+ 					}else if(param.result == 'idDuplicated'){
+ 						idChecked = 0;
+ 						$('#message_id').css('color','red').text('등록된 ID');
+ 						$('#id').val('').focus();
+ 					}else{
+ 						idChecked = 0;
+ 						alert('아이디 중복 체크 오류 발생');
+ 					}
+ 				},
+ 				error:function(){
+ 					idChecked = 0;
+ 					alert('네트워크 오류 발생');
+ 				}
+ 			});
+ 		});//end of id_check
+ 		
+ 		//아이디 중복 안내 메시지 초기화 및 아이디 중복 값 초기화
+ 		$('#register_form #id').keydown(function(){
+			idChecked = 0;
+			$('#message_id').text('');
+		});//end of keydown
+ 		
+ 		//회원 정보 등록 유효성 체크
+ 		$('#register_form').submit(function(){
+ 			if($('input[type=radio]:checked').length<1){
+ 				alert('가입분야를 선택하세요!');
+ 				return false;
+ 			}
+ 			
+ 			if($('input[type=radio]:checked').length<1){ //라디오 버튼을 배열로 받아서 2개 다 선택할 시 길이가 2이고 1개 선택할시 길이가 1
+				alert('상품표시여부를 지정하세요!');
+				return false;
+			}
+ 			if($('#id').val().trim()==''){
+ 				alert('아이디를 입력하세요!');
+ 				$('#id').val('').focus();
+ 				return false;
+ 			}
+ 			if(idChecked==0){
+ 				alert('아이디 중복 체크 필수!');
+ 				return false;
+ 			}
+ 			if($('#name').val().trim()==''){
+ 				alert('이름을 입력하세요!');
+ 				$('#name').val('').focus();
+ 				return false;
+ 			}
+ 			if($('#pwd').val().trim()==''){
+ 				alert('비밀번호를 입력하세요!');
+ 				$('#pwd').val('').focus();
+ 				return false;
+ 			}
+ 			if($('#email').val().trim()==''){
+ 				alert('이메일을 입력하세요!');
+ 				$('#email').val('').focus();
+ 				return false;
+ 			}
+ 			if($('#phone').val().trim()==''){
+ 				alert('전화번호를 입력하세요!');
+ 				$('#phone').val('').focus();
+ 				return false;
+ 			}
+ 			if($('#zipcode').val().trim()==''){
+ 				alert('우편번호를 입력하세요!');
+ 				$('#zipcode').val('').focus();
+ 				return false;
+ 			}
+ 			if($('#address1').val().trim()==''){
+ 				alert('주소를 입력하세요!');
+ 				$('#address1').val('').focus();
+ 				return false;
+ 			}
+ 			if($('#address2').val().trim()==''){
+ 				alert('나머지 주소를 입력하세요!');
+ 				$('#address2').val('').focus();
+ 				return false;
+ 			}	
+ 			
+ 		});//end of submit
+ 		
+ 							
+ 	});
 </script>
 </head>
 <body>
@@ -21,9 +122,9 @@
 			<h2>회원가입</h2>
 			<hr width="100%" size="1" noshade="noshade">
 				<ul>
-					<li>
-						<input type="radio" name="chk_info" value="1" id="chk_info1">의사
-						<input type="radio" name="chk_info" value="2" id="chk_info2">회원						
+					<li class="radiobt">
+						<input type="radio" name="chk_info" value="1" id="chk_info1" class="chk_info">의사
+						<input type="radio" name="chk_info" value="2" id="chk_info2" class="chk_info">회원						
 					</li>
 					<li>
 						<label for="id">id</label>
@@ -50,7 +151,7 @@
 					<li>
 						<label for="zipcode">우편번호</label>
 						<input type="text" name="zipcode" id="zipcode" maxlength="5">
-						<input type="button" value="우편번호 찾기" onclick="exeDaumPostcode()">
+						<input type="button" value="우편번호 찾기" onclick="execDaumPostcode()">
 					</li>
 					<li>
 						<label for="address1">주소</label>
@@ -65,6 +166,8 @@
 					<input type="submit" value="회원가입">
 				</div>
 		</form>
+		
+		
 		<!-- 우편번호 검색 시작 -->
 				<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 	<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
