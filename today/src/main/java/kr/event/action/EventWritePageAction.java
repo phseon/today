@@ -14,7 +14,9 @@ public class EventWritePageAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+		
+		//eventWriteFormPage.jsp에서 eventwrite_form 폼을 통해 데이터 전달 받음
+		
 		/*
 		 * HttpSession session = request.getSession(); 
 		 * Integer m_num = (Integer)session.getAttribute("m_num"); 
@@ -30,6 +32,7 @@ public class EventWritePageAction implements Action{
 		}
 		
 		//관리자 권한 로그인인 경우
+		//eventWriteForm의 eventwrite_form 폼에서 받아온 정보 eventVO에 담기
 		MultipartRequest multi = FileUtil.createFile(request);
 		EventVO event = new EventVO();
 		event.setE_title(multi.getParameter("e_title"));
@@ -37,13 +40,19 @@ public class EventWritePageAction implements Action{
 		event.setE_end(multi.getParameter("e_enddate"));		
 		event.setE_content(multi.getParameter("e_content"));
 		event.setE_imgsrc(multi.getFilesystemName("e_imgsrc"));
+		event.setE_thumb(multi.getFilesystemName("e_thumb"));
+		event.setE_resbtn(multi.getParameter("e_rcheck"));
+		System.out.println(multi.getParameter("e_rcheck"));
+		
 		//일단은 auth값 1로 처리, 나중에 m_num 데이터 받아오기
 		//event.setM_num(m_num)
 		event.setM_num(auth);
 		
+		//dao 호출해서 받아온 데이터 db에 저장
 		EventDAO dao = EventDAO.getInstance();
 		dao.insertEvent(event);
 		
+		//글 등록 완료 페이지로 이동
 		return "/WEB-INF/views/event/eventWritePage.jsp";
 	}
 

@@ -10,9 +10,23 @@ public class EventVO {
 	private String e_content;
 	private String e_imgsrc;
 	private Date e_date;
+	private String e_thumb;
+	private String e_resbtn;
 	private int m_num;
 	
 	
+	public String getE_thumb() {
+		return e_thumb;
+	}
+	public void setE_thumb(String e_thumb) {
+		this.e_thumb = e_thumb;
+	}
+	public String getE_resbtn() {
+		return e_resbtn;
+	}
+	public void setE_resbtn(String e_resbtn) {
+		this.e_resbtn = e_resbtn;
+	}
 	public int getE_num() {
 		return e_num;
 	}

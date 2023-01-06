@@ -15,7 +15,6 @@
 	$(function() {
 		$('#delete_btn').click(function() {
 			let choice = confirm('글을 삭제하시겠습니까?');
-			console.log('aaa;');
 			if (choice) {
 				location.replace('eventDelete.do?e_num=${event.e_num}');
 			}
@@ -48,6 +47,10 @@
 				<div align = "center">
 					${event.e_content}
 				</div>
+			</c:if>
+			<c:if test="${event.e_resbtn == true}">
+			<br>
+					<input class = "reserve_btn" type = "button" value = "예약하기">
 			</c:if>
 		</div>
 	</div>

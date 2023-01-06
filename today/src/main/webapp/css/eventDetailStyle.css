@@ -43,3 +43,9 @@
 	height : 40px;
 	font-size : 13pt;
 }
+.reserve_btn{
+	margin-top : 30px;
+	padding : 10px 30px;
+	border-radius : 15px;
+	background : #82c8a0;
+}

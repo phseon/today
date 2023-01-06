@@ -27,8 +27,8 @@ public class EventDAO {
 		try {
 			conn = DBUtil.getConnection();
 			
-			sql = "INSERT INTO event (e_num, e_title, e_start, e_end, e_content, e_imgsrc, e_date, m_num) "
-				+ "VALUES (event_seq.nextval, ?, ?, ?, ?, ?, SYSDATE, ?)";
+			sql = "INSERT INTO event (e_num, e_title, e_start, e_end, e_content, e_imgsrc, e_date, m_num, e_resbtn, e_thumb) "
+				+ "VALUES (event_seq.nextval, ?, ?, ?, ?, ?, SYSDATE, ?, ?, ?)";
 			pstmt  = conn.prepareStatement(sql);
 			pstmt.setString(1, event.getE_title());
 			pstmt.setString(2, event.getE_start());
@@ -36,6 +36,9 @@ public class EventDAO {
 			pstmt.setString(4, event.getE_content());
 			pstmt.setString(5, event.getE_imgsrc());
 			pstmt.setInt(6, event.getM_num());
+			pstmt.setString(7, event.getE_resbtn());
+			pstmt.setString(8, event.getE_thumb());
+			
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -123,6 +126,8 @@ public class EventDAO {
 				event.setE_date(rs.getDate("e_date"));
 				//나중에 썸네일 열 추가해서 불러오기
 				event.setE_imgsrc(rs.getString("e_imgsrc"));
+				event.setE_thumb(rs.getString("e_thumb"));
+				event.setE_resbtn(rs.getString("e_resbtn"));
 				
 				list.add(event);
 			}
@@ -161,6 +166,8 @@ public class EventDAO {
 				event.setE_content(rs.getString("e_content"));
 				event.setE_date(rs.getDate("e_date"));
 				event.setM_num(rs.getInt("m_num"));
+				event.setE_thumb(rs.getString("e_thumb"));
+				event.setE_resbtn(rs.getString("e_resbtn"));
 			}
 		}catch(Exception e) {
 			throw new Exception(e);
@@ -186,13 +193,15 @@ public class EventDAO {
 				sub_sql += ", e_imgsrc = ?";
 			}
 			
-			sql = "UPDATE event SET e_title = ?, e_start = ?, e_end = ?" + sub_sql 
+			sql = "UPDATE event SET e_title = ?, e_start = ?, e_end = ?, e_thumb = ?, e_resbtn = ?" + sub_sql 
 				+ ", e_content = ?, e_date = sysdate WHERE e_num = ?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(++cnt, event.getE_title());
 			pstmt.setString(++cnt, event.getE_start());
 			pstmt.setString(++cnt, event.getE_end());
+			pstmt.setString(++cnt, event.getE_thumb());
+			pstmt.setString(++cnt, event.getE_resbtn());
 			if(event.getE_imgsrc() != null) {
 				pstmt.setString(++cnt, event.getE_imgsrc());
 			}
@@ -227,15 +236,16 @@ public class EventDAO {
 		}
 	}
 	//파일 삭제
-	public void deleteFile(int e_num) throws Exception{
+	public void deleteFile(int e_num, String e_imgType) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
 		
 		try {
 			conn = DBUtil.getConnection();
+			System.out.println(e_imgType + "dao");
 			
-			sql = "UPDATE event SET e_imgsrc = '' WHERE e_num = ?";
+			sql = "UPDATE event SET " + e_imgType + "= '' WHERE e_num = ?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, e_num);

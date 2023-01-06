@@ -34,8 +34,26 @@
 			$('#e_content').focus();
 			return false;
 		}
+		if ($('#e_thumb').val() == '') {
+			alert('이벤트 썸네일을 선택해주세요.');
+			$('#e_thumb').focus();
+			return false;
+		}
 		$('#eventwrite_form').submit();
 	}
+	$(function(){
+		$('#e_rcheck').click(function(){
+			let is_checked = $('#e_rcheck').is(':checked');
+			
+			if(is_checked){
+				$('#res_btn_hide').show();
+				$('#e_rcheck').val('true');
+			}else{
+				$('#res_btn_hide').hide();
+				$('#e_rcheck').val('false');
+			}
+		});
+	});
 </script>
 </head>
 <body>
@@ -45,7 +63,8 @@
 	<div>                      
 		<form id = "eventwrite_form" action="eventWritePage.do" method = "post" enctype = "multipart/form-data">
 			<div class = "event-detail-title">
-				<label for = "e_title">이벤트제목</label> : <input type = "text" id = "e_title" name = "e_title" placeholder="제목을 입력하세요" maxlength = "50">
+				<label for = "e_title">이벤트제목</label> : 
+				<input type = "text" id = "e_title" name = "e_title" placeholder="제목을 입력하세요" maxlength = "50">
 			</div>
 			<div class = "event-detail">
 				<span class = "event-detail-left">
@@ -65,13 +84,22 @@
 			</div>				
 			<div style = "width : 1400px; margin : 0 auto;">
 				<span>
+				<label for = "e_thumb">썸네일파일</label> 첨부 : 
+				</span>
+				<input type = "file" name = "e_thumb" id = "e_thumb" accept = "image/gif, image/png, image/jpeg">
+				<span>
 				<label for = "e_imgsrc">이미지파일</label> 첨부 : 
 				</span>
 				<input type = "file" name = "e_imgsrc" id = "e_imgsrc" accept = "image/gif, image/png, image/jpeg">
 			</div>
 			<div class = "event-detail-content">
 				<textarea id = "e_content" name = "e_content" placeholder = "내용을 입력하세요"></textarea>
-				<input type = "button" value = "예약하기">
+				<br>
+				
+				<div id = "res_btn_hide" style = "display : none;">
+					<input class = "reserve_btn" type = "button" value = "예약하기">
+				</div>
+				
 			</div>
 		</form>
 	</div>

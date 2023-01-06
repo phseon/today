@@ -27,7 +27,7 @@
 					<li>
 						<a href = "eventDetail.do?e_num=${eList.e_num}">
 							<span class = "thumb">
-								<img src = "${pageContext.request.contextPath}/upload/${eList.e_imgsrc}">
+								<img src = "${pageContext.request.contextPath}/upload/${eList.e_thumb}">
 								<em>이벤트보기</em>
 							</span>
 							<strong>${eList.e_title}</strong>

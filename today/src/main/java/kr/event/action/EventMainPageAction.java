@@ -14,13 +14,18 @@ public class EventMainPageAction implements	Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+		
+		//navBar에서 이벤트 클릭 시 호출됨, eventMainPage.jsp에서 검색 시 호출
+		
+		//페이지처리 처음 호출될 때 pageNum은 null이므로 1로 설정, 다음 페이지 누를 때마다 호출 pageNum 증가
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null) pageNum = "1";
 		
+		//eventMainPage 검색시 호출될 때 받아온 keyfiled, keyword request에 저장
 		String keyfield = request.getParameter("keyfield");
 		String keyword = request.getParameter("keyword");
 		
+		//dao에 받아온 keyfield, keyword 넘겨주고 페이지 개수 받아오기
 		EventDAO dao = EventDAO.getInstance();
 		int count = dao.getEventCount(keyfield, keyword);
 		
@@ -31,10 +36,12 @@ public class EventMainPageAction implements	Action{
 			list = dao.getListEvent(page.getStartRow(), page.getEndRow(), keyfield, keyword);
 		}
 		
+		//request에 페이지 개수, 받아온 페이지 내 이벤트 리스트, 페이지수 저장
 		request.setAttribute("count", count);
 		request.setAttribute("list", list);
 		request.setAttribute("page", page.getPage());
 		
+		//다시 eventMainPage.jsp 호출
 		return "/WEB-INF/views/event/eventMainPage.jsp";
 	}
 

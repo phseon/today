@@ -34,12 +34,19 @@ public class EventDeleteFileAction implements Action{
 		
 		EventDAO dao = EventDAO.getInstance();
 		EventVO db_event = dao.getEvent(e_num);
+		String e_imgType = request.getParameter("e_imgType");
+		System.out.println(request.getParameter("e_imgType"));
 		if(auth != 1) {
 			mapAjax.put("result", "wrongAccess");
 		}else {
-			dao.deleteFile(e_num);
+			dao.deleteFile(e_num, e_imgType);
+			if(e_imgType.equals("e_thumb")) {
+				FileUtil.removeFile(request, db_event.getE_thumb());
+				System.out.println("asdfasd");
+			}else if(e_imgType.equals("e_imgsrc") ) {
+				FileUtil.removeFile(request, db_event.getE_imgsrc());
+			}
 			
-			FileUtil.removeFile(request, db_event.getE_imgsrc());
 			mapAjax.put("result", "success");
 		}
 		

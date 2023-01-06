@@ -10,7 +10,9 @@ public class EventWriteFormPageAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-				
+		
+		//eventMainPage.jsp에서 글쓰기 버튼 누를 시 호출
+		
 		/*
 		 * HttpSession session = request.getSession(); 
 		 * Integer m_num = (Integer)session.getAttribute("m_num"); 
@@ -25,7 +27,7 @@ public class EventWriteFormPageAction implements Action{
 			return "/WEB-INF/views/common/notice.jsp";
 		}
 		
-		
+		//권한 체크 후 form 페이지로 이동
 		return "/WEB-INF/views/event/eventWriteFormPage.jsp";
 	}
 

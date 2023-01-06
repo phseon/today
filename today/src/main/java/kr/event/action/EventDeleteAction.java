@@ -35,6 +35,7 @@ public class EventDeleteAction implements Action{
 		
 		//파일삭제
 		FileUtil.removeFile(request, db_event.getE_imgsrc());
+		FileUtil.removeFile(request, db_event.getE_thumb());
 		
 		return "redirect:/event/eventPage.do";
 	}
