@@ -10,6 +10,18 @@
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventHeaderStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventBodyStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventDetailStyle.css">
+<script type="text/javascript" src = "${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#delete_btn').click(function() {
+			let choice = confirm('글을 삭제하시겠습니까?');
+			console.log('aaa;');
+			if (choice) {
+				location.replace('eventDelete.do?e_num=${event.e_num}');
+			}
+		});
+	})
+</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
@@ -45,7 +57,7 @@
 				<a  href = "eventUpdateFormPage.do?e_num=${event.e_num}">수정</a>
 			</span>
 			<span class = "show-event-list">
-				<a  href = "eventPage.do">삭제</a>
+				<a href = "#" id = "delete_btn">삭제</a>
 			</span>
 		</c:if>
 		<span class = "show-event-list">
