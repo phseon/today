@@ -18,8 +18,7 @@
 				<li><a href="${pageContext.request.contextPath}/qna/qnaPage.do">QnA</a>
 				</li>
 				<li><a
-					href="${pageContext.request.contextPath}/review/writeForm.do">리뷰</a>
-				<!-- 리뷰전체페이지로 수정 -->
+					href="${pageContext.request.contextPath}/review/reviewPage.do">리뷰</a>
 				</li>
 				<li><a
 					href="${pageContext.request.contextPath}/event/eventPage.do">이벤트</a>
