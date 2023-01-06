@@ -21,7 +21,7 @@ public class MyPageAction implements Action{
 
 		MyInfoDAO dao = MyInfoDAO.getInstance();
 		//MemberVO member = dao.getMemberInfo(user_num);
-		MemberVO member = dao.getMemberInfo(1);
+		MemberVO member = dao.getMemberInfo(6);
 		request.setAttribute("member", member);
 		
 		return "/WEB-INF/views/myinfo/myPage.jsp";

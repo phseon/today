@@ -15,6 +15,38 @@ public class MyInfoDAO {
 	}
 	private MyInfoDAO() {}
 
+	// 로그인한 아이디 체크
+	public MemberVO checkMemberExist(String id)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberVO member = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			// 동일한 id의 정보가 있는지 조회
+			sql = "SELECT * FROM member m cross join member_detail d ON "
+					+ "m.m_num=d.m_num WHERE m.id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				member = new MemberVO();
+				member.setM_num(rs.getInt("m_num"));
+				member.setId(rs.getString("id"));
+				member.setAuth(rs.getInt("auth"));
+				member.setPwd(rs.getString("pwd"));
+				member.setImgsrc(rs.getString("imgsrc")); // mypage photo에서 사용
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return member;
+	}
 	
 	// 회원탈퇴
 	public void deleteMemberInfo(int member_num)throws Exception{
@@ -133,6 +165,45 @@ public class MyInfoDAO {
 			pstmt.setString(1, password);//새비밀번호
 			pstmt.setInt(2, member_num);//회원번호
 			//SQL문 실행
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	
+	// 프로필 사진 수정
+	public void updateMyPhoto(String photo, int member_num)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "update member_detail set imgsrc=? where m_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, photo);
+			pstmt.setInt(2, member_num);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	
+	// 프로필 사진 삭제
+	public void deleteMyPhoto(int member_num)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "update member_detail set imgsrc=null where m_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, member_num);
 			pstmt.executeUpdate();
 		}catch(Exception e) {
 			throw new Exception(e);

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -16,7 +15,7 @@ import kr.member.vo.MemberVO;
 import kr.myinfo.dao.MyInfoDAO;
 import kr.util.FileUtil;
 
-public class UpdateMyPhotoAction implements Action{
+public class DeleteMyPhotoAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -39,13 +38,8 @@ public class UpdateMyPhotoAction implements Action{
 			//로그인  유저 정보
 			MemberVO member = dao.getMemberInfo(user_num);
 			
-			//전송된 파일 업로드 처리
-			MultipartRequest multi = FileUtil.createFile(request);
-			
-			//서버에 저장된 파일명 반환
-			String photo = multi.getFilesystemName("photo");
-			dao.updateMyPhoto(photo, user_num);
-			// session.setAttribute("user_photo", photo);
+			dao.deleteMyPhoto(user_num);
+			// session.setAttribute("user_photo", null);
 			
 			//이전 프로필 이미지 삭제
 			FileUtil.removeFile(request, member.getImgsrc());
@@ -62,6 +56,8 @@ public class UpdateMyPhotoAction implements Action{
 		
 		
 		return "/WEB-INF/views/common/ajax_view.jsp";
+
 	}
 
+	
 }
