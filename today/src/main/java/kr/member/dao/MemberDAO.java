@@ -76,5 +76,36 @@ public class MemberDAO {
 		
 	}
 	//ID 중복 체크 및 로그인 처리
-	
+	public MemberVO checkMember(String id)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberVO member = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "select * from member m left outer join member_detail d on m.m_num=d.m_num where m.id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			//sql문 실행해서 결과행 resultset에 담음
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				member = new MemberVO();
+				member.setM_num(rs.getInt("m_num"));
+				member.setId(rs.getString("id"));
+				member.setAuth(rs.getInt("auth"));
+				member.setPwd(rs.getString("pwd"));
+				member.setImgsrc(rs.getString("imgsrc"));
+				member.setEmail(rs.getString("email"));
+			}
+			
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return member;
+	}
 }
