@@ -39,6 +39,20 @@
 			$('#e_thumb').focus();
 			return false;
 		}
+		let start = $('#e_startdate').val();
+		let end = $('#e_enddate').val();
+		
+		let splitStart = start.split('-');
+		let splitEnd = end.split('-');
+		
+		let startDate = new Date(splitStart[0], splitStart[1], splitStart[2]);
+		let endDate = new Date(splitEnd[0], splitEnd[1], splitEnd[2]);
+		
+		if(startDate.getTime() > endDate.getTime()){
+			alert('이벤트 시작일은 종료일보다 빨라야 합니다.');
+			$('#e_startdate').focus();
+			return false;
+		}
 		$('#eventupdate_form').submit();
 	}
 
@@ -75,13 +89,20 @@
 	}
 	
 	$(function(){
+		let is_checked = "<c:out value = '${event.e_resbtn}'/>";
+		
+		if(is_checked){
+			$('#res_btn_hide').show();
+		}else{
+			$('#res_btn_hide').hide();
+		}
+		console.log(is_checked);
+		
 		$('#e_rcheck').click(function(){
-			let is_checked = $('#e_rcheck').is(':checked');
-			
-			if(is_checked){
+			if($('#e_rcheck').is(':checked')){
 				$('#res_btn_hide').show();
-				$('#e_rcheck').val('true');
-				console.log($(this).attr('id'));
+				$('#e_rcheck').val('true');	
+				checkDate();
 			}else{
 				$('#res_btn_hide').hide();
 				$('#e_rcheck').val('false');
@@ -114,7 +135,7 @@
 					<span>
 					<label for = "e_rcheck">예약버튼</label> 표시 : 
 					</span>
-					<input type = "checkbox" id = "e_rcheck" name = "e_rcheck" <c:if test="${event.e_resbtn == 'true'}">checked = "checked"</c:if>>
+					<input type = "checkbox" id = "e_rcheck" name = "e_rcheck" <c:if test="${event.e_resbtn == true}">checked = "checked"</c:if>>
 				</div>
 			</div>				
 			<div style = "width : 1400px; margin : 0 auto;">
@@ -123,8 +144,7 @@
 				</span>
 				<input type = "file" name = "e_thumb" id = "e_thumb" accept = "image/gif, image/png, image/jpeg">
 				<c:if test="${!empty event.e_thumb}">
-				<span id = "file_detail1">
-					(${event.e_thumb})파일이 등록되어 있습니다.
+				<span class = "file_detail1">(${event.e_thumb})파일이 등록되어 있습니다.
 					<input type = "button" value = "파일삭제" id = "aaa" onclick = "deleteFileAjax('e_thumb')">
 				</span>
 				</c:if>
@@ -133,8 +153,7 @@
 				</span>
 				<input type = "file" name = "e_imgsrc" id = "e_imgsrc" accept = "image/gif, image/png, image/jpeg">
 				<c:if test="${!empty event.e_imgsrc}">
-				<span id = "file_detail2">
-					(${event.e_imgsrc})파일이 등록되어 있습니다.
+				<span class = "file_detail2">(${event.e_imgsrc})파일이 등록되어 있습니다.
 					<input type = "button" value = "파일삭제" onclick = "deleteFileAjax('e_imgsrc')">
 				</span>
 				</c:if>
@@ -142,13 +161,13 @@
 			<div class = "event-detail-content">
 				<textarea id = "e_content" name = "e_content" placeholder = "내용을 입력하세요">${event.e_content}</textarea>
 				<br>
-				
+				<br>
 				<div id = "res_btn_hide" style = "display : none;">
-					<input class = "reserve_btn" type = "button" value = "예약하기">
+					<input type = "button" class = "reserve_btn" value = "예약하기" disabled>
 				</div>
 			</div>
 		</form>
-	</div>
+	</div>1
 	<div class = "e-buttons">
 		<%-- <c:if test = "${auth == 1}"> --%>
 			<span class = "show-event-list">

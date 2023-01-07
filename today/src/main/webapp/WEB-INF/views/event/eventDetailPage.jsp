@@ -50,7 +50,7 @@
 			</c:if>
 			<c:if test="${event.e_resbtn == true}">
 			<br>
-					<input class = "reserve_btn" type = "button" value = "예약하기">
+					<input class = "reserve_btn" type = "button" value = "예약하기" onclick = "location.href = 'eventToReserveCheck.do'"><!-- 나중에 예약페이지로 링크 -->
 			</c:if>
 		</div>
 	</div>

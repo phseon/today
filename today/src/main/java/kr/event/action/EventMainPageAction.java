@@ -30,7 +30,7 @@ public class EventMainPageAction implements	Action{
 		int count = dao.getEventCount(keyfield, keyword);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum), count, 9, 5, "eventPage.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum), count, 9, 1, "eventPage.do");
 		List<EventVO> list = null;
 		if(count > 0) {
 			list = dao.getListEvent(page.getStartRow(), page.getEndRow(), keyfield, keyword);

@@ -37,7 +37,7 @@
 				</c:forEach>
 			</ul>
 		</c:if>
-		<ul class = "event-list">
+		<%-- <ul class = "event-list">
 			<li>
 				<a href = "eventDetail.do">
 					<span class = "thumb">
@@ -78,8 +78,8 @@
 				</a>
 				<p>기간 : 2020-10-10~2020-12-12</p>
 			</li>
-			
-		</ul>
+		</ul> --%>
+		<div class = "paging-box">${page }</div>
 	</div>
 </div>
 

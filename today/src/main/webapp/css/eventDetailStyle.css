@@ -45,7 +45,14 @@
 }
 .reserve_btn{
 	margin-top : 30px;
+	color : white;
+	font-weight : bold;
 	padding : 10px 30px;
 	border-radius : 15px;
 	background : #82c8a0;
+	cursor : pointer;
+	border : 1px solid gray;
+}
+.reserve_btn:active{
+	background : #8cdbaf;
 }
