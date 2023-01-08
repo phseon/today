@@ -24,7 +24,7 @@ public class InformationDetailAction implements Action{
 		
 		request.setAttribute("info", info);
 		
-		return "/WEB-INF/views/information/detail.jsp";
+		return "/WEB-INF/views/information/informationDetail.jsp";
 	}
 
 }
