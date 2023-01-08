@@ -16,7 +16,7 @@ public class WriteFormAction implements Action{
 		if(user_num==null) {
 			return "redirect:/member/loginForm.do";
 		}else if(user_auth==2) {
-			return "redirect:/member/loginForm.do";
+			return "/WEB-INF/views/information/autherror.jsp";
 		}
 		//로그인 된 경우
 		return "/WEB-INF/views/information/writeForm.jsp";
