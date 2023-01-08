@@ -155,10 +155,7 @@ $(function(){
 					<li><a href="${pageContext.request.contextPath}/myinfo/reservationInfoList.do">병원예약 조회</a></li>
 				</ul>
 				<ul>
-					<li><a href="${pageContext.request.contextPath}/myinfo/questionInfoList.do">QNA</a></li>
 					<li><a href="${pageContext.request.contextPath}/myinfo/reviewInfoList.do">REVIEW</a></li>
-				</ul>
-				<ul>
 					<li><a href="${pageContext.request.contextPath}/myinfo/deleteUserForm.do">회원 탈퇴</a></li>
 				</ul>
 			</div>
