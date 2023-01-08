@@ -5,8 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.controller.Action;
+import kr.information.dao.InformationDAO;
+import kr.information.vo.InformationVO;
 
-public class WriteFormAction implements Action{
+public class WriteAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -18,8 +20,16 @@ public class WriteFormAction implements Action{
 		}else if(user_auth==2) {
 			return "redirect:/member/loginForm.do";
 		}
-		//로그인 된 경우
-		return "/WEB-INF/views/information/writeForm.jsp";
+		
+		InformationVO info = new InformationVO();
+		info.setInfo_title(request.getParameter("title"));
+		info.setInfo_content(request.getParameter("content"));
+		info.setM_num(user_num);
+		
+		InformationDAO dao = InformationDAO.getInstance();
+		dao.insertInformation(info);
+		
+		return "/WEB-INF/views/information/write.jsp";
 	}
-
+	
 }

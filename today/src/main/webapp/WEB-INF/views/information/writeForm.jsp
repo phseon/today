@@ -7,6 +7,23 @@
 <title>공지사항 글쓰기</title>
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#write_form').submit(function(){
+			if($('#title').val().trim()==''){
+				alert('제목을 입력하세요!');
+				$('#title').val('').focus();
+				return false;
+			}
+			
+			if($('#content').val().trim()==''){
+				alert('내용을 입력하세요!');
+				$('#content').val('').focus();
+				return false;
+			}
+		});
+	});
+</script>
 </head>
 <body>
 <div class="page-main">
@@ -21,10 +38,7 @@
 				<label for="title">제목</label>
 				<input type="text" name="title" id="title" maxlength="50">
 			</li>
-			<li>
-				<label for="pwd">비밀번호</label>
-				<input type="password" name="pwd" id="pwd" maxlength="20">
-			</li>
+			
 			<li>
 				<label for="content">내용</label>
 				<textarea rows="10" cols="40" name="content" id="content"></textarea>
