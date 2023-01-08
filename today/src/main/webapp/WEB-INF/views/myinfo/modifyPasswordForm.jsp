@@ -17,25 +17,25 @@ $(function(){
 			$('#id').val('').focus();
 			return false;
 		}
-		if($('#origin_pwd').val().trim()==''){ // 비밀번호가 빈칸일 때
+		if($('#origin_passwd').val().trim()==''){ // 비밀번호가 빈칸일 때
 			alert('비밀번호를 입력하시기 바랍니다.');
-			$('#origin_pwd').val('').focus();
+			$('#origin_passwd').val('').focus();
 			return false;
 		}
-		if($('#pwd').val().trim()==''){ // 새 비밀번호가 빈칸일 때
+		if($('#passwd').val().trim()==''){ // 새 비밀번호가 빈칸일 때
 			alert('새 비밀번호를 입력하시기 바랍니다.');
-			$('#pwd').val('').focus();
+			$('#passwd').val('').focus();
 			return false;
 		}
-		if($('#check_pwd').val().trim()==''){ // 새 비밀번호 확인이 빈칸일 때
+		if($('#cpasswd').val().trim()==''){ // 새 비밀번호 확인이 빈칸일 때
 			alert('새 비밀번호 확인을 입력하시기 바랍니다.');
-			$('#check_pwd').val('').focus();
+			$('#cpasswd').val('').focus();
 			return false;
 		}
-		if($('#pwd').val()!=$('#check_pwd').val()){
+		if($('#passwd').val()!=$('#cpasswd').val()){
 			alert('비밀번호와 새 비밀번호가 일치하지 않습니다.');
-			$('#check_pwd').val('');
-			$('#pwd').val('').focus();
+			$('#passwd').val('');
+			$('#cpasswd').val('').focus();
 			return false;
 		}
 	})
@@ -59,16 +59,16 @@ $(function(){
 						<input type="text" name="id" id="id" maxlength="10" autocomplete="off">                       
 					</li>
 					<li>
-						<label for="origin_pwd">비밀번호</label>
-						<input type="password" name="origin_pwd" id="origin_pwd" maxlength="15" autocomplete="off">
+						<label for="origin_passwd">비밀번호</label>
+						<input type="password" name="origin_passwd" id="origin_passwd" maxlength="15" autocomplete="off">
 					</li>
 					<li>
-						<label for="pwd">새 비밀번호</label>
-						<input type="password" name="pwd" id="pwd" maxlength="15" autocomplete="off">
+						<label for="passwd">새 비밀번호</label>
+						<input type="password" name="passwd" id="passwd" maxlength="15" autocomplete="off">
 					</li>
 					<li>
-						<label for="check_pwd">비밀번호 확인</label>
-						<input type="password" name="check_pwd" id="check_pwd" maxlength="15" autocomplete="off">
+						<label for="cpasswd">비밀번호 확인</label>
+						<input type="password" name="cpasswd" id="cpasswd" maxlength="15" autocomplete="off">
 					</li>
 				</ul>
 				<div class="main-button">
