@@ -8,12 +8,14 @@
 body{
 	width: 100vw;
 	background: white;
+	z-index: 0;
 }
 /* 마이페이지-상단 */
 .content{
 	width: 760px;
 	margin: 0 auto;
 	margin-top: 5%;
+	height: 100vh;
 }
 .content .content-head{
 	width: 100%;
@@ -26,6 +28,7 @@ body{
 	text-align: center;
 }
 /* 마이페이지-중단 */
+/* 프로필사진 */
 .content .content-middle{
 	width: 100%;
 	height: 300px;
@@ -34,14 +37,44 @@ body{
 .middle-left{
 	float: left;
 	margin-right: 30px;
+	width: 300px;
 }
 .middle-left .my-photo{
-	width: 220px; 
-	height: 220px;
+	width: 250px; 
+	height: 250px;
 	object-fit: cover;
 	object-position:top;
 	border-radius:50%;
 }
+.middle-left #photo_edit{
+	width: 250px; /* 프로필사진과 줄 맞추기 */
+	margin-top: 30px;
+	height: 30px;
+	background: white;
+	border: 1px solid #898989;
+	cursor: pointer;
+	font-size: 15px;
+	color: #7b7b7b;
+}
+.middle-left #photo_edit:hover{
+	color: white;
+	background: #898989;
+}
+.middle-left .photo-button{
+	width: 100%;
+	margin-top: 10px;
+	z-index: 10;
+	display: absolute;
+}
+.middle-left .photo-button input{
+	margin-bottom: 3px;
+	padding: 3px;
+}
+.middle-left .photo-button input[type="file"]{ /*파일이름 뜨는 란*/
+	border: 0.5px solid black;
+}
+
+/* 바로가기 리스트 */
 .middle-right{
 	float: right;
 }
@@ -52,13 +85,17 @@ body{
 	margin: 0px 0 5px 5px;
 	height: 100px;
 	text-align: center;
-	border: 1px solid #cccccc;
+	border: 1px solid #898989;
 }
 .middle-right ul li a{
 	line-height: 100px;
 	font-size: 20px;
 	text-decoration: none;
 	color: black;
+	cursor: pointer;
+}
+.middle-right ul li a:hover{
+	color: grey;
 }
 /* 마이페이지-하단 */
 .content .content-bottom{
@@ -66,13 +103,15 @@ body{
 	height: 200px;
 }
 .content .content-bottom p{
+	color: black;
 	font-size: 30px;
+	font-weight: bold;
 	text-align: center;
 }
 .content .content-bottom ul{
 	width: 700px;
 	height: 200px;
-	border: 1px solid #797979;
+	border: 1px solid #898989;
 	margin: 0 auto;
 	padding: 30px;
 }
@@ -82,9 +121,17 @@ body{
 }
 .content .content-bottom input{
 	font-size: 15px;
-	margin: 10px 0 70px 0;
+	margin: 20px 0 150px 0;
+	height: 30px;
+	background: white;
+	border: 1px solid #898989;
+	cursor: pointer;
+	color: #7b7b7b; 
+	width: 220px;
 }
 .content .content-bottom input:hover{
 	cursor: pointer;
+	color: white;
+	background: #898989;
 }
 
