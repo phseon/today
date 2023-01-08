@@ -12,14 +12,14 @@
 $(function(){
 // 폼 전송버튼 눌렀을 때 안의 정보가 빈칸인지 확인하기
 	$('#delete_form').submit(function(){
-		if($('#id').val().trim()==''){
+		if($('#form_id').val().trim()==''){
 			alert('아이디를 입력하세요.');
-			$('#id').val('').focus();
+			$('#form_id').val('').focus();
 			return false;
 		}
-		if($('#pwd').val().trim()==''){
+		if($('#form_pwd').val().trim()==''){
 			alert('비밀번호를 입력하세요.');
-			$('#pwd').val('').focus();
+			$('#form_pwd').val('').focus();
 			return false;
 		}
 	})
@@ -39,12 +39,12 @@ $(function(){
 			<form id="delete_form" action="deleteUser.do" method="post">
 				<ul>
 					<li>
-						<label for="id">아이디</label>
-						<input type="text" name="id" id="id" maxlength="10" autocomplete="off">                       
+						<label for="form_id">아이디</label>
+						<input type="text" name="form_id" id="form_id" maxlength="10" autocomplete="off">                       
 					</li>
 					<li>
-						<label for="pwd">비밀번호</label>
-						<input type="password" name="pwd" id="pwd" maxlength="15" autocomplete="off">
+						<label for="form_pwd">비밀번호</label>
+						<input type="password" name="form_pwd" id="form_pwd" maxlength="15" autocomplete="off">
 					</li>
 				</ul>
 				<div class="main-button">
