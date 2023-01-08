@@ -41,6 +41,11 @@
 		</table>
 		<div class="align-center">${page}</div>
 		</c:if>
+		<div class="list-space align-right">
+			<input type="button" value="글쓰기" onclick="location.href='writeForm.do'"
+				<c:if test="${empty user_num or user_auth==2}">disabled="disabled"</c:if> />
+	
+		</div>
 	</div>
 </div>
 </body>

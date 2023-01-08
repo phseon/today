@@ -107,8 +107,45 @@ public class InformationDAO {
 	}
 	
 	//글상세
+	public InformationVO getinfodetail(int info_num) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		InformationVO info = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "select * from information i join member m using(m_num) join member_detail d using(m_num) where i.info_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, info_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				info = new InformationVO();
+				info.setInfo_num(rs.getInt("info_num"));
+				info.setInfo_title(rs.getString("info_title"));
+				info.setInfo_content(rs.getString("info_content"));
+				info.setInfo_date(rs.getDate("info_date"));
+				info.setId(rs.getString("id"));
+				info.setM_num(rs.getInt("m_num"));
+			}
+			
+			
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return info;
+	}
+	
+	
+	
+	
 	
 	//글수정
+	
 	
 	
 	//글삭제
