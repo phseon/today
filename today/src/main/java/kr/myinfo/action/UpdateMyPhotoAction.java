@@ -22,7 +22,7 @@ public class UpdateMyPhotoAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		Map<String,String> mapAjax = new HashMap<String,String>();
-		/*
+		
 		// 현재 로그인 세션 정보 저장
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
@@ -31,9 +31,7 @@ public class UpdateMyPhotoAction implements Action{
 		if(user_num==null) {
 			mapAjax.put("result", "logout");
 		}else {//로그인 된 경우  
-		*/
-		
-		int user_num = 6;  //삭제하기
+
 			MyInfoDAO dao = MyInfoDAO.getInstance();
 			
 			//로그인  유저 정보
@@ -45,15 +43,14 @@ public class UpdateMyPhotoAction implements Action{
 			//서버에 저장된 파일명 반환
 			String photo = multi.getFilesystemName("photo");
 			dao.updateMyPhoto(photo, user_num);
-			// session.setAttribute("user_photo", photo);
+			session.setAttribute("user_photo", photo);
 			
 			//이전 프로필 이미지 삭제
 			FileUtil.removeFile(request, member.getImgsrc());
 			
 			mapAjax.put("result", "success");
-		/*
 		}
-		*/
+		
 		//JSON 데이터로 변환
 		ObjectMapper mapper = new ObjectMapper();
 		String ajaxData = mapper.writeValueAsString(mapAjax);
