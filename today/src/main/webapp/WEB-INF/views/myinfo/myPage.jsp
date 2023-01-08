@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MYPAGE</title>
+<title>오늘의치과 - MY PAGE</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myInfoStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
@@ -109,6 +109,12 @@ $(function(){
 		$('#photo').val('');
 	})
 	
+	// 버튼누를 시 모달창 보이기
+	$('.photo-button').css('display','none');
+	$('#photo_edit').click(function(){
+		$('.photo-button').css('display','block');
+		$('#photo_edit').css('display','none');
+	})
 })
 </script>
 
@@ -131,6 +137,8 @@ $(function(){
 					<img src="${pageContext.request.contextPath}/upload/${member.imgsrc}" class="my-photo">		
 				</c:if>
 				
+				
+				<input type="button" value="프로필 수정 및 삭제" id="photo_edit">
 				<div class="photo-button">
 					<c:if test="${!empty member.imgsrc}"><!-- 프로필사진이 비어있지않다면 기본 프로필 사진으로 변경할 버튼이 보이도록 -->
 						<input type="button" value="기본 프로필사진으로 변경" id="photo_reset"><br>
@@ -138,16 +146,17 @@ $(function(){
 					<input type="file" id="photo" accept="image/gif,image/png,image/jpeg"><br>
 					<input type="button" value="전송" id="photo_submit">
 					<input type="button" value="취소" id="photo_cancle">
-					</div>
+				</div>
+					
 			</div>
 			<div class="middle-right"> <!-- 바로가기 리스트 -->
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/myinfo/modifyPasswordForm.do">비밀번호 수정</a></li>
-					<li><a href="#">병원예약 조회</a></li>
+					<li><a href="${pageContext.request.contextPath}/myinfo/reservationInfoList.do">병원예약 조회</a></li>
 				</ul>
 				<ul>
-					<li><a href="#">QNA</a></li>
-					<li><a href="#">REVIEW</a></li>
+					<li><a href="${pageContext.request.contextPath}/myinfo/questionInfoList.do">QNA</a></li>
+					<li><a href="${pageContext.request.contextPath}/myinfo/reviewInfoList.do">REVIEW</a></li>
 				</ul>
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/myinfo/deleteUserForm.do">회원 탈퇴</a></li>
@@ -156,7 +165,7 @@ $(function(){
 		</div>
 		
 		<div class="content-bottom"> <!-- 개인정보 -->
-			<p>개인정보</p>
+			<p>INFORMATION</p>
 			<ul>
 				<li>이름 : ${member.name}</li>
 				<li>전화번호 : ${member.phone}</li>
@@ -164,7 +173,7 @@ $(function(){
 				<li>우편번호 : ${member.zipcode}</li>
 				<li>주소 : ${member.address1} ${member.address2}</li>
 				<li>
-					<input type="button" value="개인정보 수정하기" onclick="location.href='modifyUserForm.do'">
+					<input type="button" value="개인정보 수정" onclick="location.href='modifyUserForm.do'">
 				</li>
 			</ul>    
 		</div>
