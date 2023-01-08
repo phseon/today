@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import kr.member.vo.MemberVO;
+import kr.reservation.vo.ReservationVO;
+import kr.review.vo.ReviewVO;
 import kr.util.DBUtil;
 
 public class MyInfoDAO {
@@ -211,11 +213,64 @@ public class MyInfoDAO {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
-	
+
 	// 리뷰 조회
+	public ReviewVO getReviewInfo(int member_num)throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ReviewVO myReview = null;
+		String sql = null;
+			
+		try {
+			conn = DBUtil.getConnection();
+			// 내가 작성한 리뷰보기 페이지에서 작성날짜, 리뷰내용 확인
+			sql = "select * from reservation res join review rev on res.rev_num = rev.rev_num where res.m_num = ?"; 
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, member_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) { //출력되는 정보가 있으면 각 vo에 담기. 작성날짜, 리뷰내용, 멤버번호만 넘기기
+				myReview = new ReviewVO();
+				// review에 m_num이 없어서 member_num 을 저장못함. 임의의변수에 저장해보기 -> 불가능. 그냥 넘기지말아보자
+				myReview.setR_date(rs.getDate("r_date"));
+				myReview.setR_content(rs.getString("r_content"));
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return myReview;
+	}
 	
-	// qna 조회
-	
-	// 병원 예약 조회
+	// 병원 예약 조회 (예약날짜 예약시간 병원의사 시술이름)
+	public ReservationVO getReservationInfo(int member_num)throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ReservationVO myReservation = null;
+		String sql = null;
+			
+		try {
+			conn = DBUtil.getConnection();
+			// 내가 예약한 병원진료 보기에서 날짜, 시간, 진료과목 보기
+			sql = "select * from reservation r join procedure p on r.p_num = p.p_num where m_num = ?"; 
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, member_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) { //출력되는 정보가 있으면 각 vo에 담기. 예약날짜, 예약시간, 진료과목 넘기기.
+				myReservation = new ReservationVO();
+				myReservation.setM_num(rs.getInt(member_num));
+				myReservation.setRev_date(rs.getString("rev_date"));
+				myReservation.setRev_time(rs.getString("rev_time"));
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return myReservation;
+	}
+
 	
 }
