@@ -28,8 +28,7 @@ public class MyInfoDAO {
 		try {
 			conn = DBUtil.getConnection();
 			// 동일한 id의 정보가 있는지 조회
-			sql = "SELECT * FROM member m cross join member_detail d ON "
-					+ "m.m_num=d.m_num WHERE m.id=?";
+			sql = "SELECT * FROM member m left outer join member_detail d ON m.m_num=d.m_num WHERE m.id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			
@@ -60,16 +59,17 @@ public class MyInfoDAO {
 		try {
 			conn = DBUtil.getConnection();
 			conn.setAutoCommit(false); //auto commit 해제. sql 2개이상 실핼할 땐 commit해제
-			sql = "delete from member_detail where m_num = ?"; // member_detail에서 정보삭제
+			
+			sql = "update member set auth=0 where m_num=?"; // 권한 0으로 수정
 			pstmt1 = conn.prepareStatement(sql);
 			pstmt1.setInt(1, member_num);
 			pstmt1.executeUpdate();
 			
-			sql = "update member set auth = 0 where m_num = ?"; // 권한 0으로 수정
+			sql = "delete from member_detail where m_num=?"; // member_detail에서 정보삭제
 			pstmt2 = conn.prepareStatement(sql);
 			pstmt2.setInt(1, member_num);
 			pstmt2.executeUpdate();
-
+			
 			conn.commit(); // 모두 실행 성공시
 			
 		}catch(Exception e) {
@@ -151,7 +151,7 @@ public class MyInfoDAO {
 	}
 	
 	// 비밀번호 수정
-	public void updateMemberPassword(String password, int member_num)throws Exception{
+	public void updateMemberPassword(String passwd, int member_num)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
@@ -164,7 +164,7 @@ public class MyInfoDAO {
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터를 바인딩
-			pstmt.setString(1, password);//새비밀번호
+			pstmt.setString(1, passwd);//새비밀번호
 			pstmt.setInt(2, member_num);//회원번호
 			//SQL문 실행
 			pstmt.executeUpdate();
@@ -243,6 +243,8 @@ public class MyInfoDAO {
 		return myReview;
 	}
 	
+	/*
+	
 	// 병원 예약 조회 (예약날짜 예약시간 병원의사 시술이름)
 	public ReservationVO getReservationInfo(int member_num)throws Exception {
 		Connection conn = null;
@@ -271,6 +273,5 @@ public class MyInfoDAO {
 		}
 		return myReservation;
 	}
-
-	
+	*/
 }
