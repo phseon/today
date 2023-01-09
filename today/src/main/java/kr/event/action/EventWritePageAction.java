@@ -2,6 +2,7 @@ package kr.event.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 
@@ -15,19 +16,18 @@ public class EventWritePageAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		//eventWriteFormPage.jsp에서 eventwrite_form 폼을 통해 데이터 전달 받음
+		//eventWriteFormPage.jsp에서 등록 누르면 eventwrite_form 폼을 통해 데이터 전달 받음
 		
-		/*
-		 * HttpSession session = request.getSession(); 
-		 * Integer m_num = (Integer)session.getAttribute("m_num"); 
-		 * if(m_num == null) { 
-		 * return "redirect:/member/loginForm.do";
-		 * } 
-		 * Integer auth = (Integer)session.getAttribute("auth");
-		 */
-		//일단 받아오기 전까지 데이터 강제 세팅 나중에 해제
-		int auth = 1;
-		if(auth != 1) {// 0 : 탈퇴 1 : 의사 2 :일반
+		HttpSession session = request.getSession(); 
+		 Integer user_num = (Integer)session.getAttribute("user_num"); 
+		 if(user_num == null) { 
+		 return "redirect:/event/callLoginForm.do";
+		 } 
+		 Integer user_auth = (Integer)session.getAttribute("user_auth");
+
+		if(user_auth != 1) {// 0 : 탈퇴 1 : 의사 2 :일반
+			request.setAttribute("accessMsg", "이벤트 글작성 권한이 없습니다.");
+			request.setAttribute("accessUrl", "/WEB-INF/views/event/eventMainPage.jsp");
 			return "/WEB-INF/views/common/notice.jsp";
 		}
 		
@@ -42,11 +42,7 @@ public class EventWritePageAction implements Action{
 		event.setE_imgsrc(multi.getFilesystemName("e_imgsrc"));
 		event.setE_thumb(multi.getFilesystemName("e_thumb"));
 		event.setE_resbtn(multi.getParameter("e_rcheck"));
-		System.out.println(multi.getParameter("e_rcheck"));
-		
-		//일단은 auth값 1로 처리, 나중에 m_num 데이터 받아오기
-		//event.setM_num(m_num)
-		event.setM_num(auth);
+		event.setM_num(user_num);
 		
 		//dao 호출해서 받아온 데이터 db에 저장
 		EventDAO dao = EventDAO.getInstance();

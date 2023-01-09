@@ -13,17 +13,16 @@ public class EventWriteFormPageAction implements Action{
 		
 		//eventMainPage.jsp에서 글쓰기 버튼 누를 시 호출
 		
-		/*
-		 * HttpSession session = request.getSession(); 
-		 * Integer m_num = (Integer)session.getAttribute("m_num"); 
-		 * if(m_num == null) { 
-		 * return "redirect:/member/loginForm.do";
-		 * } 
-		 * Integer auth = (Integer)session.getAttribute("auth");
-		 */
-		//일단 받아오기 전까지 데이터 강제 세팅 나중에 해제
-		int auth = 1;
-		if(auth != 1) {// 0 : 탈퇴 1 : 의사 2 :일반
+		 HttpSession session = request.getSession(); 
+		 Integer user_num = (Integer)session.getAttribute("user_num"); 
+		 if(user_num == null) { 
+		 return "redirect:/event/callLoginForm.do";
+		 } 
+		 Integer user_auth = (Integer)session.getAttribute("user_auth");
+
+		if(user_auth != 1) {// 0 : 탈퇴 1 : 의사 2 :일반
+			request.setAttribute("accessMsg", "이벤트 글작성 권한이 없습니다.");
+			request.setAttribute("accessUrl", "/WEB-INF/views/event/eventMainPage.jsp");
 			return "/WEB-INF/views/common/notice.jsp";
 		}
 		

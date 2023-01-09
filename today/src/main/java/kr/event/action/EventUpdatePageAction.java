@@ -19,17 +19,18 @@ public class EventUpdatePageAction implements Action{
 		
 		//eventUpdateFormPage.jsp에서 호출
 		
-		HttpSession session = request.getSession();
-		/*
-		 * Integer m_num = (Integer)session.getAttribute("m_num"); 
-		 * if(m_num == null) {
-		 * //로그인이 안된경우 
-		 * return "redirect:/member/loginForm.do";
-		 * }
-		 */
-		//권한 나중에 세션에서 받아오기
-		int auth = 1;
-		request.setAttribute("auth", auth);
+		HttpSession session = request.getSession(); 
+		 Integer user_num = (Integer)session.getAttribute("user_num"); 
+		 if(user_num == null) { 
+		 return "redirect:/event/callLoginForm.do";
+		 } 
+		 Integer user_auth = (Integer)session.getAttribute("user_auth");
+
+		if(user_auth != 1) {// 0 : 탈퇴 1 : 의사 2 :일반
+			request.setAttribute("accessMsg", "이벤트 글작성 권한이 없습니다.");
+			request.setAttribute("accessUrl", "/WEB-INF/views/event/eventMainPage.jsp");
+			return "/WEB-INF/views/common/notice.jsp";
+		}
 		
 		
 		MultipartRequest multi = FileUtil.createFile(request);
@@ -41,7 +42,7 @@ public class EventUpdatePageAction implements Action{
 		
 		EventDAO dao = EventDAO.getInstance();
 		EventVO db_event = dao.getEvent(e_num);
-		if(auth != 1) {
+		if(user_auth != 1) {
 			FileUtil.removeFile(request, e_imgsrc);//업로드된 파일이 있으면 파일 삭제
 			FileUtil.removeFile(request, e_thumb);
 			return "/WEB-INF/views/common/notice.jsp";

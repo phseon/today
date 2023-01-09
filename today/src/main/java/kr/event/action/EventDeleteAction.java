@@ -12,22 +12,23 @@ public class EventDeleteAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		/*
-		HttpSession session = request.getSession();
-		Integer m_num = (Integer)session.getAttribute("m_num");
-		if(m_num == null) { //로그인이 안된경우
-			return "redirect:/member/loginForm.do";
+		
+		 HttpSession session = request.getSession(); 
+		 Integer user_num = (Integer)session.getAttribute("user_num"); 
+		 if(user_num == null) { 
+		 return "redirect:/event/callLoginForm.do";
+		 } 
+		 Integer user_auth = (Integer)session.getAttribute("user_auth");
+
+		if(user_auth != 1) {// 0 : 탈퇴 1 : 의사 2 :일반
+			request.setAttribute("accessMsg", "이벤트 글삭제 권한이 없습니다.");
+			request.setAttribute("accessUrl", "/WEB-INF/views/event/eventMainPage.jsp");
+			return "/WEB-INF/views/common/notice.jsp";
 		}
-		*/
-		int auth = 1;
-		request.setAttribute("auth", auth);
 		
 		int e_num = Integer.parseInt(request.getParameter("e_num"));
 		EventDAO dao = EventDAO.getInstance();
 		EventVO db_event = dao.getEvent(e_num);
-		if(auth != 1) {
-			return "/WEB-INF/views/common/notice.jsp";
-		}
 		
 		//이벤트 글삭제
 		dao.deleteEvent(e_num);

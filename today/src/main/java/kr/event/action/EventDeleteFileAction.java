@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -19,24 +20,26 @@ public class EventDeleteFileAction implements Action{
 
 		Map<String, String> mapAjax = new HashMap<String, String>();
 		
-		/*
-		HttpSession session = request.getSession();
-		Integer m_num = (Integer)session.getAttribute("m_num");
-		if(m_num == null) { //로그인이 안된경우
-			mapAjax.put("result", "logout");
-		}else{
-		
+		 HttpSession session = request.getSession(); 
+		 Integer user_num = (Integer)session.getAttribute("user_num"); 
+		 if(user_num == null) { 
+		 return "redirect:/event/callLoginForm.do";
+		 } 
+		 Integer user_auth = (Integer)session.getAttribute("user_auth");
+
+		if(user_auth != 1) {// 0 : 탈퇴 1 : 의사 2 :일반
+			request.setAttribute("accessMsg", "파일 삭제 권한이 없습니다.");
+			request.setAttribute("accessUrl", "/WEB-INF/views/event/eventMainPage.jsp");
+			return "/WEB-INF/views/common/notice.jsp";
 		}
-		*/
+		
 		int e_num = Integer.parseInt(request.getParameter("e_num"));
-		int auth = 1;
-		request.setAttribute("auth", auth);
 		
 		EventDAO dao = EventDAO.getInstance();
 		EventVO db_event = dao.getEvent(e_num);
 		String e_imgType = request.getParameter("e_imgType");
 		System.out.println(request.getParameter("e_imgType"));
-		if(auth != 1) {
+		if(user_auth != 1) {
 			mapAjax.put("result", "wrongAccess");
 		}else {
 			dao.deleteFile(e_num, e_imgType);

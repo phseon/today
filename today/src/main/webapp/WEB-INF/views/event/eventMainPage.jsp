@@ -70,12 +70,12 @@
 		</form>
 		<br>
 		<div class = "e-buttons">
-			<%-- <c:if test="${auth ==1}"> --%>
-				<span class = "show-event-list">
+<%-- 			<c:if test="${user_auth ==1}">
+ --%>				<span class = "show-event-list">
 					<a  href = "eventWriteFormPage.do">글쓰기</a>
 				</span>
-			<%-- </c:if> --%>
-			<span class = "show-event-list">
+<%-- 			</c:if>
+ --%>			<span class = "show-event-list">
 				<a  href = "eventPage.do">목록</a>
 			</span>
 		</div>
