@@ -30,20 +30,23 @@
 			</div>
 		</div>
 		<h2>로그인 중인 회원번호 : ${user_num}</h2>
-		
-		<h2>현재 리뷰 번호(rev_num) : ${rez.rev_num}</h2>
-		<h2>현재 리뷰 작성 회원번호(m_num) : ${rez.m_num}</h2>
-		<h2>현재 리뷰 번호(rev_num) : ${reservation.rev_num}</h2>
-		<h2>현재 리뷰 작성 회원번호(m_num) : ${reservation.m_num}</h2>
-		<h2>${rez.rev_num}</h2>
-		<h2>${rez.m_num}</h2>
-		<h2>${rev_num}</h2>
-		<h2>${m_num}</h2>
-		<h2>${gm_num}</h2>
+		<h2>리뷰번호 : ${review.r_num}</h2>
+		<h2>현재 리뷰 작성 회원번호: ${rez.m_num}</h2>
 		
 		<c:if test="${user_num == rez.m_num}">
 				<input type="button" value="수정" 
 				onclick="location.href='updateForm.do?r_num=${review.r_num}'">
+				<input type="button" value="삭제" id="delete_btn">
+				<script type="text/javascript">
+					let delete_btn = document.getElementById('delete_btn');
+					//이벤트 연결
+					delete_btn.onclick=function(){
+						let choice = confirm('리뷰를 삭제하시겠습니까?');
+						if(choice){
+							location.replace('delete.do?r_num=${review.r_num}');
+						}
+					};
+				</script>
 		</c:if>
 		
 		<!-- 댓글 시작 -->
@@ -64,6 +67,15 @@
 				</c:if>
 			</form>
 		</div>
+		<!-- 댓글 목록 출력 시작 -->
+		<div id="output"></div>
+		<div class="paging-button" style="display:none;">
+			<input type="button" value="다음글 보기">
+		</div>
+		<div id="loading" style="display:none;">
+			<img src="${pageContext.request.contextPath}/images/loading.gif" width="50" height="50">
+		</div>
+		<!-- 댓글 목록 출력 끝 -->
 		<!-- 댓글 끝 -->
 	</div>
 </div>
