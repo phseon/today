@@ -9,6 +9,22 @@
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventHeaderStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventBodyStyle.css">
+<script type="text/javascript" src = "${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<!-- <script type="text/javascript">
+	$(function(){
+		remainDays();
+	});
+	function remainDays(){
+		/* let endDate = "<c:out value = '${event.e_end}'/>"; */
+		let endDate = new Date($('#endday').attr('data-remainDay'));
+		let today = new Date();
+		let remain = endDate - today;
+		
+		let remainDay = Math.floor(remain / (1000*60*60*24));
+		
+		console.log(remainDay);
+	}
+</script> -->
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
@@ -17,7 +33,7 @@
 <div class = "e-wrap"> 
 	<div class = "board-box">
 		<c:if test="${count == 0}">
-			<div>
+			<div align = "center">
 				표시할 게시물이 없습니다.
 			</div>
 		</c:if>
@@ -32,53 +48,11 @@
 							</span>
 							<strong>${eList.e_title}</strong>
 						</a>
-						<p>기간 : ${eList.e_start}~${eList.e_end}</p>
+						<p>기간 : ${eList.e_start}~${eList.e_end} D-DAY : ${eList.cal_date }</p>
 					</li>
 				</c:forEach>
 			</ul>
 		</c:if>
-		<%-- <ul class = "event-list">
-			<li>
-				<a href = "eventDetail.do">
-					<span class = "thumb">
-						<img src = "${pageContext.request.contextPath}/images/tooth.png">
-						<em>이벤트보기</em>
-					</span>
-					<strong>이벤트제목</strong>
-				</a>
-				<p>기간 : 2020-10-10~2020-12-12</p>
-			</li>
-			<li>
-				<a href = "#">
-					<span class = "thumb">
-						<img src = "${pageContext.request.contextPath}/images/tooth.png">
-						<em>이벤트보기</em>
-					</span>
-					<strong>이벤트제목</strong>
-				</a>
-				<p>기간 : 2020-10-10~2020-12-12</p>
-			</li>
-			<li class = "margin-no">
-				<a href = "#">
-					<span class = "thumb">
-						<img src = "${pageContext.request.contextPath}/images/tooth.png">
-						<em>이벤트보기</em>
-					</span>
-					<strong>이벤트제목</strong>
-				</a>
-				<p>기간 : 2020-10-10~2020-12-12</p>
-			</li>
-			<li>
-				<a href = "#">
-					<span class = "thumb">
-						<img src = "${pageContext.request.contextPath}/images/tooth.png">
-						<em>이벤트보기</em>
-					</span>
-					<strong>이벤트제목</strong>
-				</a>
-				<p>기간 : 2020-10-10~2020-12-12</p>
-			</li>
-		</ul> --%>
 		<div class = "paging-box">${page }</div>
 	</div>
 </div>

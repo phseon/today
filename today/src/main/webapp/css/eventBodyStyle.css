@@ -46,12 +46,12 @@
 .event-list li a .thumb em{
 	display : none;
 	position : relative;
-	bottom : 447px;
+	bottom : 445px;
 	width : 350px;
 	text-align : center;
 	background-color : rgba(0,0,0,0.3);
 	color : #eee;
-	line-height : 304px;
+	line-height : 301px;
 }
 .event-list li a:hover .thumb em{
 	display : block;

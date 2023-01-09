@@ -39,6 +39,21 @@
 			$('#e_thumb').focus();
 			return false;
 		}
+		let start = $('#e_startdate').val();
+		let end = $('#e_enddate').val();
+		
+		let splitStart = start.split('-');
+		let splitEnd = end.split('-');
+		
+		let startDate = new Date(splitStart[0], splitStart[1], splitStart[2]);
+		let endDate = new Date(splitEnd[0], splitEnd[1], splitEnd[2]);
+		
+		if(startDate.getTime() > endDate.getTime()){
+			alert('이벤트 시작일은 종료일보다 빨라야 합니다.');
+			$('#e_startdate').focus();
+			return false;
+		}
+		
 		$('#eventwrite_form').submit();
 	}
 	$(function(){

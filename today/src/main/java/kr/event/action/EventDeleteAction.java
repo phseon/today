@@ -3,7 +3,6 @@ package kr.event.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import kr.controller.Action;
 import kr.event.dao.EventDAO;
 import kr.event.vo.EventVO;

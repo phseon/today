@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import kr.event.vo.EventVO;
@@ -27,8 +28,9 @@ public class EventDAO {
 		try {
 			conn = DBUtil.getConnection();
 			
-			sql = "INSERT INTO event (e_num, e_title, e_start, e_end, e_content, e_imgsrc, e_date, m_num, e_resbtn, e_thumb) "
-				+ "VALUES (event_seq.nextval, ?, ?, ?, ?, ?, SYSDATE, ?, ?, ?)";
+			//이벤트 남은 기간 나중에 처리
+			sql = "INSERT INTO event (e_num, e_title, e_start, e_end, e_content, e_imgsrc, e_date, m_num, e_resbtn, e_thumb, cal_date) "
+				+ "VALUES (event_seq.nextval, ?, ?, ?, ?, ?, SYSDATE, ?, ?, ?, ?)";
 			pstmt  = conn.prepareStatement(sql);
 			pstmt.setString(1, event.getE_title());
 			pstmt.setString(2, event.getE_start());
@@ -38,6 +40,7 @@ public class EventDAO {
 			pstmt.setInt(6, event.getM_num());
 			pstmt.setString(7, event.getE_resbtn());
 			pstmt.setString(8, event.getE_thumb());
+			pstmt.setInt(9, calDay(event.getE_end()));
 			
 			
 			pstmt.executeUpdate();
@@ -124,7 +127,10 @@ public class EventDAO {
 				event.setE_start(rs.getString("e_start"));
 				event.setE_end(rs.getString("e_end"));
 				event.setE_date(rs.getDate("e_date"));
-				//나중에 썸네일 열 추가해서 불러오기
+				
+				//남은 날짜 넣어주기
+				event.setCal_date(calDay(rs.getString("e_end")));
+				//System.out.println(rs.getString("e_end"));
 				event.setE_imgsrc(rs.getString("e_imgsrc"));
 				event.setE_thumb(rs.getString("e_thumb"));
 				event.setE_resbtn(rs.getString("e_resbtn"));
@@ -193,7 +199,7 @@ public class EventDAO {
 				sub_sql += ", e_imgsrc = ?";
 			}
 			
-			sql = "UPDATE event SET e_title = ?, e_start = ?, e_end = ?, e_thumb = ?, e_resbtn = ?" + sub_sql 
+			sql = "UPDATE event SET e_title = ?, e_start = ?, e_end = ?, e_thumb = ?, e_resbtn = ?, cal_date = ?" + sub_sql 
 				+ ", e_content = ?, e_date = sysdate WHERE e_num = ?";
 			pstmt = conn.prepareStatement(sql);
 			
@@ -202,6 +208,7 @@ public class EventDAO {
 			pstmt.setString(++cnt, event.getE_end());
 			pstmt.setString(++cnt, event.getE_thumb());
 			pstmt.setString(++cnt, event.getE_resbtn());
+			pstmt.setInt(++cnt, calDay(event.getE_end()));
 			if(event.getE_imgsrc() != null) {
 				pstmt.setString(++cnt, event.getE_imgsrc());
 			}
@@ -243,7 +250,6 @@ public class EventDAO {
 		
 		try {
 			conn = DBUtil.getConnection();
-			System.out.println(e_imgType + "dao");
 			
 			sql = "UPDATE event SET " + e_imgType + "= '' WHERE e_num = ?";
 			
@@ -255,5 +261,24 @@ public class EventDAO {
 		}finally {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
+	}
+	//이벤트 남은 기간 계산
+	public int calDay(String endDate) {
+		Calendar cal = Calendar.getInstance();
+		String[] split_endDate = endDate.split("-");
+		cal.set(Integer.parseInt(split_endDate[0]), Integer.parseInt(split_endDate[1]) - 1, Integer.parseInt(split_endDate[2]));
+
+		long d_day = cal.getTimeInMillis();
+		
+		long today = System.currentTimeMillis();
+		long result = d_day - today;
+		
+		long remain = result / 1000 / 60 / 60 / 24;
+		
+		int remainDay;
+		
+		remainDay = Long.valueOf(remain).intValue();
+		
+		return remainDay;
 	}
 }

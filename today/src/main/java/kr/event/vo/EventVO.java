@@ -12,9 +12,16 @@ public class EventVO {
 	private Date e_date;
 	private String e_thumb;
 	private String e_resbtn;
+	private int cal_date;
 	private int m_num;
 	
 	
+	public int getCal_date() {
+		return cal_date;
+	}
+	public void setCal_date(int cal_date) {
+		this.cal_date = cal_date;
+	}
 	public String getE_thumb() {
 		return e_thumb;
 	}
