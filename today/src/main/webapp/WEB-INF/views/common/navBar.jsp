@@ -10,7 +10,7 @@
 					href="${pageContext.request.contextPath}/information/list.do">공지사항</a>
 				</li>
 				<li><a
-					href="${pageContext.request.contextPath}/docIndroduction/docInPage.do">의료진소개</a>
+					href="${pageContext.request.contextPath}/doctor/doctorList.do">의료진소개</a>
 				</li>
 				<li><a
 					href="${pageContext.request.contextPath}/surgery/sergPage.do">시술</a>

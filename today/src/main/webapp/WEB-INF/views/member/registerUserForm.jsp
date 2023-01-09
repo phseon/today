@@ -123,8 +123,8 @@
 			<hr width="100%" size="1" noshade="noshade">
 				<ul>
 					<li class="radiobt">
-						<input type="radio" name="chk_info" value="1" id="chk_info1" class="chk_info">의사
-						<input type="radio" name="chk_info" value="2" id="chk_info2" class="chk_info">회원						
+						<input type="radio" name="chk_info" value="1" id="chk_info1" class="chk_info">의사회원
+						<input type="radio" name="chk_info" value="2" id="chk_info2" class="chk_info">일반회원						
 					</li>
 					<li>
 						<label for="id">id</label>

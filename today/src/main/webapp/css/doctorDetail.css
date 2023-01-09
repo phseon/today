@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+/*의사 상세정보
+---------------------*/
+.doc-detail{
+	width:1200px;
+	margin-left:150px;
+}
+.doc{
+	width:85%;
+	float:left;
+	margin:auto;
+	cursor:pointer;
+}
+.doc:hover{
+	background-color:rgba(122,122,122,0.4);
+}
+.doc-detail-photo{
+	width:500px;
+	float:left;
+	margin:20px 50px 0 10px;
+}
+.doc-name{
+	margin-left:80px;
+	margin-top:130px;
+	font-size:50px;
+	color:#4a4a4a;
+}
+.doc-detail{
+	margin-left:200px;
+	padding-top:100px;
+}
+.doc-content{
+	margin:150px 0 0 450px;
+}
+.doc-content li{
+	text-align:left;
+	margin:20px auto;
+}
+.doc-end{
+	clear:both;
+	padding-right:150px;
+}
+.align-right{
+	text-align:right;
+}
