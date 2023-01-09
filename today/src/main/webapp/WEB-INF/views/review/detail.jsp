@@ -29,6 +29,18 @@
 			<!-- <h2>${rez.rev_num}</h2> -->
 			</div>
 		</div>
+		<h2>로그인 중인 회원번호 : ${user_num}</h2>
+		
+		<h2>현재 리뷰 번호(rev_num) : ${rez.rev_num}</h2>
+		<h2>현재 리뷰 작성 회원번호(m_num) : ${rez.m_num}</h2>
+		<h2>현재 리뷰 번호(rev_num) : ${reservation.rev_num}</h2>
+		<h2>현재 리뷰 작성 회원번호(m_num) : ${reservation.m_num}</h2>
+		<h2>${rez.rev_num}</h2>
+		<h2>${rez.m_num}</h2>
+		<h2>${rev_num}</h2>
+		<h2>${m_num}</h2>
+		<h2>${gm_num}</h2>
+		
 		<c:if test="${user_num == rez.m_num}">
 				<input type="button" value="수정" 
 				onclick="location.href='updateForm.do?r_num=${review.r_num}'">

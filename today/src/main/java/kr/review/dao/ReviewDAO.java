@@ -227,7 +227,7 @@ public class ReviewDAO {
 	}
 	
 	//예약 정보
-	public ReservationVO getRevInfo(int m_num, int r_num)
+	public ReservationVO getRevInfo(int rev_num)
             throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -244,7 +244,7 @@ public class ReviewDAO {
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터를 바인딩
-			pstmt.setInt(1, r_num);
+			pstmt.setInt(1, rev_num);
 			//SQL문을 실행해서 결과행을 ResultSet에 담음
 			rs = pstmt.executeQuery();
 			
