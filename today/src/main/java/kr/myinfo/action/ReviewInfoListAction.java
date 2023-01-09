@@ -24,6 +24,7 @@ public class ReviewInfoListAction implements Action {
 		request.setAttribute("myReview", myReview);
 		
 		
+		
 		return "/WEB-INF/views/myinfo/reviewInfoList.jsp";
 	}
 
