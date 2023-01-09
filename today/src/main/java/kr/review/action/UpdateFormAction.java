@@ -11,8 +11,6 @@ import kr.review.vo.ReviewVO;
 
 public class UpdateFormAction implements Action{
 
-	private static final int r_num = 0;
-
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -24,19 +22,22 @@ public class UpdateFormAction implements Action{
 		
 		//로그인 된 경우		
 		//예약테이블의 회원번호 반환
-				int m_num = Integer.parseInt(
-								request.getParameter("m_num"));
+				int r_num = Integer.parseInt(
+								request.getParameter("r_num"));
 				
 				ReviewDAO dao = ReviewDAO.getInstance();
-//				ReservationVO rez = dao.getRevInfo(m_num, r_num);
-//				ReviewVO review = dao.getReview(m_num);
-//				if(user_num!=rez.getM_num()) {
-					//로그인한 회원번호와 작성자, 회원번호가 불일치
-//					return "/WEB-INF/views/common/notice.jsp";
-//				}
 				
-				//로그인이 되어 있고 로그인한 회원번호와 작성자 회원번호가 일치
-//				request.setAttribute("m_num", m_num);
+				ReservationVO rez = dao.getRevInfo(r_num);
+				ReviewVO review = dao.getReview(r_num);
+				
+				if(user_num!=rez.getM_num()) {
+					//로그인한 회원번호와 작성자, 회원번호가 불일치
+					return "/WEB-INF/views/common/notice.jsp";
+				}
+				
+//				로그인이 되어 있고 로그인한 회원번호와 작성자 회원번호가 일치
+				request.setAttribute("rez", rez);
+				request.setAttribute("review", review);
 				
 				return "/WEB-INF/views/review/updateForm.jsp";
 	}

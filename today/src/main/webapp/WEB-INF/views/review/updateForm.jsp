@@ -6,8 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>리뷰 수정</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/review.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#update_form').submit(function(){
+			if($('#content').val().trim()==''){
+				alert('내용을 입력하세요!');
+				$('#content').val('').focus();
+				return false;
+			}
+		});
+	});
+</script>
 </head>
 <body>
 <div class="page-main">
@@ -25,7 +37,7 @@
 					<textarea rows="5" cols="30" name="content" 
 					   id="content">${review.r_content}</textarea>
 				</li>
-				<!--
+				<!-- 파일 수정
 				<li>
 					<label for="filename">파일</label>
 					<input type="file" name="filename" id="filename"
