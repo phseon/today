@@ -30,7 +30,7 @@ public class RegisterUserAction implements Action{
 		dao.insertMember(member);
 		
 		
-		return "/WEB-INF/views/member/registeruser.jsp";
+		return "/WEB-INF/views/member/registerUser.jsp";
 	}
 	
 }
