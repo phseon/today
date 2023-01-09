@@ -35,7 +35,7 @@
 				</c:if>
 				<c:if test="${!empty user_num}">
 					<li><a
-						href="${pageContext.request.contextPath}/member/myPage.do">마이페이지</a></li>
+						href="${pageContext.request.contextPath}/myinfo/myPage.do">마이페이지</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a></li>
 				</c:if>

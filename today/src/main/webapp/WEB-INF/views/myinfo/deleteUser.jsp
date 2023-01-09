@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>회원탈퇴 완료</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/myInfoDetailStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
 </head>
 <body>

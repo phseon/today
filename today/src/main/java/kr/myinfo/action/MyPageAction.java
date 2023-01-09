@@ -12,16 +12,15 @@ public class MyPageAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	/*	
+	
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		if(user_num == null) {//로그인이 되지 않은 경우
-			return "";
-		} */
+			return "redirect:/member/login.do";
+		} 
 
 		MyInfoDAO dao = MyInfoDAO.getInstance();
-		//MemberVO member = dao.getMemberInfo(user_num);
-		MemberVO member = dao.getMemberInfo(6);
+		MemberVO member = dao.getMemberInfo(user_num);
 		request.setAttribute("member", member);
 		
 		return "/WEB-INF/views/myinfo/myPage.jsp";

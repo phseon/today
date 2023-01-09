@@ -12,21 +12,20 @@ public class ModifyUserAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	/*	
+
 		HttpSession session = request.getSession();
-		Integer user_num = 
-				(Integer)session.getAttribute("user_num");
+		Integer user_num = (Integer)session.getAttribute("user_num");
 		if(user_num==null) {
-			return "";
-		} */
+			return "redirect:/member/login.do";
+		} 
 		
 		// 로그인시
 		request.setCharacterEncoding("utf-8");
 		
 		// form에 입력한 데이터들을 membervo에 저장하기
 		MemberVO member = new MemberVO();
-		//member.setMem_num(user_num);
-		member.setM_num(1);
+		
+		member.setM_num(user_num);
 		member.setName(request.getParameter("name"));
 		member.setPhone(request.getParameter("phone"));
 		member.setEmail(request.getParameter("email"));
