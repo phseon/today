@@ -304,6 +304,7 @@ public class ReviewDAO {
 		}
 	}
 	
+	/*
 	//댓글 등록
 	public void insertCommReview(ReviewCommVO reviewComm)
 	                                    throws Exception{
@@ -413,5 +414,5 @@ public class ReviewDAO {
 		}
 		return list;
 	}
-	
+	*/
 }
