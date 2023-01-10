@@ -145,6 +145,29 @@ public class InformationDAO {
 	
 	
 	//글수정
+	public void updateInfo(InformationVO info)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "update information set info_title=?, info_content=? where info_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, info.getInfo_title());
+			pstmt.setString(2, info.getInfo_content());
+			pstmt.setInt(3, info.getInfo_num());
+			pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	
+	
+	
 	
 	
 	
