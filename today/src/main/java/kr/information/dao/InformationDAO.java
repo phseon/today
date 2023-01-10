@@ -166,10 +166,27 @@ public class InformationDAO {
 		}
 	}
 	
-	
-	
-	
-	
-	
 	//글삭제
+	public void deleteInfo(int info_num)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "delete from information where info_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, info_num);
+			pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	
+	
+	
+	
 }

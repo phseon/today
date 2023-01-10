@@ -54,7 +54,7 @@
  		//회원 정보 등록 유효성 체크
  		$('#register_form').submit(function(){
  			if($('input[type=radio]:checked').length<1){
- 				alert('가입분야를 선택하세요!');
+ 				alert('가입유형을 선택하세요!');
  				return false;
  			}
  			
