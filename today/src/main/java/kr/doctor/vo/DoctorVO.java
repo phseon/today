@@ -1,16 +1,16 @@
 package kr.doctor.vo;
 
 public class DoctorVO {
-	private String name;
+	private String p_num;
 	private String imgsrc;
 	private String content;
-	private int d_num;
+	private int m_num;
 	
-	public String getName() {
-		return name;
+	public String getP_num() {
+		return p_num;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setP_num(String p_num) {
+		this.p_num = p_num;
 	}
 	public String getImgsrc() {
 		return imgsrc;
@@ -24,11 +24,11 @@ public class DoctorVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getD_num() {
-		return d_num;
+	public int getM_num() {
+		return m_num;
 	}
-	public void setD_num(int d_num) {
-		this.d_num = d_num;
+	public void setM_num(int m_num) {
+		this.m_num = m_num;
 	}
 	
 }
