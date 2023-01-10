@@ -160,16 +160,28 @@ public class ReviewDAO {
 	public ReviewVO getReview(int r_num)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+//		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
 		ReviewVO review = null;
+//		ReviewCommVO comm = null;
 		String sql = null;
 		
 		try {
 			//커넥션풀로부터 커넥션을 할당
 			conn = DBUtil.getConnection();
+			//오토커밋 해제
+			conn.setAutoCommit(false);
+			
 			//SQL문 작성
-			sql = "SELECT * FROM review r JOIN reservation v "
-				+ "USING(rev_num) WHERE r.r_num=?";
+//			sql = "SELECT * FROM review r JOIN reservation v "
+//				+ "USING(rev_num) JOIN comments c USING(r_num) WHERE r.r_num=?";
+//			
+			sql = "SELECT * FROM review r LEFT JOIN reservation v " 
+				+ "ON r.rev_num=v.rev_num "
+				+ "LEFT JOIN comments c "
+				+ "ON r.r_num=c.r_num "
+				+ "WHERE r.r_num=?";
+
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
@@ -184,6 +196,18 @@ public class ReviewDAO {
 				review.setR_date(rs.getDate("r_date"));
 				review.setRev_num(rs.getInt("rev_num"));
 			}
+			
+//			sql = "SELECT * FROM review r JOIN comments c "
+//				+ "USING(r_num) WHERE r.r_num=?";
+//			pstmt2 = conn.prepareStatement(sql);
+//			pstmt2.setInt(1, r_num);
+//			rs = pstmt2.executeQuery();
+//			if(rs.next()) {
+//				review.setR_num(rs.getInt("r_num"));
+//			}
+//			
+//			//sql 실행시 모두 성공하면 commit
+//			conn.commit();
 		}catch(Exception e) {
 			throw new Exception(e);
 		}finally {
@@ -306,7 +330,7 @@ public class ReviewDAO {
 	
 	
 	//댓글 등록
-	public void insertCommReview(ReviewCommVO reviewComm)
+	public void insertCommReview(MemberVO member, ReviewVO review, ReviewCommVO comm)
 	                                    throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -322,10 +346,10 @@ public class ReviewDAO {
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
-			pstmt.setDate(1, reviewComm.getC_date());
-			pstmt.setString(2, reviewComm.getC_content());
-			pstmt.setInt(3, reviewComm.getM_num());
-			pstmt.setInt(4, reviewComm.getR_num());
+			pstmt.setDate(1, comm.getC_date());
+			pstmt.setString(2, comm.getC_content());
+			pstmt.setInt(3, member.getM_num());
+			pstmt.setInt(4, review.getR_num());
 			//SQL문 실행
 			pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -349,8 +373,14 @@ public class ReviewDAO {
 			//커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 			//SQL문 작성
+//			sql = "SELECT COUNT(*) FROM comments c "
+//				+ "WHERE c.r_num=?";
+//			
 			sql = "SELECT COUNT(*) FROM comments c "
-				+ "WHERE c.r_num=?";
+				+ "JOIN review r "
+				+ "ON c.r_num=r.r_num "
+				+ "WHERE r.r_num=?";
+			
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
@@ -381,12 +411,20 @@ public class ReviewDAO {
 			//커넥션풀로부터 커넥션을 할당
 			conn = DBUtil.getConnection();
 			//SQL문 작성			
-			sql = "SELECT * FROM (SELECT *, rownum rnum "
-				+ "FROM comments c WHERE "
-				+ "c.r_num=? ORDER BY c.c_num DESC) "
+//			sql = "SELECT * FROM (SELECT *, rownum rnum "
+//				+ "FROM comments c LEFT JOIN member m ON c.m_num = m.m_num "
+//				+ "LEFT JOIN review r ON c.r_num = r.r_num WHERE "
+//				+ "r.r_num=? ORDER BY c.c_num DESC) "
+//				+ "WHERE rnum>=? AND rnum<=?";
+			
+			sql = "SELECT * "
+				+ "FROM (SELECT c.*, rownum rnum "
+				+ "FROM comments c LEFT JOIN member m ON c.m_num = m.m_num "
+				+ "LEFT JOIN review r ON c.r_num = r.r_num "
+				+ "WHERE c.r_num=? "
+				+ "ORDER BY c.c_num DESC) "
 				+ "WHERE rnum>=? AND rnum<=?";
-			
-			
+
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
@@ -399,11 +437,11 @@ public class ReviewDAO {
 			while(rs.next()) {
 				ReviewCommVO comm = new ReviewCommVO();
 				MemberVO member = new MemberVO();
-				comm.setC_num(rs.getInt("c_num"));
+				comm.setC_num((Integer)rs.getInt("c_num"));
 				comm.setC_content(rs.getString("c_content"));
-				comm.setR_num(rs.getInt("r_num"));
+				comm.setR_num((Integer)rs.getInt("r_num"));
 				//이 값은 안 들어가나? 쿼리에서 빼서 없어도 될 듯
-				member.setM_num(rs.getInt("m_num"));
+//				member.setM_num((Integer)rs.getInt("m_num"));
 				
 				list.add(comm);
 			}

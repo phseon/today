@@ -18,9 +18,10 @@ $(function(){
 			success:function(param){
 				//로딩 이미지 감추기
 				
-				console.log("<<" + count);
-				console.log(rowCount);
+				console.log("<<" + $('#r_num').val());
+				console.log("<<" + pageNum);
 				$('#loading').hide();
+				
 				count = param.count;
 				rowCount = param.rowCount;
 				
@@ -71,6 +72,7 @@ $(function(){
 					$('.paging-button').show();
 				}
 			},
+			/*
 			error:function(param){
 				$('#loading').hide();
 				
@@ -82,6 +84,10 @@ $(function(){
 				alert('네트워크 오류 발생');
 				
 			}
+			*/
+			error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		 }
 		});
 	}
 	
@@ -114,7 +120,7 @@ $(function(){
 			success:function(param){
 				if(param.result == 'logout'){
 					alert('로그인해야 작성할 수 있습니다.');
-				}else if(param.reulst == 'success'){
+				}else if(param.result == 'success'){
 					//폼 초기화
 					initForm();
 					//댓글 작성이 성공하면 새로 삽입한 글을 포함해서
@@ -125,16 +131,16 @@ $(function(){
 					alert('댓글 등록 오류 발생');
 				}
 			},
-			error:function(){
-				alert('네트워크 오류');
-			}
+			error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		 }
 		});
 	
 	});
 	
 	
 	
-	/*
+
 	
 	//댓글 작성 폼 초기화
 	function initForm(){
@@ -163,7 +169,7 @@ $(function(){
 		
 	});
 	
-	*/
+
 	
 	
 	

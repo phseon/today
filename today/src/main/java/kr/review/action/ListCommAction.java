@@ -1,6 +1,5 @@
 package kr.review.action;
 
-import java.io.Console;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +13,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import kr.review.dao.ReviewDAO;
 import kr.review.vo.ReviewCommVO;
+import kr.review.vo.ReviewVO;
 import kr.controller.Action;
 import kr.util.PagingUtil;
 
@@ -29,26 +29,50 @@ public class ListCommAction implements Action{
 			pageNum = "1";
 		}
 		
-		
-		int r_num = Integer.parseInt(
-				request.getParameter("r_num"));
-		
-		System.out.println("mm");
-		System.out.println(Integer.parseInt(request.getParameter("r_num")));
-		
-		System.out.println("ggg" + request.getParameter("r_num"));
+		System.out.println("page:"+pageNum);
+//		ReviewDAO dao = ReviewDAO.getInstance();
+//		int count = dao.getReviewCount(keyfield, keyword);
+//		
+//		int a = Integer.parseInt(
+//				request.getParameter("review_num"));
+//		
+//			
 //		int r_num = Integer.parseInt(
 //				request.getParameter("r_num"));
+//		
+//		System.out.println("mm");
+//		System.out.println(Integer.parseInt(request.getParameter("review_num")));
+//		
+//		System.out.println("ggg" + request.getParameter("r_num"));
+//		int r_num = Integer.parseInt(
+//				request.getParameter("r_num"));
+//		
+//		
+//		
+//		
+//		System.out.println(r_num);//61
+//		
+//		int r_num = (Integer)request.getAttribute("r_num");
+		int r_num = Integer.parseInt(
+		         request.getParameter("r_num"));
 		
-		
-		
-		
-		System.out.println(r_num);//61
 		
 		ReviewDAO dao = ReviewDAO.getInstance();
 		
 		int count = dao.getCommReviewCount(r_num);
+
 		
+//		ReviewDAO dao = ReviewDAO.getInstance();
+//		ReviewVO review = dao.getr
+//		
+////		String rr_num = 
+////				request.getParameter("review_num");
+////		System.out.println("qqq" + rr_num);//2
+//		
+//		int num = review.r_num;
+//		int count = dao.getReview(review.r_num);
+		
+//		System.out.println(r_num);//2
 		System.out.println(count);//2
 		
 		/*

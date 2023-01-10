@@ -1,5 +1,6 @@
 package kr.review.action;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import kr.review.dao.ReviewDAO;
 import kr.review.vo.ReviewCommVO;
+import kr.review.vo.ReviewVO;
 import kr.controller.Action;
+import kr.member.vo.MemberVO;
 import kr.reservation.vo.ReservationVO;
 
 public class WriteCommAction implements Action{
@@ -29,17 +32,32 @@ public class WriteCommAction implements Action{
 		}else {//로그인 된 경우
 			//전송된 데이터 인코딩 처리
 			request.setCharacterEncoding("utf-8");
-			
+
+			MemberVO member = new MemberVO();
 			ReviewCommVO comm = new ReviewCommVO();
-			ReservationVO rez = new ReservationVO();
+			ReviewVO review = new ReviewVO();
 			
-			rez.setM_num(rez.getM_num());//회원번호(댓글 작성자)
+			int r_num = Integer.parseInt(
+			         request.getParameter("r_num"));
+			
+			//현재 날짜를 sql에 사용하도록 변환
+			Date date = new Date();
+
+	        long timeInMilliSeconds = date.getTime();
+	        java.sql.Date nowdate = new java.sql.Date(timeInMilliSeconds); 
+			
+			comm.setM_num(user_num);//회원번호(댓글 작성자)
 			comm.setC_content(request.getParameter("c_content"));
-			comm.setR_num(Integer.parseInt(
-					            request.getParameter("r_num")));
+			comm.setR_num(r_num);
+			comm.setC_date(nowdate);
 			
 			ReviewDAO dao = ReviewDAO.getInstance();
-			dao.insertCommReview(comm);
+			dao.insertCommReview(member,review,comm);
+			
+					
+			System.out.println("zzz"+request.getParameter("c_content"));
+			
+//			dao.insertCommReview(member,review,comm);
 			
 			mapAjax.put("result", "success");
 		}
