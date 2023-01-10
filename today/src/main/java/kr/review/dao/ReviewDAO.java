@@ -8,7 +8,7 @@ import java.util.List;
 
 import kr.member.vo.MemberVO;
 import kr.reservation.vo.ReservationVO;
-import kr.review.vo.ReviewCommVO;
+//import kr.review.vo.ReviewCommVO;
 import kr.review.vo.ReviewVO;
 import kr.util.DBUtil;
 import kr.util.DurationFromNow;
