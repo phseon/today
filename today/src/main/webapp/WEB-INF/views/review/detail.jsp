@@ -6,12 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>리뷰 상세</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/review.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-
-</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/review.comm.js"></script>
 </head>
 <body>
 <div class="page-main">
@@ -51,19 +50,21 @@
 		
 		<!-- 댓글 시작 -->
 		<div id="comm_div">
-			<span class="cm-title">댓글</span>
-			<form id="cm_form">
+			<span class="c-title">댓글</span>
+			<form id="c_form">
+			<!-- DetailRevAction에 넘어가는 r_num -->
 			<input type="hidden" name="r_num" 
-			       value="${review.r_num}" id="r_num">
-				<textarea rows="3" cols="50" name="cm_content" 
-				  id="cm_content" class="cm-content"
+			       value="${r_num}" id="r_num">
+			       <h2>aa${review.r_num}</h2>
+				<textarea rows="3" cols="50" name="c_content" 
+				  id="c_content" class="c-content"
 				  <c:if test="${empty user_num}">disabled="disabled"</c:if>
 				  ><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>       
 				<c:if test="${!empty user_num}">
-				<div id="cm_first">
+				<div id="c_first">
 					<input type="submit" value="전송">
 				</div>
-				<div id="cm_second">
+				<div id="c_second">
 					<span class="letter-count">300/300</span>
 				</div>
 				</c:if>
