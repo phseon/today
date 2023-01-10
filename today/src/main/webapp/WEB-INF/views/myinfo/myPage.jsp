@@ -13,7 +13,7 @@
 <script type="text/javascript">
 $(function(){
 	
-
+	console.log('${member.imgsrc}');
 	let photo_path = $('.my-photo').attr('src');
 	let my_photo;
 
