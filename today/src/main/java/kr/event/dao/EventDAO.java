@@ -1,6 +1,7 @@
 package kr.event.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -146,6 +147,46 @@ public class EventDAO {
 		
 		return list;
 	}
+	//마감 임박 이벤트
+	public List<EventVO> getCloseEvent(int eventNum) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<EventVO> list = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			
+			sql = "SELECT * FROM (SELECT * FROM event WHERE cal_date >= 0 ORDER BY cal_date ASC) WHERE ROWNUM <= ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, eventNum);
+			
+			rs = pstmt.executeQuery();
+			list = new ArrayList<EventVO>();
+			while(rs.next()) {
+				EventVO event = new EventVO();
+				event.setE_num(rs.getInt("e_num"));
+				event.setE_title(StringUtil.useNoHtml(rs.getString("e_title")));
+				event.setE_start(rs.getString("e_start"));
+				event.setE_end(rs.getString("e_end"));
+				event.setE_date(rs.getDate("e_date"));
+				event.setCal_date(calDay(rs.getString("e_end")));
+				event.setE_imgsrc(rs.getString("e_imgsrc"));
+				event.setE_thumb(rs.getString("e_thumb"));
+				event.setE_resbtn(rs.getString("e_resbtn"));
+				
+				list.add(event);
+			}
+			
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+		return list;
+	}
 	//이벤트 글상세
 	public EventVO getEvent(int e_num) throws Exception{
 		Connection conn = null;
@@ -263,6 +304,7 @@ public class EventDAO {
 		}
 	}
 	//이벤트 남은 기간 계산
+	//시작날짜도 받아와서 오늘날짜와 비교, 아직 시작날짜가 안됐으면 진행전 중이면 중 지났으면 마감 중일 땐 d-day표시
 	public int calDay(String endDate) {
 		Calendar cal = Calendar.getInstance();
 		String[] split_endDate = endDate.split("-");

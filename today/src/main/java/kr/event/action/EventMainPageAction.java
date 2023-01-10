@@ -30,15 +30,19 @@ public class EventMainPageAction implements	Action{
 		int count = dao.getEventCount(keyfield, keyword);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum), count, 9, 1, "eventPage.do");
+		
+		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum), count, 6, 1, "eventPage.do");
 		List<EventVO> list = null;
 		if(count > 0) {
 			list = dao.getListEvent(page.getStartRow(), page.getEndRow(), keyfield, keyword);
 		}
+		int closecnt = 3;
+		List<EventVO> topList = dao.getCloseEvent(closecnt);
 		
 		//request에 페이지 개수, 받아온 페이지 내 이벤트 리스트, 페이지수 저장
 		request.setAttribute("count", count);
 		request.setAttribute("list", list);
+		request.setAttribute("topList", topList);
 		request.setAttribute("page", page.getPage());
 		
 		//다시 eventMainPage.jsp 호출

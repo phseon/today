@@ -10,26 +10,12 @@
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventHeaderStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventBodyStyle.css">
 <script type="text/javascript" src = "${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<!-- <script type="text/javascript">
-	$(function(){
-		remainDays();
-	});
-	function remainDays(){
-		/* let endDate = "<c:out value = '${event.e_end}'/>"; */
-		let endDate = new Date($('#endday').attr('data-remainDay'));
-		let today = new Date();
-		let remain = endDate - today;
-		
-		let remainDay = Math.floor(remain / (1000*60*60*24));
-		
-		console.log(remainDay);
-	}
-</script> -->
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
 	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<jsp:include page="/WEB-INF/views/event/event_header.jsp"/>
+	
 <div class = "e-wrap"> 
 	<div class = "board-box">
 		<c:if test="${count == 0}">
@@ -38,6 +24,24 @@
 			</div>
 		</c:if>
 		<c:if test="${count > 0}">
+			<ul class = "event-list">
+				<c:forEach var = "cList" items = "${topList}">
+					<li>
+						<a href = "eventDetail.do?e_num=${cList.e_num}">
+							<span class = "thumb">
+								<img src = "${pageContext.request.contextPath}/upload/${cList.e_thumb}">
+								<em>이벤트보기</em>
+							</span>
+							<strong>${cList.e_title}</strong>
+						</a>
+						<p>기간 : ${cList.e_start}~${cList.e_end} 
+						<span class = "badge close">
+							진행중 : D-${cList.cal_date}
+						</span>
+						</p>
+					</li>
+				</c:forEach>
+			</ul>
 			<ul class = "event-list">
 				<c:forEach var = "eList" items = "${list}">
 					<li>
@@ -48,7 +52,18 @@
 							</span>
 							<strong>${eList.e_title}</strong>
 						</a>
-						<p>기간 : ${eList.e_start}~${eList.e_end} D-DAY : ${eList.cal_date }</p>
+						<p>기간 : ${eList.e_start}~${eList.e_end} 
+						<c:if test="${eList.cal_date <= 0}">
+							<span class = "badge end">
+								마감
+							</span>
+						</c:if>
+						<c:if test="${eList.cal_date > 0}">
+							<span class = "badge continue">
+								진행중
+							</span>
+						</c:if>
+						</p>
 					</li>
 				</c:forEach>
 			</ul>

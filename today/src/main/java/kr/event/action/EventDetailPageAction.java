@@ -17,10 +17,6 @@ public class EventDetailPageAction implements Action{
 		//전달받은 이벤트 번호(e_num) 저장
 		int e_num = Integer.parseInt(request.getParameter("e_num"));
 		
-		//회원 번호, 관리자 권한 나중에 세션에 저장되서 넘겨받으면 조건체크하기
-		int auth = 1;
-		request.setAttribute("auth", auth);
-		
 		//전달 받은 이벤트 번호로 해당 이벤트 정보 eventVO에 저장
 		EventDAO dao = EventDAO.getInstance();
 		EventVO event = dao.getEvent(e_num);

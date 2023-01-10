@@ -119,14 +119,14 @@
 		</form>
 	</div>
 	<div class = "e-buttons">
-		<%-- <c:if test = "${auth == 1}"> --%>
+		<c:if test = "${user_auth == 1}">
 			<span class = "show-event-list">
 				<a href = "eventPage.do">취소</a>
 			</span>
 			<span class = "show-event-list">
 				<a href = "#" onclick = "return submit_eventwrite_form()">등록</a>
 			</span>
-		<%-- </c:if> --%>
+		</c:if>
 		<span class = "show-event-list">
 			<a href = "eventPage.do">목록</a>
 		</span>

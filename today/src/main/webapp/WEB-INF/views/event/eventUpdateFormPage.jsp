@@ -70,10 +70,11 @@
 						alert('로그인 후 사용하세요.');
 					}else if(param.result == 'success'){
 						//$(this).parent().hide();
+						$('.back_btn').hide();
 						if(id == 'e_thumb'){
-							$('#file_detail1').hide();
+							$('.file_detail1').hide();
 						}else{
-							$('#file_detail2').hide();
+							$('.file_detail2').hide();
 						}
 					}else if(param.result == 'wrongAccess'){
 						alert('권한이 없습니다.');
@@ -96,7 +97,6 @@
 		}else{
 			$('#res_btn_hide').hide();
 		}
-		console.log(is_checked);
 		
 		$('#e_rcheck').click(function(){
 			if($('#e_rcheck').is(':checked')){
@@ -167,17 +167,17 @@
 				</div>
 			</div>
 		</form>
-	</div>1
+	</div>
 	<div class = "e-buttons">
-		<%-- <c:if test = "${auth == 1}"> --%>
-			<span class = "show-event-list">
+		<c:if test = "${user_auth == 1}">
+			<span class = "show-event-list back_btn">
 				<a href = "eventDetail.do?e_num=${event.e_num}">취소</a>
 			</span>
 			<span class = "show-event-list">
 				<a href = "#" onclick = "return submit_eventupdate_form()">수정</a>
 			</span>
-		<%-- </c:if> --%>
-		<span class = "show-event-list">
+		</c:if>
+		<span class = "show-event-list back_btn">
 			<a href = "eventPage.do">목록</a>
 		</span>
 	</div>
