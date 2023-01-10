@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import kr.doctor.vo.DoctorVO;
 import kr.member.vo.MemberVO;
 import kr.reservation.vo.ReservationVO;
 import kr.review.vo.ReviewVO;
@@ -243,8 +244,6 @@ public class MyInfoDAO {
 		return myReview;
 	}
 	
-	/*
-	
 	// 병원 예약 조회 (예약날짜 예약시간 병원의사 시술이름)
 	public ReservationVO getReservationInfo(int member_num)throws Exception {
 		Connection conn = null;
@@ -256,15 +255,16 @@ public class MyInfoDAO {
 		try {
 			conn = DBUtil.getConnection();
 			// 내가 예약한 병원진료 보기에서 날짜, 시간, 진료과목 보기
-			sql = "select * from reservation r join procedure p on r.p_num = p.p_num where m_num = ?"; 
+			sql = "select * from reservation where m_num=?"; 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, member_num);
 			rs = pstmt.executeQuery();
-			if(rs.next()) { //출력되는 정보가 있으면 각 vo에 담기. 예약날짜, 예약시간, 진료과목 넘기기.
+			if(rs.next()) { //출력되는 정보가 있으면 각 vo에 담기. 예약날짜, 예약시간, 내 번호 넘기기.
 				myReservation = new ReservationVO();
-				myReservation.setM_num(rs.getInt(member_num));
+				//myReservation.setM_num(rs.getInt(member_num)); // 이건 의사에대한 이름
 				myReservation.setRev_date(rs.getString("rev_date"));
-				myReservation.setRev_time(rs.getString("rev_time"));
+				myReservation.setRev_time(rs.getString("rev_time")); 
+				myReservation.setP_num(rs.getInt("p_num")); 
 			}
 		}catch(Exception e) {
 			throw new Exception(e);
@@ -273,5 +273,35 @@ public class MyInfoDAO {
 		}
 		return myReservation;
 	}
-	*/
+	
+	
+	// 시술정보 조회 (병원예약정보에서 넘긴 p_num에 대한 정보를 뽑아내기위해)
+	public DoctorVO getProcedureInfo(int p_num)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		DoctorVO myProcedure = null;
+		String sql = null;
+			
+		try {
+			conn = DBUtil.getConnection();
+			// 모든정보 들고오기
+			sql = "select * from procedure where p_num = ?"; 
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, p_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) { //출력되는 정보가 있으면 각 vo에 담기. 예약날짜, 예약시간, 진료과목 넘기기.
+				myProcedure = new DoctorVO();
+				myProcedure.setP_title(rs.getString("p_title"));
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return myProcedure;
+		}
+	
+
+	
 }
