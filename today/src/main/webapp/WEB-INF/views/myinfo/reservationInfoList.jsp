@@ -27,9 +27,9 @@
 						<td>시술내용</td>
 					</tr>
 					<tr class="table-detail">
-						<td>{Reservation.rev_date}</td>
-						<td>15:30</td>
-						<td>충치치료 및 사랑니 발치</td>
+						<td>${myReservation.rev_date}</td>
+						<td>${myReservation.rev_time}</td>
+						<td>${myProcedure.p_title}</td>
 					</tr>
 				</table>
 				<div class="content-button">
