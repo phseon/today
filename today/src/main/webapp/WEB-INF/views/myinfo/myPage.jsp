@@ -19,30 +19,30 @@ $(function(){
 
 	// 이미지 변경 시
 	$('#photo').change(function(){
-		my_photo = this.files[0];
-		if(!my_photo){
-			$('.my-photo').attr('src',photo_path);
-			return;
-		}
-		if(my_photo.size > 1024*1024){
-			alert('1024kbytes까지만 업로드 가능합니다.');
-			$('.my-photo').attr('src',photo_path); //기본이미지로 다시 변경
-			$(this).val('');
-			return;
-		}
-		let reader = new FileReader(); 
-		reader.readerAsDataURL(my_photo);
-		reader.onload=function(){
-			$('.my-photo').attr('src',reader.result); // 사진이름 출력
-		};
+			my_photo = this.files[0];
+			if(!my_photo){
+				$('.my-photo').attr('src',photo_path);
+				return;
+			}
+			if(my_photo.size > 1024*1024){
+				alert('1024kbytes까지만 업로드가 가능합니다.');
+				$('.my-photo').attr('src',photo_path); // 다시 그전이미지 주소로
+				$(this).val('');
+				return;
+			}
+			let reader = new FileReader();
+			reader.readAsDataURL(my_photo);
+			reader.onload=function(){
+				$('.my-photo').attr('src',reader.result); //사진 이름
+			};
 	});
 	
 	// 이미지전송버튼 눌렀을 때(빈칸이면)
-	$('#photo_submit').click(function(){
-		if($('#photo').val()==''){
-			alert('파일을 선택하세요.');
-			$('#photo').focus();
-			return;
+		$('#photo_submit').click(function(){
+			if($('#photo').val()==''){
+				alert('파일을 선택하세요!');
+				$('#photo').focus();
+				return;
 		}
 		
 	// 이미지 전송 버튼 눌렀을 때(빈칸이 아니면) - 서버에 파일 보내기
@@ -140,9 +140,11 @@ $(function(){
 				
 				<input type="button" value="프로필 수정 및 삭제" id="photo_edit">
 				<div class="photo-button">
+					
 					<c:if test="${!empty member.imgsrc}"><!-- 프로필사진이 비어있지않다면 기본 프로필 사진으로 변경할 버튼이 보이도록 -->
 						<input type="button" value="기본 프로필사진으로 변경" id="photo_reset"><br>
 					</c:if>
+					
 					<input type="file" id="photo" accept="image/gif,image/png,image/jpeg"><br>
 					<input type="button" value="전송" id="photo_submit">
 					<input type="button" value="취소" id="photo_cancle">

@@ -30,12 +30,12 @@ public class UpdateMyPhotoAction implements Action{
 		// 현재 로그인 세션
 		if(user_num==null) {
 			mapAjax.put("result", "logout");
-		}else {//로그인 된 경우  
+		}else {//로그인 중이라면
 
 			MyInfoDAO dao = MyInfoDAO.getInstance();
 			
 			//로그인  유저 정보
-			MemberVO member = dao.getMemberInfo(user_num);
+			MemberVO db_member = dao.getMemberInfo(user_num);
 			
 			//전송된 파일 업로드 처리
 			MultipartRequest multi = FileUtil.createFile(request);
@@ -43,10 +43,10 @@ public class UpdateMyPhotoAction implements Action{
 			//서버에 저장된 파일명 반환
 			String photo = multi.getFilesystemName("photo");
 			dao.updateMyPhoto(photo, user_num);
-			session.setAttribute("user_photo", photo);
+			session.setAttribute("user_photo", photo); //넘길땐 user_photo로 세션넘기기
 			
 			//이전 프로필 이미지 삭제
-			FileUtil.removeFile(request, member.getImgsrc());
+			FileUtil.removeFile(request, db_member.getImgsrc());
 			
 			mapAjax.put("result", "success");
 		}
