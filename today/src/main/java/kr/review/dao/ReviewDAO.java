@@ -322,7 +322,7 @@ public class ReviewDAO {
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
-			pstmt.setInt(1, reviewComm.getC_num());
+			pstmt.setDate(1, reviewComm.getC_date());
 			pstmt.setString(2, reviewComm.getC_content());
 			pstmt.setInt(3, reviewComm.getM_num());
 			pstmt.setInt(4, reviewComm.getR_num());

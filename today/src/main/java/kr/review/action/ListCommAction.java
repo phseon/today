@@ -1,5 +1,6 @@
 package kr.review.action;
 
+import java.io.Console;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -28,11 +29,27 @@ public class ListCommAction implements Action{
 			pageNum = "1";
 		}
 		
+		
 		int r_num = Integer.parseInt(
-				         request.getParameter("r_num"));
+				request.getParameter("r_num"));
+		
+		System.out.println("mm");
+		System.out.println(Integer.parseInt(request.getParameter("r_num")));
+		
+		System.out.println("ggg" + request.getParameter("r_num"));
+//		int r_num = Integer.parseInt(
+//				request.getParameter("r_num"));
+		
+		
+		
+		
+		System.out.println(r_num);//61
 		
 		ReviewDAO dao = ReviewDAO.getInstance();
+		
 		int count = dao.getCommReviewCount(r_num);
+		
+		System.out.println(count);//2
 		
 		/*
 		 * ajax 방식으로 목록을 표시하기 때문에 PagingUtil은 페이지수
@@ -63,7 +80,7 @@ public class ListCommAction implements Action{
 		mapAjax.put("rowCount", rowCount);
 		mapAjax.put("list", list);
 		//로그인한 사람이 작성자인지 체크하기 위해서 전송
-		//왜 체크하지???
+		//댓글 수정, 삭제하기 위해.
 		mapAjax.put("user_num", user_num);
 		
 		//JSON 데이터로 변환

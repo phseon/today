@@ -17,9 +17,15 @@ $(function(){
 			dataType:'json',
 			success:function(param){
 				//로딩 이미지 감추기
+				
+				console.log("<<" + count);
+				console.log(rowCount);
 				$('#loading').hide();
 				count = param.count;
 				rowCount = param.rowCount;
+				
+				console.log("!!" + count);
+				console.log(rowCount);
 				
 				if(pageNum == 1){
 					//처음 호출시는 목록을 표시하는 div의 내부 내용물 제거
@@ -28,9 +34,11 @@ $(function(){
 				
 				$(param.list).each(function(index,item){
 					let output = '<div class="item">';
-					output += '<h4>' + item.id + '</h4>';
+					output += '<h4>' + item.c_num + '</h4>';
 					output += '<div class="sub-item">';
 					output += '<p>' + item.c_content + '</p>';
+					output += '<div class="sub-item">';
+					output += '<p>' + item.r_num + '</p>';
 
 /*					if(item.re_modifydate){
 						output += '<span class="modify-date">최근 수정일 : ' + item.re_modifydate + '</span>';
@@ -42,8 +50,8 @@ $(function(){
 					//로그인한 회원번호와 작성자의 회원번호 일치 여부 체크
 					if(param.user_num == item.m_num){
 						//로그인한 회원번호와 작성자 회원번호 일치
-						output += ' <input type="button" data-renum="' + item.re_num+'" value="수정" class="modify-btn">';
-						output += ' <input type="button" data-renum="' + item.re_num+'" value="삭제" class="delete-btn">';
+						output += ' <input type="button" data-cnum="' + item.c_num+'" value="수정" class="modify-btn">';
+						output += ' <input type="button" data-cnum="' + item.c_num+'" value="삭제" class="delete-btn">';
 					}
 					
 					output += '<hr size="1" noshade width="100%">';
@@ -63,9 +71,16 @@ $(function(){
 					$('.paging-button').show();
 				}
 			},
-			error:function(){
+			error:function(param){
 				$('#loading').hide();
+				
+				console.log(">>" + $('#r_num').val());
+				console.log("?" + param);
+				console.log("!" + pageNum);
+				console.log("!!" + param.count);
+				console.log(param.rowCount);
 				alert('네트워크 오류 발생');
+				
 			}
 		});
 	}
@@ -77,7 +92,7 @@ $(function(){
 	
 	
 	//댓글 등록
-	$('#re_form').submit(function(event){
+	$('#c_form').submit(function(event){
 		//기본 이벤트 제거
 		event.preventDefault();
 		
