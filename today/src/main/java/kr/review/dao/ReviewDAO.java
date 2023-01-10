@@ -8,7 +8,7 @@ import java.util.List;
 
 import kr.member.vo.MemberVO;
 import kr.reservation.vo.ReservationVO;
-//import kr.review.vo.ReviewCommVO;
+import kr.review.vo.ReviewCommVO;
 import kr.review.vo.ReviewVO;
 import kr.util.DBUtil;
 import kr.util.DurationFromNow;
@@ -304,7 +304,7 @@ public class ReviewDAO {
 		}
 	}
 	
-	/*
+	
 	//댓글 등록
 	public void insertCommReview(ReviewCommVO reviewComm)
 	                                    throws Exception{
@@ -414,5 +414,6 @@ public class ReviewDAO {
 		}
 		return list;
 	}
-	*/
+	
+	
 }

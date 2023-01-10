@@ -53,6 +53,8 @@
 		<div id="comm_div">
 			<span class="cm-title">댓글</span>
 			<form id="cm_form">
+			<input type="hidden" name="r_num" 
+			       value="${review.r_num}" id="r_num">
 				<textarea rows="3" cols="50" name="cm_content" 
 				  id="cm_content" class="cm-content"
 				  <c:if test="${empty user_num}">disabled="disabled"</c:if>
