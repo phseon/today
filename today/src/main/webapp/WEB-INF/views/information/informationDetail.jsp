@@ -21,8 +21,9 @@
 			<li>제목 : ${info.info_title}<li>
 			<li>작성자 : ${info.id}<li>
 			<li>작성일 : ${info.info_date}<li>
+			<textarea readonly rows="10" cols="40">${info.info_content}</textarea>
+		
 		</ul>
-		<textarea readonly rows="10" cols="40">${info.info_content}</textarea>
 		
 		<%--로그인한 회원번호와 작성자 회원번호가 일치해야 수정,삭제 가능 --%>
 		<c:if test="${user_num == info.m_num}">

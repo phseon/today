@@ -12,6 +12,8 @@ public class InformationDetailAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		
 		int info_num = Integer.parseInt(request.getParameter("info_num"));
 		
 		InformationDAO dao = InformationDAO.getInstance();
