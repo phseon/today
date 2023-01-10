@@ -33,5 +33,6 @@ public class WriteAction implements Action{
 		
 		return "/WEB-INF/views/information/write.jsp";
 	}
+
 	
 }
