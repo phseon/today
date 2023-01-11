@@ -1,0 +1,168 @@
+@charset "UTF-8";
+a{
+	cursor: pointer;
+}
+a:link{
+	text-decoration:none;
+	color:#000;
+}
+a:visited{
+	text-decoration:none;
+	color:#000;
+}
+a:hover{
+	text-decoration:none;
+	color:#6c6c6c;
+}
+
+img{
+	border-radius:15%;
+}
+/*공통 등록*/
+form{
+	width:600px;
+	margin:0 auto;
+	border:2px solid #000;
+	padding:10px 10px 10px 30px;
+}
+form ul li{
+	clear:both;
+}
+ul{
+	list-style:none;
+}
+li{
+	margin-top:15px;
+}
+input{
+	margin-top:4px;
+}
+p{
+	margin-left:3px;
+	word-wrap: break-word;
+}
+input[type="button"]{
+	border:2px solid #98a9ab;
+	background-color:rgba(0,0,0,0);
+	color:#98a9ab;
+	border-radius:5px;	
+	width:55px;
+}
+input[type="button"]:hover{
+	color:black;
+	background-color:#cfd7d8;	
+}
+input[type="submit"]{
+	border:2px solid #98a9ab;
+	background-color:rgba(0,0,0,0);
+	color:#98a9ab;
+	border-radius:5px;
+	width:55px;	
+}
+input[type="submit"]:hover{
+	color:black;
+	background-color:#cfd7d8;	
+}
+
+input[type="radio"]{
+	display:none;
+}
+input[type="radio"]+label{
+	text-align:center;
+	cursor:pointer;
+	display:inline-block;
+	border:2px solid #98a9ab;
+	background-color:rgba(0,0,0,0);
+	color:#98a9ab;
+	border-radius:5px;
+	width:55px;	
+}
+input[type="radio"]:checked+label{
+    color:black;
+	background-color:#cfd7d8;	
+}
+
+/*------------------------------*/
+
+/*
+input[type="text"],input[type="password"]{
+	width:310px;
+}*/
+#pro_bgcolor{
+	background-color: #ced6d7;
+}
+#_title{
+	text-align:center;
+	margin-top:12px;
+	margin-bottom:8px;
+}
+#write_form input[type="text"],#update_form input[type="text"]{
+	width:575px;
+}
+#delete_form input[type="password"]{
+	width:300px;
+}
+#align_center{
+	text-align:center;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+#align_right{
+	text-align:right;
+}
+
+#ltable{
+	float:left;
+	text-align:center;
+	width:33%;
+	border-spacing: 30px 5rem;
+	
+}
+#mtable{
+	float:left;
+	text-align:center;
+	width:33%;
+	border-spacing: 30px 5rem;
+}
+#rtable{
+	float:left;
+	text-align:center;
+	width:33%;
+	border-spacing: 30px 5rem;
+}
+#ltable td, #mtable td, #rtable td{
+	border: 1px solid #000;
+}
+
+#detail_left{
+	float:left;	
+	width:44%;
+	border-right:solid 3px;
+	text-align:center;
+	
+}
+#detail_right{
+	float:left;
+	width:55%;
+	height:400px;
+	overflow:auto;
+	
+}
+#detail_clear{
+	clear:both;
+}
+
+#list_p_title{
+	margin-top:5px;
+	font-size:x-large;
+	font-weight:900;
+}
+.result-display{
+	width:400px;
+	height:200px;
+	margin:50px auto;
+	border:1px solid #000;
+	display:flex;/*하위 요소를 수직으로 쌓을 수 있는 공간을 만듬*/
+	align-items:center;/*세로 정렬*/
+	justify-content:center;/*가로 정렬*/	
+}
