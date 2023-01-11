@@ -69,7 +69,7 @@ public class EventDAO {
 				else if(keyfield.equals("2")) sub_sql += "WHERE e_content LIKE ?";
 			}
 			
-			sql = "SELECT COUNT(*) FROM event" + sub_sql;
+			sql = "SELECT COUNT(*) FROM event " + sub_sql;
 			
 			pstmt = conn.prepareStatement(sql);
 			
