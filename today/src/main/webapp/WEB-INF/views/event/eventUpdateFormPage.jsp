@@ -102,7 +102,6 @@
 			if($('#e_rcheck').is(':checked')){
 				$('#res_btn_hide').show();
 				$('#e_rcheck').val('true');	
-				checkDate();
 			}else{
 				$('#res_btn_hide').hide();
 				$('#e_rcheck').val('false');
@@ -111,7 +110,7 @@
 	});
 </script>
 </head>
-<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+<body>
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
 	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<jsp:include page="/WEB-INF/views/event/event_header.jsp"/>
@@ -145,7 +144,7 @@
 				<input type = "file" name = "e_thumb" id = "e_thumb" accept = "image/gif, image/png, image/jpeg">
 				<c:if test="${!empty event.e_thumb}">
 				<span class = "file_detail1">(${event.e_thumb})파일이 등록되어 있습니다.
-					<input type = "button" value = "파일삭제" id = "aaa" onclick = "deleteFileAjax('e_thumb')">
+					<input type = "button" value = "파일삭제" onclick = "deleteFileAjax('e_thumb')">
 				</span>
 				</c:if>
 				<span>

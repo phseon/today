@@ -45,6 +45,8 @@ public class EventMainPageAction implements	Action{
 		request.setAttribute("topList", topList);
 		request.setAttribute("page", page.getPage());
 		
+		request.setAttribute("pageNum", pageNum);
+		
 		//다시 eventMainPage.jsp 호출
 		return "/WEB-INF/views/event/eventMainPage.jsp";
 	}

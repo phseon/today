@@ -64,7 +64,7 @@
 			</span>
 		</c:if>
 		<span class = "show-event-list">
-			<a  href = "eventPage.do">목록</a>
+			<a  href = "eventPage.do?&pageNum=${pageNum}">목록</a>
 		</span>
 	</div>
 

@@ -158,3 +158,8 @@
 	color : white;
 	font-weight : bold;
 }
+.badge.beforeEvent{
+	background-color : #cca843;
+	color : white;
+	font-weight : bold;	
+}

@@ -16,6 +16,7 @@ public class EventDetailPageAction implements Action{
 		//eventMainPage.jsp에서 이벤트 글 클릭시 호출 get방식으로 이벤트 번호 전달받음
 		//전달받은 이벤트 번호(e_num) 저장
 		int e_num = Integer.parseInt(request.getParameter("e_num"));
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		
 		//전달 받은 이벤트 번호로 해당 이벤트 정보 eventVO에 저장
 		EventDAO dao = EventDAO.getInstance();
@@ -27,6 +28,7 @@ public class EventDetailPageAction implements Action{
 		
 		//eventVO에 저장한 정보 request에 담기
 		request.setAttribute("event", event);
+		request.setAttribute("pageNum", pageNum);
 		
 		//eventDetailPage.jsp 호출해서 저장된 데이터 넘겨주고 ui 호출
 		return "/WEB-INF/views/event/eventDetailPage.jsp";
