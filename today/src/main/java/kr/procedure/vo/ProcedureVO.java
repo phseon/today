@@ -1,5 +1,5 @@
 package kr.procedure.vo;
-
+ 
 public class ProcedureVO {
 	private int p_num;
 	private String p_title;

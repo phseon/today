@@ -34,7 +34,7 @@
 	<hr size="3" noshade="noshade" width="100%">
 	<div id="detail_clear"></div>
 	<br>
-	
+	 
 	<br>
 <div id="align_center">
 <c:if test="${user_auth == 1}">

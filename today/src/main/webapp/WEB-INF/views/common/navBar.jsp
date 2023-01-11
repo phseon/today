@@ -25,7 +25,7 @@
 				</li>
 			</ul>
 		</div>
-		<div id="login_nav">
+		<div id="login_nav"> 
 			<ul>
 				<c:if test="${empty user_num}">
 					<li><a

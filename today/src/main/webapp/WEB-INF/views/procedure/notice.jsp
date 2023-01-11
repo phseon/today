@@ -19,7 +19,7 @@
 					${accessMsg}
 				</c:if>
 				<c:if test="${empty accessMsg}">
-					잘못된 접속입니다.
+					잘못된 접속입니다. 
 				</c:if>
 			</div>
 		</div>

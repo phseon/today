@@ -14,7 +14,7 @@
 <jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 <h1 id="_title">
 시술 목록
-</h1>
+</h1> 
 <c:if test="${user_auth == 1}">
 	<div id="align_right">
 	<input type="button" value="글쓰기" onclick="location.href='writeForm.do'">

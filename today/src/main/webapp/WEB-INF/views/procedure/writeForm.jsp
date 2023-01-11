@@ -21,7 +21,7 @@ $(function(){
 			$('#content').val('').focus();
 			return false;
 		}
-		if($('#imgsrc').val()==''){
+		if($('#imgsrc').val()==''){ 
 			alert('사진을 입력하세요');
 			$('#imgsrc').focus();
 			return false;

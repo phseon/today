@@ -10,7 +10,7 @@
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(function(){
+$(function(){ 
 	$('#update_form').submit(function(){
 		if($('#title').val().trim()==''){
 			alert('제목을 입력하세요!');

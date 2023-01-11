@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(function(){
+$(function(){ 
 	document.getElementById("rev_date").value = new Date().toISOString().slice(0, 10);
 	$('#reservation_form').submit(function(){
 		if(!($('input[type=radio][name=time]:checked').val())){
