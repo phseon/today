@@ -7,7 +7,7 @@ import kr.controller.Action;
 import kr.procedure.dao.ProcedureDAO;
 import kr.procedure.vo.ProcedureVO;
 import kr.util.StringUtil;
-
+ 
 public class DetailAction implements Action{
 
 	@Override

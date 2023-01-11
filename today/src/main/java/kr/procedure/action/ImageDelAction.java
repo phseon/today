@@ -13,7 +13,7 @@ import kr.controller.Action;
 import kr.procedure.dao.ProcedureDAO;
 import kr.procedure.vo.ProcedureVO;
 import kr.util.FileUtil;
-
+ 
 public class ImageDelAction implements Action{
 
 	@Override
