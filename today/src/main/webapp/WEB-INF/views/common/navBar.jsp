@@ -13,7 +13,7 @@
 					href="${pageContext.request.contextPath}/doctor/doctorList.do">의료진소개</a>
 				</li>
 				<li><a
-					href="${pageContext.request.contextPath}/surgery/sergPage.do">시술</a>
+					href="${pageContext.request.contextPath}/procedure/list.do">시술</a>
 				</li>
 				<li><a href="${pageContext.request.contextPath}/qna/qnaPage.do">QnA</a>
 				</li>
@@ -25,7 +25,7 @@
 				</li>
 			</ul>
 		</div>
-		<div id="login_nav">
+		<div id="login_nav"> 
 			<ul>
 				<c:if test="${empty user_num}">
 					<li><a
