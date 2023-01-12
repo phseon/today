@@ -180,7 +180,7 @@ public class FaqDAO {
 				Connection conn = null;
 				PreparedStatement pstmt = null;
 				String sql = null;
-				String sub_sql = "";
+	 //	   		 String sub_sql = "";
 				int cnt = 0;
 			
 				try {
