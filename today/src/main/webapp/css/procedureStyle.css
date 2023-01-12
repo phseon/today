@@ -12,12 +12,9 @@ a:visited{
 }
 a:hover{
 	text-decoration:none;
-	color:#6c6c6c;
+	color:gray;
 }
 
-img{
-	border-radius:15%;
-}
 /*공통 등록*/
 form{
 	width:600px;
@@ -30,9 +27,6 @@ form ul li{
 }
 ul{
 	list-style:none;
-}
-li{
-	margin-top:15px;
 }
 input{
 	margin-top:4px;
