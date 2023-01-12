@@ -9,6 +9,7 @@ import kr.doctor.vo.DoctorVO;
 import kr.member.vo.MemberVO;
 import kr.myinfo.dao.MyInfoDAO;
 import kr.reservation.vo.ReservationVO;
+import kr.review.dao.ReviewDAO;
 import kr.review.vo.ReviewVO;
 
 public class rezInfoAction implements Action {
@@ -36,13 +37,15 @@ public class rezInfoAction implements Action {
 		ReservationVO myReservation = dao.getReservationInfo(user_num);
 		request.setAttribute("myRez", myReservation); 
 
-		
 		//p_num을 보내주어서 procedure테이블에 있는 p_num에 대한 p_title 뽑아내기
 		Integer p_num = (Integer)myReservation.getP_num();
 		DoctorVO myProcedure = dao.getProcedureInfo(p_num);
 		request.setAttribute("myProc", myProcedure); 
+
+		ReviewDAO r_dao = ReviewDAO.getInstance();
 		
-	
+		ReservationVO rez = r_dao.getRevInfo(user_num);
+		request.setAttribute("rez", rez);
 		
 		return "/WEB-INF/views/review/writeForm.jsp";
 		}

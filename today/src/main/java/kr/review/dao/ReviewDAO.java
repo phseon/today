@@ -5,11 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import kr.member.vo.MemberVO;
 import kr.reservation.vo.ReservationVO;
 import kr.review.vo.ReviewCommVO;
 import kr.review.vo.ReviewVO;
+import kr.procedure.vo.ProcedureVO;
 import kr.util.DBUtil;
 import kr.util.DurationFromNow;
 import kr.util.StringUtil;
@@ -24,34 +26,49 @@ public class ReviewDAO {
 	private ReviewDAO() {}
 	
 	//리뷰 등록
-	public void insertReivew(ReviewVO review) throws Exception{
+	public void insertReivew(ReviewVO review, int rev_num) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		String sql = null;
 		
 		try {
 			conn = DBUtil.getConnection();
+			//오토 커밋 해제
+			conn.setAutoCommit(false);
 
-			//이후 별점, 예약 내용 추가
 //			sql = "INSERT INTO review(r_num,r_date,"
 //				+ "r_content,r_imgsrc,star,rev_num) VALUES ("
 //				+ "review_seq.nextval(),SYSDATE,?,?,?,?)";
-			sql = "INSERT INTO review(r_num,r_date,"
-					+ "r_content,r_imgsrc) VALUES ("
-					+ "review_seq.nextval,SYSDATE,?,?)";
-		
-			pstmt = conn.prepareStatement(sql);
+
+//			sql = "INSERT INTO review(r_num,r_date,"
+//					+ "r_content,r_imgsrc) VALUES ("
+//					+ "review_seq.nextval,SYSDATE,?,?,?)";
 			
+			//별점, 이미지 추가  
+			sql = "INSERT INTO review(r_num,r_date,"
+				+ "r_content,r_imgsrc,star,rev_num) VALUES "
+				+ "(review_seq.nextval,SYSDATE,?,?,?,?)";    
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, review.getR_content());
 			pstmt.setString(2, review.getR_imgsrc());
-//			pstmt.setInt(3, review.getStar());
-//			pstmt.setInt(3, review.getRev_num());
-			
+			pstmt.setInt(3, 1);
+			pstmt.setInt(4, rev_num);
 			pstmt.executeUpdate();
+			
+			sql = "UPDATE reservation "
+				+ "SET r_ox ='T' "
+				+ "WHERE rev_num=?";
+			pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(1, rev_num);
+			pstmt2.executeUpdate();
+			
+			conn.commit();
 		}catch(Exception e) {
 			throw new Exception(e);
 		}finally {
 			DBUtil.executeClose(null, pstmt, conn);
+			DBUtil.executeClose(null, pstmt2, conn);
 		}
 	}
 	
@@ -253,6 +270,50 @@ public class ReviewDAO {
 		}
 	}
 	
+	
+	
+	//리뷰 삭제
+	public void deleteReview(int r_num)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		String sql = null;
+		
+		try {
+			//커넥션풀로부터 커넥션을 할당
+			conn = DBUtil.getConnection();
+			//오토커밋 해제
+			conn.setAutoCommit(false);
+			
+			//부모글 삭제
+			sql = "DELETE FROM review WHERE r_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, r_num);
+			pstmt.executeUpdate();
+			
+            sql = "UPDATE reservation "
+				+ "SET r_ox ='F' " 
+				+ "WHERE rev_num = (SELECT v.rev_num "
+				+ "FROM reservation v, review r "
+                + "WHERE v.rev_num=r.rev_num "
+                + "AND r.r_num=?)";
+            pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(1, r_num);
+			pstmt2.executeUpdate();
+			
+			//예외 발생 없이 정상적으로 SQL문이 실행
+			conn.commit();
+		}catch(Exception e) {
+			//예외 발생
+			conn.rollback();
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt2, null);
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	
+
 	//예약 정보
 	public ReservationVO getRevInfo(int member_num)
             throws Exception{
@@ -261,16 +322,23 @@ public class ReviewDAO {
 		ResultSet rs = null;
 		ReviewVO review = null;
 		ReservationVO rez = null;
+		ProcedureVO proc = null;
 		String sql = null;
 		
 		try {
 			//커넥션풀로부터 커넥션을 할당
 			conn = DBUtil.getConnection();
 			//SQL문 작성
+//			sql = "SELECT * FROM reservation v "
+//			    + "LEFT JOIN procedure p ON p.m_num=v.m_num "
+//			    + "LEFT JOIN review r ON v.rev_num=r.rev_num "
+//			    + "WHERE v.m_num=?";
+			
 			sql = "SELECT * FROM reservation v "
-			    + "LEFT JOIN procedure p ON p.m_num=v.m_num "
-			    + "LEFT JOIN review r ON v.rev_num=r.rev_num "
-			    + "WHERE v.m_num=?";
+				+ ", procedure p "
+				+ "WHERE p.m_num=v.m_num "
+				+ "AND v.m_num=?";			
+			
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터를 바인딩
@@ -283,8 +351,10 @@ public class ReviewDAO {
 				rez = new ReservationVO();
 				rez.setRev_date(rs.getString("rev_date"));
 				rez.setRev_time(rs.getString("rev_time"));
+				rez.setRev_num(rs.getInt("rev_num"));
+				rez.setR_ox(rs.getString("r_ox"));
 				rez.setM_num(rs.getInt("m_num"));
-//				rez.setP_num(rs.getInt("p_num"));
+				rez.setP_num(rs.getInt("p_num"));
 			}
 		}catch(Exception e) {
 			throw new Exception(e);
@@ -293,41 +363,182 @@ public class ReviewDAO {
 			}
 		return rez;
 		}
+
 	
 	
-	//리뷰 삭제
-	public void deleteReview(int r_num)throws Exception{
+	//예약 개수
+		public int getRezCount(int member_num)
+				                      throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			int count = 0;
+			
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+//				sql = "SELECT COUNT(*) FROM comments c "
+//					+ "WHERE c.r_num=?";
+//				
+				sql = "SELECT COUNT(*) "
+					+ "FROM reservation v "
+					+ "WHERE v.m_num=?";
+				
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, member_num);
+				//SQL문을 실행해서 결과행을 ResultSet 담음
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					count = rs.getInt(1);
+				}
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			return count;
+		}
+	
+		/*
+	//예약 정보
+	public List<ReservationVO> getRevInfo(int start,
+            int end, int member_num)
+            throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		PreparedStatement pstmt2 = null;
-		PreparedStatement pstmt3 = null;
+		ResultSet rs = null;
+		List<ReservationVO> list = null;
+		ReservationVO rez = null;
+		ProcedureVO proc = null;
 		String sql = null;
 		
 		try {
 			//커넥션풀로부터 커넥션을 할당
 			conn = DBUtil.getConnection();
-			//오토커밋 해제
-			conn.setAutoCommit(false);
+			//SQL문 작성
+//			sql = "SELECT * FROM reservation v "
+//			    + "LEFT JOIN procedure p ON p.m_num=v.m_num "
+//			    + "LEFT JOIN review r ON v.rev_num=r.rev_num "
+//			    + "WHERE v.m_num=?";
 			
-			//부모글 삭제
-			sql = "DELETE FROM review WHERE r_num=?";
-			pstmt3 = conn.prepareStatement(sql);
-			pstmt3.setInt(1, r_num);
-			pstmt3.executeUpdate();
+//			sql = "SELECT * FROM reservation v "
+//				+ ", procedure p "
+//				+ "WHERE p.m_num=v.m_num "
+//				+ "AND v.m_num=?";			
+
+//			sql = "SELECT *, rownum rnum "
+//			+ "FROM reservation v, procedure p "
+//			+ "WHERE p.m_num=v.m_num "
+//			+ "AND v.m_num=? "
+//			+ "AND rnum>=? AND rnum<=?";
 			
-			//예외 발생 없이 정상적으로 SQL문이 실행
-			conn.commit();
+			sql = "SELECT *"
+				+ "FROM reservation v, procedure p "
+				+ "WHERE p.m_num=v.m_num "
+				+ "AND v.m_num=?";
+            
+
+			
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터를 바인딩
+			pstmt.setInt(1, member_num);
+//			pstmt.setInt(2, start);
+//			pstmt.setInt(3, end);
+			//SQL문을 실행해서 결과행을 ResultSet에 담음
+			rs = pstmt.executeQuery();
+			list = new ArrayList<ReservationVO>();
+			
+			
+			if(rs.next()) {
+				//r_num rev_num m_num 정리
+//				rez = new ReservationVO();
+				rez.setRev_date(rs.getString("rev_date"));
+				rez.setRev_time(rs.getString("rev_time"));
+				rez.setRev_num(rs.getInt("rev_num"));
+				rez.setM_num(rs.getInt("m_num"));
+				rez.setP_num(rs.getInt("p_num"));
+//				proc.setP_title(rs.getString("p_title"));
+				
+				list.add(rez);
+				}
 		}catch(Exception e) {
-			//예외 발생
-			conn.rollback();
 			throw new Exception(e);
 		}finally {
-			DBUtil.executeClose(null, pstmt3, null);
-			DBUtil.executeClose(null, pstmt2, null);
-			DBUtil.executeClose(null, pstmt, conn);
+			DBUtil.executeClose(rs, pstmt, conn);
+			}
+		return list;
 		}
+	
+	*/
+	
+	
+	/*
+	//예약 목록 목록
+	public List<Map<ReservationVO, ProcedureVO>> getRevInfo(int member_num)
+			                		     throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Map<ReservationVO, ProcedureVO>> list = null;
+		String sql = null;
+		
+		try {
+			//커넥션풀로부터 커넥션을 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성			
+//			sql = "SELECT * FROM (SELECT *, rownum rnum "
+//				+ "FROM comments c LEFT JOIN member m ON c.m_num = m.m_num "
+//				+ "LEFT JOIN review r ON c.r_num = r.r_num WHERE "
+//				+ "r.r_num=? ORDER BY c.c_num DESC) "
+//				+ "WHERE rnum>=? AND rnum<=?";
+			
+			sql = "SELECT * FROM reservation v "
+					+ ", procedure p "
+					+ "WHERE p.m_num=v.m_num "
+					+ "AND v.m_num=?";			
+
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(1, member_num);
+			//SQL문을 실행해서 결과행들을 ResultSet에 담음
+			rs = pstmt.executeQuery();
+			list = new ArrayList<Map<ReservationVO, ProcedureVO>>();
+			while(rs.next()) {
+				ReservationVO rez = new ReservationVO();
+				ProcedureVO proc = new ProcedureVO();
+				rez.setRev_date(rs.getString("rev_date"));
+				rez.setRev_time(rs.getString("rev_time"));
+				rez.setRev_num(rs.getInt("rev_num"));
+				rez.setM_num(rs.getInt("m_num"));
+				rez.setP_num(rs.getInt("p_num"));
+				proc.setP_title(rs.getString("p_title"));
+				
+				
+				ReviewCommVO comm = new ReviewCommVO();
+				MemberVO member = new MemberVO();
+				comm.setC_num((Integer)rs.getInt("c_num"));
+				comm.setC_content(rs.getString("c_content"));
+				comm.setR_num((Integer)rs.getInt("r_num"));
+				//이 값은 안 들어가나? 쿼리에서 빼서 없어도 될 듯
+				comm.setM_num((Integer)rs.getInt("m_num"));
+				
+				list.add(comm);
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return list;
 	}
 	
+	*/
 	
 	//댓글 등록
 	public void insertCommReview(MemberVO member, ReviewVO review, ReviewCommVO comm)
@@ -362,7 +573,8 @@ public class ReviewDAO {
 		}
 	}
 	
-	
+
+		
 	//댓글 개수
 	public int getCommReviewCount(int r_num)
 			                         throws Exception{

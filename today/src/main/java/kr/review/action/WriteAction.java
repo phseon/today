@@ -32,7 +32,10 @@ public class WriteAction implements Action{
 		review.setR_imgsrc(multi.getParameter("r_imgsrc"));
 		
 		ReviewDAO dao = ReviewDAO.getInstance();
-		dao.insertReivew(review);
+		ReservationVO rez = dao.getRevInfo(user_num);
+
+		System.out.println("aa"+rez.getRev_num());
+		dao.insertReivew(review,rez.getRev_num());
 		
 //		//예약번호 반환
 //		int rev_num = Integer.parseInt(

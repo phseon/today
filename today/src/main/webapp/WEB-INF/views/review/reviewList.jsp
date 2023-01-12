@@ -31,12 +31,27 @@
 		</form>
 		<!-- 검색 폼 끝 -->
 		<div class="list-space align-right">
+		<h2>리뷰 작성번호:${rez.rev_num}</h2>
+		<h2>리뷰 작성 회원번호:${rez.m_num}</h2>
+		<h2>리뷰 작성여부:${rez.r_ox}</h2>
+
+			<c:if test="${rez.r_ox=='T'}">
+			<input type="button" value="리뷰 내역"
+			   onclick="location.href='${pageContext.request.contextPath}/myinfo/myPage.do'"/>
+			</c:if>
+			
+			<c:if test="${rez.r_ox=='F'}">
 			<input type="button" value="리뷰 작성"
 				   onclick="location.href='writeForm.do'"
-				<c:if test="${empty user_num}">disabled="disabled"</c:if>/>
+				   <c:if test="${empty user_num}">disabled="disabled"</c:if>/>
+			</c:if>
+			
+		<!-- list로 목록 넣으면 선택 가능 -> 리뷰 작성으로 수정 -> 작성 폼에서 선택 -->
+		<!-- 리뷰 내역 유지하려면 내역 페이지에서도 수정, 삭제 넣어야 함 -->
+		
 		<!-- 위 라인 관련. 클래 -->
 
-		</div>
+		</div>:
 		
 		<c:if test="${count == 0}">
 		<div class="result-display">
