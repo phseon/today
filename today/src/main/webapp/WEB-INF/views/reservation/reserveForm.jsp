@@ -22,14 +22,8 @@
 				$('#date').focus();
 				return false;
 			}
-			if($('#time').val()==''){
-				alert('시술시간을 선택해주세요.');
-				$('#time').focus();
-				return false;
-			}
-			if($!('input:[type:radio][name="r_ox"]:checked');){
-				alert('리뷰 작성여부를 선택해주세요.');
-				$('#r_ox').focus();
+			if(!$('input[type=radio]:checked').val()){
+				alert('시술시간을 선택하세요!');
 				return false;
 			}
 		});
@@ -42,7 +36,7 @@
 	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<br><br>
 	<h2>예약 폼</h2>
-	<div class="result-display">
+	<div class="form-display">
 		
 		<form id="reserve_form" action="reserve.do" method="post">
 			<ul>
@@ -63,9 +57,28 @@
   						document.getElementById('date').setAttribute('min',today); 
 					</script>
 				</li>
+				<li>예약시간</li>
 				<li>
-					<label for="time">예약시간</label>
-					<input type="time" name="time" id="time">
+				<div class="timeSelect">
+					<input type="radio" name="time" id="time1" value="10:00"><label for="time1">10:00</label>
+					<input type="radio" name="time" id="time2" value="10:30"><label for="time2">10:30</label>
+					<input type="radio" name="time" id="time3" value="11:00"><label for="time3">11:00</label>
+					<input type="radio" name="time" id="time4" value="11:30"><label for="time4">11:30</label>
+					<input type="radio" name="time" id="time5" value="12:00"><label for="time5">12:00</label>
+					<input type="radio" name="time" id="time6" value="12:30"><label for="time6">12:30</label>
+					<input type="radio" name="time" id="time7" value="13:00"><label for="time7">13:00</label>
+					<input type="radio" name="time" id="time8" value="13:30"><label for="time8">13:30</label>
+					<input type="radio" name="time" id="time9" value="14:00"><label for="time9">14:00</label>
+					<input type="radio" name="time" id="time10" value="14:30"><label for="time10">14:30</label>
+					<input type="radio" name="time" id="time11" value="15:00"><label for="time11">15:00</label>
+					<input type="radio" name="time" id="time12" value="15:30"><label for="time12">15:30</label>
+					<input type="radio" name="time" id="time13" value="16:00"><label for="time13">16:00</label>
+					<input type="radio" name="time" id="time14" value="16:30"><label for="time14">16:30</label>
+					<input type="radio" name="time" id="time15" value="17:00"><label for="time15">17:00</label>
+					<input type="radio" name="time" id="time16" value="17:30"><label for="time16">17:30</label>
+					<input type="radio" name="time" id="time17" value="18:00"><label for="time17">18:00</label>
+					<input type="radio" name="time" id="time12" value="15:30"><label for="time12">18:30</label>
+				</div>
 				</li>
 			</ul>
 		<div class="align-center">

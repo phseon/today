@@ -33,13 +33,12 @@ public class ReserveAction implements Action{
 		reserve.setP_num(Integer.parseInt(request.getParameter("p_num")));
 		reserve.setRev_date(request.getParameter("date"));
 		reserve.setRev_time(request.getParameter("time"));
-		reserve.setR_ox(request.getParameter("r_ox"));
 		
 		dao.insertReservation(reserve);
 		
 		request.setAttribute("accessMsg", "예약이 완료되었습니다.");
 		request.setAttribute("accessUrl",
-						request.getContextPath() + "/main/main.do");
+						request.getContextPath() + "/myinfo/myPage.do");
 				
 		return "/WEB-INF/views/common/notice.jsp";
 	}

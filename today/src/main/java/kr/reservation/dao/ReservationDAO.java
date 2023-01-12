@@ -57,14 +57,13 @@ public class ReservationDAO {
 		
 		try {
 			conn = DBUtil.getConnection();
-			sql = "INSERT INTO reservation (rev_num,rev_date,rev_time,p_num"
-					+ ",r_ox,m_num) VALUES (reservation_seq.nextval,?,?,?,?,?)";
+			sql = "INSERT INTO reservation (rev_num,rev_date,rev_time,p_num,"
+					+ "m_num) VALUES (reservation_seq.nextval,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, reserve.getRev_date());
 			pstmt.setString(2, reserve.getRev_time());
 			pstmt.setInt(3, reserve.getP_num());
-			pstmt.setString(4, reserve.getR_ox());
-			pstmt.setInt(5, reserve.getM_num());
+			pstmt.setInt(4, reserve.getM_num());
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {
