@@ -27,8 +27,8 @@
 </head>
 <body>
 <div class="page-main">
-	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/common/headersample.jsp"/>	
-	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/common/navBar.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>	
+	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<div class="content-main">
 		<form id="login_form" action="login.do" method="post">
 			<h2>로그인</h2>

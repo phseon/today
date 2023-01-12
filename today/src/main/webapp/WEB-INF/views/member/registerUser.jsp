@@ -10,8 +10,8 @@
 </head>
 <body>
 <div class="page-main"> 
-	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/common/headersample.jsp"/>	
-	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/common/navBar.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>	
+	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<div class="content-main">
 		<h2>회원가입 완료</h2>
 		<div class="result-display">

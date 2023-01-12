@@ -115,8 +115,8 @@
 </head>
 <body>
 <div class="page-main">
-	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/common/headersample.jsp"/>	
-	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/common/navBar.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>	
+	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<div class="content-main">
 		<form id="register_form" action="registerUser.do" method="post">
 			<h2>회원가입</h2>
