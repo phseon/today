@@ -9,6 +9,5 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 </body>
 </html>

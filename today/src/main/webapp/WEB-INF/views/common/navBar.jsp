@@ -7,13 +7,13 @@
 		<div id="menu_nav">
 			<ul>
 				<li><a
-					href="${pageContext.request.contextPath}/information/list.do">공지사항</a>
+					href="${pageContext.request.contextPath}/notice/listPage.do">공지사항</a>
 				</li>
 				<li><a
-					href="${pageContext.request.contextPath}/doctor/doctorList.do">의료진소개</a>
+					href="${pageContext.request.contextPath}/docIndroduction/docInPage.do">의료진소개</a>
 				</li>
 				<li><a
-					href="${pageContext.request.contextPath}/procedure/list.do">시술</a>
+					href="${pageContext.request.contextPath}/surgery/sergPage.do">시술</a>
 				</li>
 				<li><a href="${pageContext.request.contextPath}/qna/qnaPage.do">QnA</a>
 				</li>
@@ -25,7 +25,7 @@
 				</li>
 			</ul>
 		</div>
-		<div id="login_nav"> 
+		<div id="login_nav">
 			<ul>
 				<c:if test="${empty user_num}">
 					<li><a
@@ -35,7 +35,7 @@
 				</c:if>
 				<c:if test="${!empty user_num}">
 					<li><a
-						href="${pageContext.request.contextPath}/myinfo/myPage.do">마이페이지</a></li>
+						href="${pageContext.request.contextPath}/member/myPage.do">마이페이지</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a></li>
 				</c:if>

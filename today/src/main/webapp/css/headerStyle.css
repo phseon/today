@@ -1,92 +1,54 @@
 @charset "UTF-8";
 *{
-	margin : 0;
-	padding : 0;
 	list-style : none;
 	text-decoration : none;
-	font-family : 'Noto Sans KR', sans-serif;
+	border-collapse : none;
+	margin : 0;
+	padding : 0;
+	color : black;
 }
 .wrap{
-	margin : 0;
-	padding : 0;	
+	background-color:transparent;
 }
-/*병원 이미지 및 이름*/
 .header{
 	width : 100%;
-	min-width : 1400px;
-	margin : 10px auto;
-}
-.main-logo{
-	display : flex;
-	margin : 20px 5px;
-	width : 100%;
-	align-items: center;
-	justify-content: center;
-}
-#main_logo_img{
-	width : 40px;
-	height : 40px;
-	margin : 5px;
-}
-#main-logo-title > a{
-	color: black;
-	margin : 30px 5px;
-	letter-spacing : 3px;
-}
-/*메뉴바*/
-.main-bg{
-	background-color : rgb(44, 44, 44);
-	width : 100%;
-	min-width : 1400px;
-	height: 80px;
-	position : relative;
-	z-index : 1000;
-}
-.sticky{
-	position:-webkit-sticky;
-	position:sticky;
-	top:0;
-}
-.main_nav {
-	display: flex;
-	justify-content: space-between;
-	align-items : center;
-	height : inherit;
-}
-#menu_nav ul{
-	display : flex;
-	margin-left : 100px;
-}
-#menu_nav ul li{
-	width : 200px;
 	margin : 0 auto;
-	text-align : center;
 }
-#menu_nav ul li:not(:last-child){
-	border-right : 1px solid white;
-}
-#menu_nav ul li a{
-	color : white;
-	font-size : 130%;
-	font-weight : bold;
-}
-#menu_nav ul li a:hover{
-	color : gray;
-}
-#login_nav {
-	margin-bottom : 40px;
-}
-#login_nav ul{
+.nav_bar{
 	display : flex;
+	width : 1500px;
+	margin : auto;
+	height : 50px;
 }
-#login_nav ul li{
-	width : 60px;
+.title{
+	width : 300px;
+	height: 50px;
+	margin : auto;
+	line-height : 50px;
+	text-align : center;
+	font-size : 14pt;
+	letter-spacing : 4px;
 }
-#login_nav li a{
-	font-size : 10px;
-	color : gray;
-	margin : 0 2px;
-	padding : 5px;
-	border : 1px solid gray;
-	border-radius : 10px;
+.menu{
+	display : flex;
+	width : calc(1300px - 300px);
+	line-height : 50px;
+	height: 50px;
+	justify-content :space-around;
+}
+.menu li{
+	margin-left : 80px;
+}
+.menu li a{
+	font-weight : bold;
+	font-size : 13pt;
+}
+.loginBar{
+	margin-left : 30px;
+	font-weight : bold;
+	font-size : 12pt;
+	text-align : right;
+}
+.loginBar span {
+	margin-left : 5px;
 }
