@@ -37,7 +37,7 @@ public class UpdateAction implements Action{
 		ReviewDAO dao = ReviewDAO.getInstance();
 		
 		//수정전 데이터 호출
-		ReservationVO rez = dao.getRevInfo(r_num);
+		ReservationVO rez = dao.getRevInfo(user_num);
 		ReviewVO review = dao.getReview(r_num);
 		
 		if(user_num != rez.getM_num()) {

@@ -27,7 +27,7 @@ public class UpdateFormAction implements Action{
 				
 				ReviewDAO dao = ReviewDAO.getInstance();
 				
-				ReservationVO rez = dao.getRevInfo(r_num);
+				ReservationVO rez = dao.getRevInfo(user_num);
 				ReviewVO review = dao.getReview(r_num);
 				
 				if(user_num!=rez.getM_num()) {
