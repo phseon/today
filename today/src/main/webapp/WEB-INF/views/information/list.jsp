@@ -6,12 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 목록</title>
+
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/member.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
 </head>
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>	
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
+	
 	<div class="content-main">
 		<h2>공지사항</h2>
 		<hr width="100%" size="1" noshade="noshade">

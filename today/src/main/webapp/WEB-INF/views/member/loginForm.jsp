@@ -28,7 +28,6 @@
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>	
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	
 	<div class="content-main">
 		<form id="login_form" action="login.do" method="post">
