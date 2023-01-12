@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>헤더</title>
-<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/mainHeader.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
 </head>
 <body>
 <!-- header 시작 -->
