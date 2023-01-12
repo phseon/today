@@ -1,0 +1,28 @@
+@charset "UTF-8";
+*{
+	margin : 0;
+	padding : 0;
+	list-style : none;
+	text-decoration : none;
+	font-family : 'Noto Sans KR', sans-serif;
+}
+
+/*푸터*/
+.main-f{
+	width : 100%;
+	min-width : 1500px;
+	position : relative;
+	height: 160px;
+}
+.main_navf {
+	font-weight : bold;
+	text-align : center;
+	justify-content: space-between;
+	font-size : 110%;
+	height : inherit;
+}
+#menu_navf ul li a:hover{
+	color : gray;
+}
+
+
