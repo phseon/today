@@ -8,6 +8,7 @@
 <title>시술 수정</title>
 <link rel = "stylesheet" href = "${pageContext.request.contextPath }/css/procedureStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventHeaderStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(function(){ 
@@ -28,7 +29,7 @@ $(function(){
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
+<jsp:include page="/WEB-INF/views/procedure/procedure_header.jsp"/>
 <h1 id="_title">
 시술 정보 수정
 </h1>
@@ -41,7 +42,7 @@ $(function(){
 		</li>
 		<li>
 			<label for="content">내용</label>
-			<textarea rows="20" cols="90" id="content" name="content">${pro.p_content }</textarea>
+			<textarea rows="20" cols="80" id="content" name="content">${pro.p_content }</textarea>
 		</li>
 		<li>
 			<label for="imgsrc">파일</label>

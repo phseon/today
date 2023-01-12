@@ -7,10 +7,12 @@
 <title>시술 삭제</title>
 <link rel = "stylesheet" href = "${pageContext.request.contextPath }/css/procedureStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventHeaderStyle.css">
+
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
+<jsp:include page="/WEB-INF/views/procedure/procedure_header.jsp"/>
 <h1 id="_title">
 시술 정보 삭제
 </h1>

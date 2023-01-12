@@ -8,13 +8,13 @@
 <title>시술 목록</title>
 <link rel = "stylesheet" href = "${pageContext.request.contextPath }/css/procedureStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventHeaderStyle.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/footerStyle.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
-<h1 id="_title">
-시술 목록
-</h1> 
+<jsp:include page="/WEB-INF/views/procedure/procedure_header.jsp"/>
+
 <c:if test="${user_auth == 1}">
 	<div id="align_right">
 	<input type="button" value="글쓰기" onclick="location.href='writeForm.do'">
@@ -61,5 +61,7 @@
 			</c:forEach>
 		</table>
 	</c:if>
+	<div id="detail_clear"></div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

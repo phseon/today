@@ -1,4 +1,12 @@
 @charset "UTF-8";
+#pro_header{
+	width : 100%;
+	position : relative;
+	background-image:url(../images/promain.jpg);
+	background-position: center top;
+	padding : 100px 0;
+	
+}
 a{
 	cursor: pointer;
 }

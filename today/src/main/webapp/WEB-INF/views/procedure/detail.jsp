@@ -8,12 +8,12 @@
 <title>시술 상세 정보</title>
 <link rel = "stylesheet" href = "${pageContext.request.contextPath }/css/procedureStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventHeaderStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
-
+<jsp:include page="/WEB-INF/views/procedure/procedure_header.jsp"/>
 
 
 	<h1 id="_title">
@@ -43,7 +43,7 @@
 </c:if>
 <input type="button" value="목록" onclick="location.href='list.do'">
 <c:if test="${user_auth == 2}">
-<input type="button" value="예약"  onclick="location.href='r.do?p_num=${pro.p_num}'">
+<input type="button" value="예약"  onclick="location.href='${pageContext.request.contextPath}/reservation/reserveForm.do'">
 </c:if>
 </div>
 </body>
