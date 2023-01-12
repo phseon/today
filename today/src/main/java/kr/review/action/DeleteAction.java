@@ -23,7 +23,7 @@ public class DeleteAction implements Action{
 		int r_num = Integer.parseInt(
 				       request.getParameter("r_num"));
 		ReviewDAO dao = ReviewDAO.getInstance();
-		ReservationVO rez = dao.getRevInfo(r_num);
+		ReservationVO rez = dao.getRevInfo(user_num);
 		if(user_num != rez.getM_num()) {
 			//로그인한 회원번호와 작성자 회원번호가 불일치
 			return "/WEB-INF/views/common/notice.jsp";
