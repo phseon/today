@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.doctor.vo.DoctorVO;
 import kr.member.vo.MemberVO;
 import kr.util.DBUtil;
 
@@ -17,6 +18,7 @@ public class DoctorDAO {
 	
 	private DoctorDAO() {}
 	
+	//페이지 count
 	public int getDoctorCount()throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -43,6 +45,7 @@ public class DoctorDAO {
 		return count;
 	}
 	
+	//의사 리스트
 	public List<MemberVO> getDoctor(int start, int end)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -81,7 +84,8 @@ public class DoctorDAO {
 		return list;
 	}
 	
-	public MemberVO getDoctorDetail(int m_num)throws Exception{
+	//의사 상세정보
+	public MemberVO getDoctorDetail(int d_num)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -90,9 +94,10 @@ public class DoctorDAO {
 		
 		try{
 			conn = DBUtil.getConnection();
-			sql = "SELECT * FROM member_detail WHERE m_num=?";
+			sql = "SELECT * FROM member m LEFT OUTER JOIN "
+				+ "member_detail d ON m.m_num=d.m_num WHERE d.m_num=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, m_num);
+			pstmt.setInt(1, d_num);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				doctor = new MemberVO();
@@ -100,6 +105,8 @@ public class DoctorDAO {
 				doctor.setName(rs.getString("name"));
 				doctor.setContent(rs.getString("content"));
 				doctor.setImgsrc(rs.getString("imgsrc"));
+				doctor.setAuth(rs.getInt("auth"));
+				doctor.setPwd(rs.getString("pwd"));
 			}
 		}catch(Exception e) {
 			throw new Exception(e);
@@ -107,5 +114,34 @@ public class DoctorDAO {
 			DBUtil.executeClose(rs, pstmt, conn);
 		}
 		return doctor;
+	}
+	
+	//의사 정보수정
+	public void updateDoctor(MemberVO doctor)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		String sub_sql = null;
+		int cnt = 0;
+		
+		try {
+			conn = DBUtil.getConnection();
+			if(doctor.getImgsrc()!=null) {
+				sub_sql = ",imgsrc=?";
+			}
+			sql = "UPDATE member_detail SET content=?" 
+				+ sub_sql + " WHERE m_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(++cnt, doctor.getContent());
+			if(doctor.getImgsrc()!=null) {
+				pstmt.setString(++cnt, doctor.getImgsrc());
+			}
+			pstmt.setInt(++cnt, doctor.getM_num());
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
 	}
 }

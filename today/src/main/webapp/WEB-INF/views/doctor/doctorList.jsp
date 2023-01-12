@@ -26,9 +26,7 @@
 	<c:if test="${count > 0}">
 		<div class="doc-list">
 		<c:forEach var="doctor" items="${list}">
-		<div class="doc" onclick="location.href='doctorDetail.do'">
-		<input type="hidden" name="m_num" 
-				       value="${doctor.m_num}" id="m_num">
+		<div class="doc" onclick="location.href='doctorDetail.do?d_num=${doctor.m_num}'">
 			<span class="doc_photo">
 			<c:if test="${!empty doctor.imgsrc}">
 				<img src="${pageContext.request.contextPath}/upload/${doctor.imgsrc}" width="400" height="300">

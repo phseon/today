@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.controller.Action;
 import kr.doctor.dao.DoctorDAO;
+import kr.doctor.vo.DoctorVO;
 import kr.member.vo.MemberVO;
 import kr.util.PagingUtil;
 
@@ -23,7 +24,7 @@ public class DoctorListAction implements Action{
 		int count = dao.getDoctorCount();
 				
 		PagingUtil page = new PagingUtil(Integer.parseInt(pageNum),
-												count,10,10,"doctorList.do");
+												count,3,10,"doctorList.do");
 				
 		List<MemberVO> list = null;
 		if(count>0) {

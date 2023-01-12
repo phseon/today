@@ -3,11 +3,52 @@ package kr.reservation.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
+import kr.doctor.vo.DoctorVO;
 import kr.reservation.vo.ReservationVO;
 import kr.util.DBUtil;
 
 public class ReservationDAO {
+	private static ReservationDAO instance = new ReservationDAO();
+	
+	public static ReservationDAO getInstance() {
+		return instance;
+	}
+	
+	private ReservationDAO() {}
+	
+	//시술 찾기
+	public List<DoctorVO> getProcedureList()throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		DoctorVO doctor = null;
+		List<DoctorVO> list = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT * FROM procedure";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			list = new ArrayList<DoctorVO>();
+			while(rs.next()) {
+				doctor = new DoctorVO();
+				doctor.setM_num(rs.getInt("m_num"));
+				doctor.setP_num(rs.getInt("p_num"));
+				doctor.setP_title(rs.getString("p_title"));
+				
+				list.add(doctor);
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return list;
+	}
 	//예약 등록
 	public void insertReservation(ReservationVO reserve)throws Exception{
 		Connection conn = null;
