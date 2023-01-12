@@ -37,8 +37,11 @@ public class WriteCommAction implements Action{
 			ReviewCommVO comm = new ReviewCommVO();
 			ReviewVO review = new ReviewVO();
 			
-			int r_num = Integer.parseInt(
-			         request.getParameter("r_num"));
+//			int r_num = Integer.parseInt(
+//			         request.getParameter("r_num"));
+			System.out.println(request.getParameter("c_content"));
+			String com = request.getParameter("c_content");
+			System.out.println(com);
 			
 			//현재 날짜를 sql에 사용하도록 변환
 			Date date = new Date();
@@ -46,9 +49,10 @@ public class WriteCommAction implements Action{
 	        long timeInMilliSeconds = date.getTime();
 	        java.sql.Date nowdate = new java.sql.Date(timeInMilliSeconds); 
 			
-			comm.setM_num(user_num);//회원번호(댓글 작성자)
+			member.setM_num(user_num);//회원번호(댓글 작성자)
 			comm.setC_content(request.getParameter("c_content"));
-			comm.setR_num(r_num);
+			review.setR_num(Integer.parseInt(
+			         request.getParameter("r_num")));
 			comm.setC_date(nowdate);
 			
 			ReviewDAO dao = ReviewDAO.getInstance();

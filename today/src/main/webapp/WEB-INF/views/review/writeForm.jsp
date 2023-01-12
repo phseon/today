@@ -20,6 +20,9 @@
 			<ul>
 				<li>
 					예약 날짜 : ${rez.rev_time} !!<br>
+					<h2>예약진료 내용 영역</h2>
+					<h2>${myRez.rev_date}</h2>
+					<h2>${myProc.p_title}</h2>
 				</li>
 				<li>
 					<label for="r_content">내용</label>
