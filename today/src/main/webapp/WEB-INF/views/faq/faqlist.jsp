@@ -7,7 +7,10 @@
 <meta charset="UTF-8">
 <title>faq 목록</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js">
+<script type="text/javascript">
+</script>
 <!-- <script type="text/javascript">
 	$(function(){
 		$('#search_form').submit(function(){
@@ -22,7 +25,8 @@
 </head>
 <body>
 <div class="page-main">
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<div class="content-main">
 		<h2>FAQ</h2>
 		<h5>자주 묻는 질문</h5>
