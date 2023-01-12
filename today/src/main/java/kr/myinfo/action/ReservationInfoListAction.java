@@ -26,7 +26,10 @@ public class ReservationInfoListAction implements Action {
 		MyInfoDAO dao = MyInfoDAO.getInstance();
 		ReservationVO myReservation = dao.getReservationInfo(user_num);
 		request.setAttribute("myReservation", myReservation); 
-
+		
+		if(myReservation == null) { // 만약 병원예약 조회 건수가 0이라면 아래 sql을 실행할 수 없으니 alert창 띄우기
+			return "/WEB-INF/views/myinfo/reservationAlert.jsp";
+		}
 		
 		//p_num을 보내주어서 procedure테이블에 있는 p_num에 대한 p_title 뽑아내기
 		Integer p_num = (Integer)myReservation.getP_num();
