@@ -20,6 +20,9 @@
 		<div class="align-center">
 			<div class="align-left">
 			<h2>예약진료 내용 영역</h2>
+			<h2>${myRez.rev_date}</h2>
+			<h2>${myProc.p_title}</h2>
+			<h2>예약진료 내용 영역</h2>
 			<h2>${review.rev_num}</h2>
 			<h2>${review.r_date}</h2>
 			</div>
@@ -34,7 +37,12 @@
 		<!-- <h2>로그인한 회원의 예약번호: ${rezInfo.rev_num}</h2>
 		리뷰 작성 폼에서만 보이기. 여러개면 리스트로 가져오기? -->
 		
-		
+		<form action="detail.do" method="post" id="detail"
+		              enctype="multipart/form-data">
+			<input type="hidden" name="r_num" 
+			                       value="${review.r_num}">
+		</form>	
+			
 		<c:if test="${user_num == rez.m_num}">
 				<input type="button" value="수정" 
 				onclick="location.href='updateForm.do?r_num=${review.r_num}'">
@@ -57,6 +65,8 @@
 		-->
 			<input type="hidden" name="r_num" 
 			                       value="${review.r_num}">
+			<input type="hidden" name="m_num" 
+			                       value="${comm.m_num}">
 		<!-- 댓글 시작 -->
 		<div id="comm_div">
 			<span class="c-title">댓글</span>
@@ -74,14 +84,14 @@
 			       -->
 			       <h2>aa${review.r_num}</h2>
 				<textarea rows="3" cols="50" name="c_content" 
-				  id="c_content" class="c-content"
+				  id="c_content" class="comm-content"
 				  <c:if test="${empty user_num}">disabled="disabled"</c:if>
 				  ><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>       
 				<c:if test="${!empty user_num}">
-				<div id="c_first">
+				<div id="c_second">
 					<input type="submit" value="전송">
 				</div>
-				<div id="c_second">
+				<div id="c_first">
 					<span class="letter-count">300/300</span>
 				</div>
 				</c:if>

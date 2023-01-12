@@ -106,7 +106,8 @@ public class ListCommAction implements Action{
 		//로그인한 사람이 작성자인지 체크하기 위해서 전송
 		//댓글 수정, 삭제하기 위해.
 		mapAjax.put("user_num", user_num);
-		
+//		mapAjax.put("m_num", m_num);
+
 		//JSON 데이터로 변환
 		ObjectMapper mapper = new ObjectMapper();
 		String ajaxData = mapper.writeValueAsString(mapAjax);

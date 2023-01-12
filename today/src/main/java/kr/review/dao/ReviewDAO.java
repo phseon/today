@@ -254,7 +254,7 @@ public class ReviewDAO {
 	}
 	
 	//예약 정보
-	public ReservationVO getRevInfo(int r_num)
+	public ReservationVO getRevInfo(int member_num)
             throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -267,24 +267,24 @@ public class ReviewDAO {
 			//커넥션풀로부터 커넥션을 할당
 			conn = DBUtil.getConnection();
 			//SQL문 작성
-			sql = "SELECT * FROM review r JOIN reservation v "
-				+ "USING(rev_num) WHERE r_num=?";
+			sql = "SELECT * FROM reservation v "
+			    + "LEFT JOIN procedure p ON p.m_num=v.m_num "
+			    + "LEFT JOIN review r ON v.rev_num=r.rev_num "
+			    + "WHERE v.m_num=?";
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터를 바인딩
-			pstmt.setInt(1, r_num);
+			pstmt.setInt(1, member_num);
 			//SQL문을 실행해서 결과행을 ResultSet에 담음
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				//r_num rev_num m_num 정리
 				rez = new ReservationVO();
-				review = new ReviewVO();
-				rez.setRev_num(rs.getInt("rev_num"));
+				rez.setRev_date(rs.getString("rev_date"));
+				rez.setRev_time(rs.getString("rev_time"));
 				rez.setM_num(rs.getInt("m_num"));
-				review.setRev_num(rs.getInt("rev_num"));
-//				rez.setRev_date(rs.getString("rev_date"));
-//				rez.setRev_time(rs.getString("rev_time"));
+//				rez.setP_num(rs.getInt("p_num"));
 			}
 		}catch(Exception e) {
 			throw new Exception(e);
@@ -331,18 +331,21 @@ public class ReviewDAO {
 	
 	//댓글 등록
 	public void insertCommReview(MemberVO member, ReviewVO review, ReviewCommVO comm)
-	                                    throws Exception{
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		String sql = null;
-		
-		try {
-			//커넥션풀로부터 커넥션 할당
-			conn = DBUtil.getConnection();
-			//SQL문 작성
-			sql = "INSERT INTO comments (c_num,"
-				+ "c_date,c_content,m_num,r_num) "
-				+ "VALUES (comments_seq.nextval,?,?,?,?)";
+			            throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+				sql = "INSERT INTO comments (c_num,"
+					+ "c_date,c_content,m_num,r_num) "
+					+ "VALUES (comments_seq.nextval,?,?,?,?)";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
@@ -441,7 +444,7 @@ public class ReviewDAO {
 				comm.setC_content(rs.getString("c_content"));
 				comm.setR_num((Integer)rs.getInt("r_num"));
 				//이 값은 안 들어가나? 쿼리에서 빼서 없어도 될 듯
-//				member.setM_num((Integer)rs.getInt("m_num"));
+				comm.setM_num((Integer)rs.getInt("m_num"));
 				
 				list.add(comm);
 			}
@@ -453,5 +456,88 @@ public class ReviewDAO {
 		return list;
 	}
 	
-	
+	//댓글 상세
+		public ReviewCommVO getCommReview(int c_num)
+		                                 throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ReviewCommVO comm = null;
+			String sql = null;
+
+			try {
+				//커넥션풀로부터 커넥션을 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+				sql = "SELECT * FROM comments WHERE c_num=?";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, c_num);
+				//SQL문을 실행해서 결과행을 ResultSet에 담음
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					comm = new ReviewCommVO();
+					comm.setC_num(rs.getInt("c_num"));
+					comm.setM_num(rs.getInt("m_num"));
+				}
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			return comm;
+		}
+		
+	//댓글 수정
+		public void updateCommReview(ReviewCommVO comm)
+		                                     throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션을 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+				sql = "UPDATE comments SET c_content=? "
+					+ "WHERE c_num=?";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터를 바인딩
+				pstmt.setString(1, comm.getC_content());
+				pstmt.setInt(2, comm.getC_num());
+		
+				//SQL문 실행
+				pstmt.executeUpdate();
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(null, pstmt, conn);
+			}
+		}
+		//댓글 삭제
+		public void deleteCommReview(int c_num)
+				                       throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션을 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+				sql = "DELETE FROM comments WHERE c_num=?";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, c_num);
+				//SQL문 실행
+				pstmt.executeUpdate();
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(null, pstmt, conn);
+			}
+		}
 }

@@ -38,8 +38,11 @@ $(function(){
 					output += '<h4>' + item.c_num + '</h4>';
 					output += '<div class="sub-item">';
 					output += '<p>' + item.c_content + '</p>';
+				/*	output += '<div class="sub-item">';
+					output += '<h4>' + item.r_num + '</h4>';
 					output += '<div class="sub-item">';
-					output += '<p>' + item.r_num + '</p>';
+					output += '<h4>' + item.m_num + '</h4>';
+				*/
 
 /*					if(item.re_modifydate){
 						output += '<span class="modify-date">최근 수정일 : ' + item.re_modifydate + '</span>';
@@ -47,10 +50,13 @@ $(function(){
 						output += '<span class="modify-date">등록일: ' + item.re_date + '</span>';
 					}
 */
-
+					console.log("ㅇㅇ");
+					console.log("wwww" + item);
+						
 					//로그인한 회원번호와 작성자의 회원번호 일치 여부 체크
 					if(param.user_num == item.m_num){
 						//로그인한 회원번호와 작성자 회원번호 일치
+						console.log("ㅐㅐㅐ!!"+param.user_num + "wwww" + item.m_num);
 						output += ' <input type="button" data-cnum="' + item.c_num+'" value="수정" class="modify-btn">';
 						output += ' <input type="button" data-cnum="' + item.c_num+'" value="삭제" class="delete-btn">';
 					}
@@ -131,8 +137,8 @@ $(function(){
 					alert('댓글 등록 오류 발생');
 				}
 			},
-			error:function(request,status,error){
-		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			error:function(request,status,error,form_data){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error+"form_data:"+form_data);
 		 }
 		});
 	
@@ -162,7 +168,7 @@ $(function(){
 				$('#c_first .letter-count').text(remain);
 			}else{
 				//수정폼 글자수
-				$('#c_first .letter-count').text(remain);
+				$('#mc_first .letter-count').text(remain);
 			}
 			
 		}
@@ -173,20 +179,20 @@ $(function(){
 	
 	
 	
-	/*
+
 	
 	//댓글 수정 버튼 클릭시 수정폼 노출
 	$(document).on('click','.modify-btn',function(){
 		//댓글 번호
-		let c_num = $(this).attr('data-renum');
+		let c_num = $(this).attr('data-cnum');
 		//댓글 내용	
 		let content = $(this).parent().find('p')
 				.html().replace(/<br>/gi,'\n');
 								//g:지정문자열 모두, i:대소문자 무시
 		//댓글 수정폼 UI
-		let modifyUI = '<form id="mre_form">';
+		let modifyUI = '<form id="mc_form">';
 			modifyUI += '<input type="hidden" name="c_num" id="c_num" value="'+c_num+'">';
-			modifyUI += '<textarea rows="3" cols="50" name="c_content" id="mc_content" class="rep-content">'+content+'</textarea>';
+			modifyUI += '<textarea rows="3" cols="50" name="c_content" id="mc_content" class="comm-content">'+content+'</textarea>';
 			modifyUI += '<div id="mc_first"><span class="letter-count">300/300</span></div>';
 			modifyUI += '<div id="mc_second" class="align-right">';
 			modifyUI += ' <input type="submit" value="수정">';				
@@ -226,43 +232,50 @@ $(function(){
 		
 	}
 	
-	*/
 	
 	
 	
-	/*
+	
+	
 	//댓글 수정
 	$(document).on('submit','#mc_form',function(event){
 		//기본이벤트 제거(function 매개변수에 event 객체 넣어서 전달 가능하게.)
 		event.preventDefault();
-		if($('#mre_content').val().trim()==''){
+		if($('#mc_content').val().trim()==''){
 			alert('내용을 입력하세요');
-			$('#mre_content').val('').focus();
+			$('#mc_content').val('').focus();
 			return false;
 		}
 		
 		//폼에 입력한 데이터 반환
-		let form_Data = $(this).serialize();
-		
+		let form_data = $(this).serialize();
+		console.log(form_data);
 		//서버와 통신
 		$.ajax({
-			url:'updateReply.do',
+			url:'updateComm.do',
 			type:'post',
 			data:form_data,
 			dataType:'json',
 			success:function(param){
+					
 				if(param.result == 'logout'){
 					alert('로그인해야 수정할 수 있습니다 ');
 				}else if(param.result == 'success'){
-					$('#mre_form').parent().find('p')
-							.html($('mre_content').val()
+					console.log("alalal");
+					$('#mc_form').parent().find('p')
+							.html($('mc_content').val()
+							/*
 												  .replace(/</g,'&lt;')
 												  .replace(/>/g,'&gt;')
-												  .replace(/\n/g,'<br>'));
-					$('#mre_form').parent()
+												  .replace(/\n/g,'<br>')
+												  */
+												  );
+		/*			$('#mc_form').parent()
 								  .find('.modify-date').text('최근 수정일 : 5초 미만');
+			*/
 					//수정폼 삭제 및 초기화
 					initModifyForm();
+					selectList(1);
 				}else if(param.result == 'wrongAccess'){
 					alert('타인의 글을 수정할 수 없습니다');
 				}else{
@@ -277,13 +290,13 @@ $(function(){
 	//댓글 삭제
 	$(document).on('click','.delete-btn',function(){
 		//댓글 번호
-		let re_num = $(this).attr('data-renum');
-		
+		let c_num = $(this).attr('data-cnum');
+		console.log("ddd"+c_num);
 		//서버와 통신
 		$.ajax({
-			url:'deleteReply.do',
+			url:'deleteComm.do',
 			type:'post',
-			data:{re_num:re_num},
+			data:{c_num:c_num},
 			dataType:'json',
 			success:function(param){
 				if(param.result == 'logout'){
@@ -294,7 +307,7 @@ $(function(){
 				}else if(param.result == 'wrongAccess'){
 					alert('타인의 글을 삭제할 수 없습니다.');
 				}else{
-					alert('댓글 작에 오류 발생');
+					alert('댓글 삭제 오류 발생');
 				}
 			},
 			error:function(){
@@ -303,7 +316,7 @@ $(function(){
 		})
 	});
 	
-	*/
+	
 	//초기 데이터(목록) 호출
 	selectList(1);
 });
