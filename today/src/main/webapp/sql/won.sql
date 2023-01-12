@@ -3,7 +3,9 @@ create table faq (
     faq_title    varchar2(100)   not null,
     faq_content  varchar2(3000)  not null,
     faq_type     varchar2(12)    not null,
-    constraint faq_pk primary key (faq_num)
+    m_num number(10) not null,
+    constraint faq_pk primary key (faq_num),
+    constraint qna_fk foreign key (m_num) references member (m_num)
 );
  create sequence faq_seq;
 
