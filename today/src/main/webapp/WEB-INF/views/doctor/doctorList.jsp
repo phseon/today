@@ -17,6 +17,13 @@
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
 	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
+<div id = "doctor_header">
+	<div id = "doctor_header_notice">오늘의 치과<br>의료진</div>
+</div>
+<div id = "doctor_title">
+	<h1>의료진 소개</h1>
+	<img src = "${pageContext.request.contextPath}/images/dividing_line.png">
+</div>
 	<div class="content-main">
 	<c:if test="${count == 0}">
 		<div class="result-display">

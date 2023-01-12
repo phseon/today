@@ -22,13 +22,8 @@
 				$('#date').focus();
 				return false;
 			}
-			if($('#time').val()==''){
-				alert('시술시간을 선택해주세요.');
-				$('#time').focus();
-				return false;
-			}
-			if($('input[type=radio]:checked'.length()<1)){
-				alert('결제수단을 선택하세요!');
+			if(!$('input[type=radio]:checked').val()){
+				alert('시술시간을 선택하세요!');
 				return false;
 			}
 		});
@@ -83,8 +78,6 @@
 					<input type="radio" name="time" id="time16" value="17:30"><label for="time16">17:30</label>
 					<input type="radio" name="time" id="time17" value="18:00"><label for="time17">18:00</label>
 					<input type="radio" name="time" id="time12" value="15:30"><label for="time12">18:30</label>
-					<input type="radio" name="time" id="time13" value="16:00"><label for="time13">19:00</label>
-					<input type="radio" name="time" id="time14" value="16:30"><label for="time14">19:30</label>
 				</div>
 				</li>
 			</ul>
