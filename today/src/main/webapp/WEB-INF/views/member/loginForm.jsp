@@ -29,18 +29,19 @@
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>	
 	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
+	
 	<div class="content-main">
 		<form id="login_form" action="login.do" method="post">
 			<h2>로그인</h2>
-			<hr width="100%" size="1" noshade="noshade">
+			<hr width="30%" size="1" noshade="noshade" >
 			<ul>
 				<li>
-					<label for="id">아이디</label>
-					<input type="text" name="id" id="id" maxlength="15" autocomplete="off">
+					<label for="id"></label>
+					<input type="text" name="id" id="id" maxlength="15" autocomplete="off" placeholder="아이디">
 				</li>
 				<li>
-					<label for="pwd">비밀번호</label>
-					<input type="password" name="pwd" id="pwd" maxlength="20">
+					<label for="pwd"></label>
+					<input type="password" name="pwd" id="pwd" maxlength="20" placeholder="비밀번호">
 				</li>
 			</ul>
 			<div class="align-center">

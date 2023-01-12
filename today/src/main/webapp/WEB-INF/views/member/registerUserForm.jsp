@@ -29,6 +29,7 @@
  					if(param.result=='idNotFound'){
  						idChecked = 1;
  						$('#message_id').css('color','#000000').text('등록 가능 ID');
+ 						$('#register_form ul').css('margin','50px');
  					}else if(param.result == 'idDuplicated'){
  						idChecked = 0;
  						$('#message_id').css('color','red').text('등록된 ID');
@@ -116,48 +117,47 @@
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>	
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<div class="content-main">
 		<form id="register_form" action="registerUser.do" method="post">
 			<h2>회원가입</h2>
-			<hr width="100%" size="1" noshade="noshade">
-				<ul>
+			<hr width="30%" size="1" noshade="noshade">
+				<ul class="xxx">
 					<li class="radiobt">
 						<input type="radio" name="chk_info" value="1" id="chk_info1" class="chk_info">의사회원
 						<input type="radio" name="chk_info" value="2" id="chk_info2" class="chk_info">일반회원						
 					</li>
-					<li>
-						<label for="id">id</label>
-						<input type="text" name="id" id="id" maxlength="15" autocomplete="off">
-						<input type="button" value="ID중복체크" id="id_check" >
+					<li class="align-left">
+						<label for="id">아이디</label>
+						<input type="text" name="id" id="id" maxlength="15" autocomplete="off" style="width:250px;display:inline-block;" >
+						<input type="button" value="ID 중복체크" id="id_check" style="width:95px;">
 						<span id="message_id"></span>
 					</li>
-					<li>
+					<li class="align-left">
 						<label for="name">이름</label>
 						<input type="text" name="name" id="name" maxlength="10">
 					</li>
-					<li>
+					<li class="align-left">
 						<label for="pwd">비밀번호</label>
 						<input type="password" name="pwd" id="pwd" maxlength="20">
 					</li>
-					<li>
+					<li class="align-left">
 						<label for="email">이메일</label>
 						<input type="email" name="email" id="email" maxlength="50">
 					</li>
-					<li>
+					<li class="align-left">
 						<label for="phone">전화번호</label>
 						<input type="text" name="phone" id="phone" maxlength="15">
 					</li>
-					<li>
+					<li class="align-left">
 						<label for="zipcode">우편번호</label>
-						<input type="text" name="zipcode" id="zipcode" maxlength="5">
-						<input type="button" value="우편번호 찾기" onclick="execDaumPostcode()">
+						<input type="text" name="zipcode" id="zipcode" maxlength="5" style="width:250px;display:inline-block;">
+						<input type="button" value="우편번호 찾기" onclick="execDaumPostcode()" style="width:95px;">
 					</li>
-					<li>
+					<li class="align-left">
 						<label for="address1">주소</label>
 						<input type="text" name="address1" id="address1" maxlength="30">
 					</li>
-					<li>
+					<li class="align-left">
 						<label for="address2">나머지 주소</label>
 						<input type="text" name="address2" id="address2" maxlength="30">
 					</li>

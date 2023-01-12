@@ -1,2 +1,114 @@
 @charset "UTF-8";
+/*로그인,회원가입*/
+*{
+	margin:0;
+	padding: 0;
+}
+body{
+	width: 100vw;
+	background: white;
+}
 
+.align-center{
+	text-align:center;
+}
+hr{
+	text-align:center;
+	margin:0 auto;
+	margin-top:15px;
+	margin-bottom:20px;
+	
+}
+#login_form img{
+	width : 500px;
+}
+
+.content-main{
+	width:800px;
+	margin:0 auto;
+	position : relative;
+	text-align:center;
+	margin-top : 100px;
+}
+
+.content-main h2{
+	font-size : 40px;
+	font-weight:400;	
+}
+
+input[type="submit"],input[type="text"],input[type="password"],input[type="email"]{
+	width:350px;
+	height:45px;
+	font-size : 20px;
+	margin : 3px 0 3px 0;
+	padding:0 0 0 5px;
+	border-style:solid;
+	border-color:rgb(184, 184, 184);
+	border-radius: 5px;
+	border-width:0.5px;
+	
+}
+
+input[type="submit"]{
+	width:358px;
+	height:47px;	
+	background-color: rgb(92,92,92);
+	color:white;
+	cursor:pointer;
+}
+
+a{
+	color:gray;
+}
+a:visited{
+	color:gray;
+	
+}
+
+/*회원가입 추가*/
+.align-left label {
+	text-align : left;
+		width:100px;	
+	display :inline-block;
+}
+#register_form ul{
+	width:fit-content;
+	text-align :left;
+	margin:0 auto;
+}
+.align-left{
+	height:fit-content;
+	vertical-align:middle;
+}
+
+#register_form input[type="submit"],input[type="text"],input[type="password"],input[type="email"]{
+	width:350px;
+	height:35px;
+	font-size : 20px;
+	margin : 3px 0 3px 0;
+	padding:0 0 0 5px;
+	border-style:solid;
+	border-color:rgb(184, 184, 184);
+	border-radius: 5px;
+	border-width:0.5px;
+	
+}
+#register_form input[type="button"]{
+	height:36px;
+	display :inline-block;
+	font-size : 10px;
+	border-style:solid;
+	border-color:rgb(184, 184, 184);
+	border-radius: 5px;
+	border-width:0.5px;
+vertical-align: 3px;
+}
+
+#id_check text{
+	margin-bottom:4.3px;
+	color:red;
+}
+
+.xxx{
+	margin:20px;
+}
