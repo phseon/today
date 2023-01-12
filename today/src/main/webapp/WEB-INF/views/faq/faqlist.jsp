@@ -8,7 +8,7 @@
 <title>faq 목록</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(function(){
 		$('#search_form').submit(function(){
 			if($('#keyword').val().trim()==''){
@@ -18,7 +18,7 @@
 			}
 		});
 	});
-</script>
+</script> -->
 </head>
 <body>
 <div class="page-main">
@@ -27,7 +27,7 @@
 		<h2>FAQ</h2>
 		<h5>자주 묻는 질문</h5>
 		<!-- 검색 폼 시작 -->
-		<form id="search_form" action="list.do" method="get">
+		<%-- <form id="search_form" action="list.do" method="get">
 			<ul class="search">
 				<li>
 					<select name="keyfield">
@@ -43,7 +43,7 @@
 					<input type="submit" value="검색">
 				</li>
 			</ul>
-		</form>
+		</form> --%>
 		<!-- 검색 폼 끝 -->
 		<div class="list-space align-right">
 			<input type="button" value="글쓰기"
