@@ -6,27 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>faq 목록</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js">
-<script type="text/javascript">
-</script>
-
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
 </head>
 <body>
 <div class="page-main">
-	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>	
 	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<div class="content-main">
 		<h2>FAQ</h2>
 		<h5>자주 묻는 질문</h5>
 		
 		<div class="list-space align-right">
-			<input type="button" value="글쓰기"
-			       onclick="location.href='writeForm.do'"
-			   <c:if test="${empty user_num}">disabled="disabled"</c:if>/>
-			<input type="button" value="목록"
-			    onclick="location.href='list.do'">
+			<input type="button" value="글쓰기" onclick="location.href='writeForm.do'"
+			   <c:if test="${empty user_num or user_auth==2}">disabled="disabled"</c:if> />
+		
 		</div>
 		<c:if test="${count == 0}">
 		<div class="result-display">
@@ -40,11 +33,11 @@
 				<th>카테고리</th>
 				<th>제목</th>
 			</tr>
-			<c:forEach var="faq" items="${list}">
+			<c:forEach var="faqlist" items="${list}">
 			<tr>
-				<td>${faq.faq_num}</td>
-				<td><a href="detail.do?faq_num=${faq.faq_num}">${faq.faq_title}</a></td>
-				<td>${faq.faq_title}</td>
+				<td>${faqlist.faq_num}</td>
+				<td><a href="detail.do?faq_num=${faqlist.faq_num}">${faqlist.faq_title}</a></td>
+				<td>${faqlist.faq_title}</td>
 			</tr>
 			</c:forEach>
 		</table>
@@ -54,7 +47,6 @@
 </div>
 </body>
 </html>
-
 
 
     
