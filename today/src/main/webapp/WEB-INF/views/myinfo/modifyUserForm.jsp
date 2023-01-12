@@ -33,7 +33,6 @@ $(function(){
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	
 	<div class="inform">
 		<div class="inform-head">

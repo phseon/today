@@ -121,11 +121,11 @@ $(function(){
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	
 	<div class="content">
 		<div class="content-head">
 			<p>MY PAGE</p>
+			<img src="${pageContext.request.contextPath}/images/dividing_line.png" width="600px" style="margin-left:80px;">
 		</div>
 		
 		<div class="content-middle">
@@ -165,6 +165,7 @@ $(function(){
 		
 		<div class="content-bottom"> <!-- 개인정보 -->
 			<p>INFORMATION</p>
+			<img src="${pageContext.request.contextPath}/images/dividing_line.png" width="600px" style="margin-left:80px; margin-bottom: 40px;">
 			<ul>
 				<li>이름 : ${member.name}</li>
 				<li>전화번호 : ${member.phone}</li>
