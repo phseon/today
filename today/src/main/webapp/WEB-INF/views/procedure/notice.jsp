@@ -11,7 +11,6 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 		<h2 id="align_center">안내</h2>
 		<div class="result-display">
 			<div id="align_center">

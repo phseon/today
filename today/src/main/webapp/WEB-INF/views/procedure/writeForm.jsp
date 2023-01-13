@@ -35,7 +35,7 @@ $(function(){
 <jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
 <jsp:include page="/WEB-INF/views/procedure/procedure_header.jsp"/>
 <h1 id="_title">
-시술 생성
+시술 정보 생성
 </h1>
 	<form action="write.do" method="post" id="write_form" enctype="multipart/form-data">
 		<ul>
@@ -43,7 +43,6 @@ $(function(){
 				<input type="text" id="title" name="title" size="20" maxlength="20" placeholder="제목을 입력하세요">
 			</li>
 			<li>
-				
 				<textarea rows="20" cols="80" id="content" name="content"  placeholder="내용을 입력하세요"></textarea>
 			</li>
 			<li>
@@ -56,5 +55,6 @@ $(function(){
 		<input type="button" value="목록" onclick="location.href='list.do'">
 		</div>
 	</form>
+	<br><br><br><br><br><br>
 </body>
 </html>
