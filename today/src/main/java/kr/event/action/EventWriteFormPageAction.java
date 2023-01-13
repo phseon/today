@@ -19,6 +19,9 @@ public class EventWriteFormPageAction implements Action{
 		 return "redirect:/event/callLoginForm.do";
 		 } 
 		 Integer user_auth = (Integer)session.getAttribute("user_auth");
+		 
+		 String pageNum = request.getParameter("pageNum");
+			if(pageNum == null) pageNum = "1";
 
 		if(user_auth != 1) {// 0 : 탈퇴 1 : 의사 2 :일반
 			request.setAttribute("accessMsg", "이벤트 글작성 권한이 없습니다.");

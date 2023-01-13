@@ -76,7 +76,7 @@
 	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<jsp:include page="/WEB-INF/views/event/event_header.jsp"/>
 	<div>                      
-		<form id = "eventwrite_form" action="eventWritePage.do" method = "post" enctype = "multipart/form-data">
+		<form id = "eventwrite_form" action="eventWritePage.do?pageNum=${pageNum}}" method = "post" enctype = "multipart/form-data">
 			<div class = "event-detail-title">
 				<label for = "e_title">이벤트제목</label> : 
 				<input type = "text" id = "e_title" name = "e_title" placeholder="제목을 입력하세요" maxlength = "50">

@@ -29,6 +29,9 @@ public class EventUpdateFormPageAction implements Action{
 			return "/WEB-INF/views/common/notice.jsp";
 		}
 		
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null) pageNum = "1";
+		
 		//받아온 이벤트 글 번호 저장
 		int e_num = Integer.parseInt(request.getParameter("e_num"));
 		
@@ -41,6 +44,7 @@ public class EventUpdateFormPageAction implements Action{
 		
 		//불러온 이벤트 글 정보 request에 저장
 		request.setAttribute("event", event);
+		request.setAttribute("pageNum", pageNum);
 		
 		//eventUpdateFromPage.jsp 호출해서 저장되어 있던 내용 수정 폼에 표시하게 정보 전달
 		return "/WEB-INF/views/event/eventUpdateFormPage.jsp";

@@ -1,10 +1,9 @@
 package kr.event.action;
 
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
-
 import com.oreilly.servlet.MultipartRequest;
 
 import kr.controller.Action;
@@ -37,6 +36,9 @@ public class EventUpdatePageAction implements Action{
 		
 		int e_num = Integer.parseInt(multi.getParameter("e_num"));
 		
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null) pageNum = "1";
+		
 		String e_imgsrc = multi.getFilesystemName("e_imgsrc");
 		String e_thumb = multi.getFilesystemName("e_thumb");
 		
@@ -68,7 +70,7 @@ public class EventUpdatePageAction implements Action{
 		
 		
 		//수정할 정보 모두 eventVO에 담고 다시 get방식으로 eventDetail.do 호출
-		return "redirect:/event/eventDetail.do?e_num=" + e_num;
+		return "redirect:/event/eventDetail.do?e_num=" + e_num + "&pageNum=" + pageNum;
 	}
 
 }

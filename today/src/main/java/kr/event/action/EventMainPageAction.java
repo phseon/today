@@ -27,6 +27,7 @@ public class EventMainPageAction implements	Action{
 		
 		//dao에 받아온 keyfield, keyword 넘겨주고 페이지 개수 받아오기
 		EventDAO dao = EventDAO.getInstance();
+		dao.updateCalDate();
 		int count = dao.getEventCount(keyfield, keyword);
 		
 		//페이지 처리
@@ -46,6 +47,7 @@ public class EventMainPageAction implements	Action{
 		request.setAttribute("page", page.getPage());
 		
 		request.setAttribute("pageNum", pageNum);
+		
 		
 		//다시 eventMainPage.jsp 호출
 		return "/WEB-INF/views/event/eventMainPage.jsp";
