@@ -32,17 +32,6 @@ hr{
 	font-size : 40px;
 	font-weight:400;	
 }
-/*
-input[type="submit"],input[type="text"],input[type="password"]{
-	font-size : 15px;
-	margin : 6px 0 6px 0;
-	border-style:solid;
-	border-color:rgb(184, 184, 184);
-	border-radius: 5px;
-	border-width:0.5px;
-	
-}
-*/
 
 #login_form input[type="text"]{
 	width:350px;
