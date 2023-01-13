@@ -8,6 +8,7 @@ import kr.controller.Action;
 import kr.doctor.vo.DoctorVO;
 import kr.member.vo.MemberVO;
 import kr.myinfo.dao.MyInfoDAO;
+import kr.reservation.dao.ReservationDAO;
 import kr.reservation.vo.ReservationVO;
 import kr.review.dao.ReviewDAO;
 import kr.review.vo.ReviewVO;
@@ -42,9 +43,9 @@ public class rezInfoAction implements Action {
 		DoctorVO myProcedure = dao.getProcedureInfo(p_num);
 		request.setAttribute("myProc", myProcedure); 
 
-		ReviewDAO r_dao = ReviewDAO.getInstance();
-		
-		ReservationVO rez = r_dao.getRevInfo(user_num);
+		ReservationDAO rez_dao = ReservationDAO.getInstance();
+		System.out.println("uuu번호" + user_num);
+		ReservationVO rez = rez_dao.getReservation(user_num);
 		request.setAttribute("rez", rez);
 		
 		return "/WEB-INF/views/review/writeForm.jsp";

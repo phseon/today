@@ -16,17 +16,17 @@ public class DetailRevAction implements Action{
 		//리뷰번호 반환
 		int r_num = Integer.parseInt(
 						request.getParameter("r_num"));
-		
+		System.out.println("번호" + r_num);
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		
 		ReviewDAO dao = ReviewDAO.getInstance();
 		
 		//예약, 리뷰 VO 둘 다 사용
-		ReservationVO rez = dao.getRevInfo(user_num);
+//		ReservationVO rez = dao.getRevInfo(user_num);
 		ReviewVO review = dao.getReview(r_num);
 	
-		request.setAttribute("rez", rez);
+//		request.setAttribute("rez", rez);
 		request.setAttribute("review", review);
 		
 		return "/WEB-INF/views/review/detail.jsp";

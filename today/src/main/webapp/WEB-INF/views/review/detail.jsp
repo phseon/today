@@ -25,6 +25,8 @@
 			<h2>예약진료 내용 영역</h2>
 			<h2>${review.rev_num}</h2>
 			<h2>${review.r_date}</h2>
+			<h2>${review.dr_name}</h2>
+			<h2>${review.p_title}</h2>
 			</div>
 			<div class="align-right">
 			<h2>${review.r_content}</h2>
@@ -33,8 +35,14 @@
 		</div>
 		<h2>로그인 중인 회원번호 : ${user_num}</h2>
 		<h2>리뷰번호 : ${review.r_num}</h2>
-		<h2>rez현재 리뷰 작성 회원번호: ${rez.m_num}</h2>
+	<!-- <h2>rez현재 리뷰 작성 회원번호: ${rez.m_num}</h2> -->	
 		<h2>review현재 리뷰 작성 회원번호: ${review.m_num}</h2>
+		<h2>별점: ${review.star}</h2>
+		<!-- 조건문 해보기 -->
+		<c:if test="'${review.star}'==5">
+			<h2>★★★★★</h2>
+		</c:if>
+		
 		<!-- <h2>로그인한 회원의 예약번호: ${rezInfo.rev_num}</h2>
 		리뷰 작성 폼에서만 보이기. 여러개면 리스트로 가져오기? -->
 		
@@ -43,6 +51,11 @@
 			<input type="hidden" name="r_num" 
 			                       value="${review.r_num}">
 		</form>	
+		<c:if test="${!empty review.r_imgsrc}">
+		<div class="align-center">
+			<img src="${pageContext.request.contextPath}/upload/${review.r_imgsrc}" class="detail-img">
+		</div>
+		</c:if>
 			
 		<c:if test="${user_num == review.m_num}">
 				<input type="button" value="수정" 
