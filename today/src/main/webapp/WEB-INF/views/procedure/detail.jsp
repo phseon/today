@@ -9,6 +9,7 @@
 <link rel = "stylesheet" href = "${pageContext.request.contextPath }/css/procedureStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventHeaderStyle.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/footerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -37,14 +38,17 @@
 	 
 	<br>
 <div id="align_center">
-<c:if test="${user_auth == 1}">
-<input type="button" value="수정" onclick="location.href='updateForm.do?p_num=${pro.p_num}'">
-<input type="button" value="삭제" onclick="location.href='deleteForm.do?p_num=${pro.p_num}'">
-</c:if>
-<input type="button" value="목록" onclick="location.href='list.do'">
-<c:if test="${user_auth == 2}">
-<input type="button" value="예약"  onclick="location.href='${pageContext.request.contextPath}/reservation/reserveForm.do'">
-</c:if>
+	<c:if test="${user_auth == 1}">
+	<input type="button" value="수정" onclick="location.href='updateForm.do?p_num=${pro.p_num}'">
+	<input type="button" value="삭제" onclick="location.href='deleteForm.do?p_num=${pro.p_num}'">
+	</c:if>
+	
+	<input type="button" value="목록" onclick="location.href='list.do'">
+	
+	<c:if test="${user_auth == 2}">
+	<input type="button" value="예약"  onclick="location.href='${pageContext.request.contextPath}/reservation/reserveForm.do'">
+	</c:if>
 </div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
