@@ -9,6 +9,7 @@ public class ReviewVO {
 	private String r_imgsrc;
 	private int star;
 	private int rev_num;
+	private int m_num;
 	
 	public int getR_num() {
 		return r_num;
@@ -45,5 +46,11 @@ public class ReviewVO {
 	}
 	public void setRev_num(int rev_num) {
 		this.rev_num = rev_num;
+	}		
+	public int getM_num() {
+		return m_num;
+	}
+	public void setM_num(int m_num) {
+		this.m_num = m_num;
 	}		
 }

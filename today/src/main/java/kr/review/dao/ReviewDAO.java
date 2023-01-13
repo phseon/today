@@ -180,6 +180,7 @@ public class ReviewDAO {
 //		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
 		ReviewVO review = null;
+//		ReservationVO rez = null;
 //		ReviewCommVO comm = null;
 		String sql = null;
 		
@@ -208,10 +209,12 @@ public class ReviewDAO {
 			
 			if(rs.next()) {
 				review = new ReviewVO();
+//				rez = new ReservationVO();
 				review.setR_num(rs.getInt("r_num"));
 				review.setR_content(rs.getString("r_content"));
 				review.setR_date(rs.getDate("r_date"));
 				review.setRev_num(rs.getInt("rev_num"));
+				review.setM_num(rs.getInt("m_num"));
 			}
 			
 //			sql = "SELECT * FROM review r JOIN comments c "
@@ -313,7 +316,7 @@ public class ReviewDAO {
 		}
 	}
 	
-
+// 예약 VO
 	//예약 정보
 	public ReservationVO getRevInfo(int member_num)
             throws Exception{
