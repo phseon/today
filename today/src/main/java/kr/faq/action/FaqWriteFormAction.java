@@ -25,7 +25,7 @@ public class FaqWriteFormAction implements Action{
 		}
 	
 		//권한있는 경우
-		return "/WEB-INF/views/faq/faqformwrite.jsp";
+		return "/WEB-INF/views/faq/faqwriteform.jsp";
 	}
 
 }

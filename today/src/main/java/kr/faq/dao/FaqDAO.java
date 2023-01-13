@@ -53,32 +53,21 @@ public class FaqDAO {
 		}
 		
 		//faq 총 레코드 수
-		public int getFaqCount(String keyfield, String keyword)
-									        throws Exception{
+		public int getFaqCount()throws Exception{
 				Connection conn = null;
 				PreparedStatement pstmt = null;
 				ResultSet rs = null;
 				String sql = null;
-				String sub_sql = "";
+				
 				int count = 0;
 				
 				try {
 					conn = DBUtil.getConnection();
 					
-					if(keyword != null && !"".equals(keyword)) {
-						//검색글 개수
-						if(keyfield.equals("1")) sub_sql += "WHERE faq_title LIKE ?";
-						else if(keyfield.equals("2")) sub_sql += "WHERE faq_content LIKE ?";
-					}
-					
-					sql = "SELECT COUNT(*) FROM faq" + sub_sql;
+					sql = "SELECT COUNT(*) FROM faq";
 					
 					pstmt = conn.prepareStatement(sql);
-					if(keyword !=null && !"".equals(keyword)) {
-						pstmt.setString(1, "%" + keyword + "%");
-					}
 					
-					//SQL문을 실행하고 결과행을 ResultSet 담음
 					rs = pstmt.executeQuery();
 					if(rs.next()) {
 						count = rs.getInt(1);
@@ -93,37 +82,29 @@ public class FaqDAO {
 		}
 		
 		//faq 목록 
-		public List<FaqVO> getListFaq (int start, int end, String keyfield, 
-										String keyword) throws Exception{
+		public List<FaqVO> getListFaq (int start, int end) throws Exception{
 			   Connection conn = null;
 			   PreparedStatement pstmt = null;
 			   ResultSet rs = null;
 			   List<FaqVO> list = null;
 			   String sql = null;
-			   String sub_sql = "";
-			   int cnt = 0;
+
 			   
 			   
 			   try {
 				   conn = DBUtil.getConnection();
 				   
-				   if(keyword != null && !"".equals(keyword)) {
-						//검색글 개수
-						if(keyfield.equals("1")) sub_sql += "WHERE faq_title LIKE ?";
-						else if(keyfield.equals("2")) sub_sql += "WHERE faq_content LIKE ?";
-					}
+				 
 				   
 				   sql = "SELECT * FROM (SELECT a.*, rownum rnum "
-							+ "FROM (SELECT * FROM faq "
-							+ sub_sql + " ORDER BY faq_num DESC)a) "
+							+ "FROM (SELECT * FROM faq"
+							+ " ORDER BY faq_num DESC)a) "
 							+ "WHERE rnum >= ? AND rnum <= ?";
 				   
 				   pstmt = conn.prepareStatement(sql);
-				   if(keyword !=null && !"".equals(keyword)) {
-						pstmt.setString(1, "%" + keyword + "%");
-					}
-				   pstmt.setInt(++cnt, start);
-				   pstmt.setInt(++cnt, end);
+				  
+				   pstmt.setInt(1, start);
+				   pstmt.setInt(2, end);
 				   
 				   rs = pstmt.executeQuery();
 				   list = new ArrayList<FaqVO>();
@@ -131,6 +112,9 @@ public class FaqDAO {
 					   FaqVO faq = new FaqVO();
 					   faq.setFaq_num(rs.getInt("faq_num"));
 					   faq.setFaq_title(StringUtil.useNoHtml(rs.getString("faq_title")));
+					   faq.setFaq_type(StringUtil.useNoHtml(rs.getString("faq_type")));
+					   
+					   list.add(faq);
 				   }
 				   
 			   }catch (Exception e) {
