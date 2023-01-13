@@ -15,19 +15,17 @@ public class FaqUpdateFormAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		HttpSession session = request.getSession();
-		Integer user_num = 
-				(Integer)session.getAttribute("user_num");
+		Integer user_num =(Integer)session.getAttribute("user_num");
 		if(user_num == null) {//로그인 되지 않은 경우
 			return "redirect:/member/loginForm.do";
 		}
 		
-Integer user_auth = (Integer)session.getAttribute("user_auth");
+		Integer user_auth = (Integer)session.getAttribute("user_auth");
 		
-		//일반회원인 경우
-		if(user_auth ==2) {// 1:의사 2:일반
-			return "/WEB-INF/views/common/notice.jsp";
-		}
-	
+		/*
+		 * //일반회원인 경우 if(user_auth ==2) {// 1:의사 2:일반 return
+		 * "/WEB-INF/views/common/notice.jsp"; }
+		 */
 	
 		//글번호 반환
 		int faq_num = Integer.parseInt(
@@ -35,7 +33,7 @@ Integer user_auth = (Integer)session.getAttribute("user_auth");
 
 		FaqDAO dao = FaqDAO.getInstance();
 		FaqVO faq = dao.getFaq(faq_num);
-		if(user_num!=faq.getM_num()) {
+		if(user_auth!=1) {
 			return "/WEB-INF/views/common/notice.jsp";			
 		}
 				
@@ -43,7 +41,7 @@ Integer user_auth = (Integer)session.getAttribute("user_auth");
 				
 		request.setAttribute("faq", faq);
 
-		return "/WEB-INF/views/faq/faqupdateform.jsp";
+		return "/WEB-INF/views/faq/faqupdate.jsp";
 	}
 
 }
