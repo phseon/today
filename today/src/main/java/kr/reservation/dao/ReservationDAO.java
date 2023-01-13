@@ -30,7 +30,7 @@ public class ReservationDAO {
 		
 		try {
 			conn = DBUtil.getConnection();
-			sql = "SELECT * FROM procedure";
+			sql = "SELECT * FROM procedure p JOIN member_detail d ON p.m_num=d.m_num ORDER BY p_num DESC";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			list = new ArrayList<DoctorVO>();
@@ -39,6 +39,7 @@ public class ReservationDAO {
 				doctor.setM_num(rs.getInt("m_num"));
 				doctor.setP_num(rs.getInt("p_num"));
 				doctor.setP_title(rs.getString("p_title"));
+				doctor.setDr_name(rs.getString("name"));
 				
 				list.add(doctor);
 			}
@@ -58,12 +59,13 @@ public class ReservationDAO {
 		try {
 			conn = DBUtil.getConnection();
 			sql = "INSERT INTO reservation (rev_num,rev_date,rev_time,p_num,"
-					+ "m_num) VALUES (reservation_seq.nextval,?,?,?,?)";
+					+ "m_num,dr_num) VALUES (reservation_seq.nextval,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, reserve.getRev_date());
 			pstmt.setString(2, reserve.getRev_time());
 			pstmt.setInt(3, reserve.getP_num());
 			pstmt.setInt(4, reserve.getM_num());
+			pstmt.setInt(5, reserve.getDr_num());
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {

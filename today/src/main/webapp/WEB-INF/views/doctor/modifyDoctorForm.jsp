@@ -10,9 +10,9 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		//회원 정보 수정 유효성 체크
+		//파일 선택 여부 확인
 		$('#doc_form').submit(function(){
-			if($('d_imgsrc').val().trim()==''){
+			if($('#d_imgsrc').val()==''){
 				alert('파일을 선택해주세요.');
 				$('#d_imgsrc').focus();
 				return false;
@@ -20,7 +20,7 @@
 		});
 		
 		//취소 시 뒤로가기
-		$('input[type="button"]').on('click',function(){
+		$('input[type=button]').on('click',function(){
 			history.back();
 		})
 	});
@@ -29,10 +29,11 @@
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<div class="result-display">
+	<br><br>
 		<h3>의사 상세정보 변경</h3>
-		<form id="doc_form" action="modifyDoctor.do" method="post" 
+		<div class="form-display">
+		<form id="doc-form" action="modifyDoctor.do" method="post" 
 										enctype="multipart/form-data">
 			<input type="hidden" name="d_num" value="${doctor.m_num}">
 			<ul>
@@ -54,6 +55,7 @@
 				<input type="button" value="취소" onclick="location.href='doctorList.do'">
 			</div>
 		</form>
+		</div>
 	</div>
 </div>
 </body>

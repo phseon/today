@@ -33,13 +33,21 @@
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<br><br>
 	<h2>예약 폼</h2>
 	<div class="form-display">
 		
 		<form id="reserve_form" action="reserve.do" method="post">
 			<ul>
+				<li>
+					<label for="dr_num">시술명</label>
+					<select id="dr_num" name="dr_num">
+					<c:forEach var="doctor" items="${list}">
+						<option value="${doctor.m_num}">${doctor.dr_name}</option>
+					</c:forEach>
+					</select>
+					<c:if test=""></c:if>
+				</li>
 				<li>
 					<label for="procedure">시술명</label>
 					<select id="p_num" name="p_num">
@@ -49,6 +57,7 @@
 					</select>
 					<c:if test=""></c:if>
 				</li>
+			
 				<li>
 					<label for="name">예약일</label>
 					<input type="date" name="date" id="date" max="">

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>의사 소개</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/doctor.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/doctorHeader.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -16,7 +17,6 @@
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 <div id = "doctor_header">
 	<div id = "doctor_header_notice">오늘의 치과<br>의료진</div>
 </div>

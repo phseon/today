@@ -6,6 +6,14 @@ public class DoctorVO {
 	private String p_title;
 	private String p_content;
 	private String p_imgsrc;
+	private String dr_name;
+	
+	public String getDr_name() {
+		return dr_name;
+	}
+	public void setDr_name(String dr_name) {
+		this.dr_name = dr_name;
+	}
 	public int getM_num() {
 		return m_num;
 	}

@@ -7,7 +7,14 @@ public class ReservationVO {
 	private String rev_time;
 	private String r_ox;
 	private int m_num;
+	private int dr_num;
 	
+	public int getDr_num() {
+		return dr_num;
+	}
+	public void setDr_num(int dr_num) {
+		this.dr_num = dr_num;
+	}
 	public int getM_num() {
 		return m_num;
 	}

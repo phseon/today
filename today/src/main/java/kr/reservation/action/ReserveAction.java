@@ -33,6 +33,7 @@ public class ReserveAction implements Action{
 		reserve.setP_num(Integer.parseInt(request.getParameter("p_num")));
 		reserve.setRev_date(request.getParameter("date"));
 		reserve.setRev_time(request.getParameter("time"));
+		reserve.setDr_num(Integer.parseInt(request.getParameter("dr_num")));
 		
 		dao.insertReservation(reserve);
 		
