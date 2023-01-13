@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import kr.controller.Action;
 import kr.doctor.dao.DoctorDAO;
-import kr.doctor.vo.DoctorVO;
 import kr.member.vo.MemberVO;
 
 public class ModifyDoctorFormAction implements Action{

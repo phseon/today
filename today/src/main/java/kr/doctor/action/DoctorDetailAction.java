@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.controller.Action;
 import kr.doctor.dao.DoctorDAO;
-import kr.doctor.vo.DoctorVO;
 import kr.member.vo.MemberVO;
+import kr.util.StringUtil;
 
 public class DoctorDetailAction implements Action{
 
@@ -20,6 +20,10 @@ public class DoctorDetailAction implements Action{
 		DoctorDAO doctorDao = DoctorDAO.getInstance();
 		MemberVO doctor = new MemberVO();
 		doctor = doctorDao.getDoctorDetail(d_num);
+		
+		//HTML 태그 허용X, 줄바꿈O
+		doctor.setContent(
+				StringUtil.useBrNoHtml(doctor.getContent()));
 		
 		request.setAttribute("doctor", doctor);
 		

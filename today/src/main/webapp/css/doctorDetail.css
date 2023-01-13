@@ -2,6 +2,9 @@
 
 /*의사 상세정보
 ---------------------*/
+.content-main{
+	margin:50px auto;
+}
 .doc-detail{
 	width:1200px;
 	margin-left:150px;
@@ -12,13 +15,10 @@
 	margin:auto;
 	cursor:pointer;
 }
-.doc:hover{
-	background-color:rgba(122,122,122,0.4);
-}
 .doc-detail-photo{
 	width:500px;
 	float:left;
-	margin:20px 50px 0 10px;
+	margin:0 50px 0 10px;
 }
 .doc-name{
 	margin-left:80px;
@@ -26,21 +26,64 @@
 	font-size:50px;
 	color:#4a4a4a;
 }
-.doc-detail{
-	margin-left:200px;
-	padding-top:100px;
-}
 .doc-content{
-	margin:150px 0 0 450px;
+	margin:0 0 0 500px;
 }
 .doc-content li{
 	text-align:left;
 	margin:20px auto;
 }
+.modify_doc{
+	text-align:center;
+	border:1px solid gray;
+	border-radius:10px 10px 10px 10px;
+	width:80px;
+	height:40px;
+	line-height:40px;
+	font-weight:bold;
+	cursor:pointer;
+}
+.reserve_doc{
+	text-align:center;
+	border:1px solid gray;
+	border-radius:10px 10px 10px 10px;
+	width:80px;
+	height:40px;
+	line-height:40px;
+	font-weight:bold;
+	cursor:pointer;
+}
+.reserve_doc:hover, .modify_doc:hover{
+	background-color:rgba(122,122,122,0.4);
+}
 .doc-end{
 	clear:both;
 	padding-right:150px;
 }
-.align-right{
-	text-align:right;
+.align-center{
+	display:flex;
+	justify-content:center;
+}
+
+/*의사 정보변경
+---------------------*/
+.page-main{
+	margin: 0 auto;
+	text-align:center;
+}
+.content-main{
+	margin: 0 auto;
+}
+.form-display{
+	width:800px;
+	height:500px;
+	margin:50px auto;
+	border:1px solid #000;
+	display:flex;
+	align-items:center;
+	justify-content:center;	
+}
+form ul li{
+	margin:20px auto;
+	padding:10px auto;
 }

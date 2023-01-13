@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.doctor.vo.DoctorVO;
 import kr.member.vo.MemberVO;
 import kr.util.DBUtil;
 
@@ -121,7 +120,7 @@ public class DoctorDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
-		String sub_sql = null;
+		String sub_sql = "";
 		int cnt = 0;
 		
 		try {

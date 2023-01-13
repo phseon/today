@@ -7,14 +7,23 @@
 <meta charset="UTF-8">
 <title>의사 상세정보</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/doctorDetail.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/doctorHeader.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
+<div id = "doctor_header">
+	<div id = "doctor_header_notice">오늘의 치과<br>의료진</div>
+</div>
+<div id = "doctor_title">
+	<h1>의료진 소개</h1>
+	<img src = "${pageContext.request.contextPath}/images/dividing_line.png">
+</div>
 	<div class="content-main">
+	<hr size="1" noshade="noshade" width="100%">
 		<div class="doc-detail">
 			<ul class="doc-detail-photo">
 			<c:if test="${empty doctor.imgsrc}">
@@ -32,15 +41,18 @@
 				<c:if test="${empty doctor.content}">
 				<li>의사 소개를 입력하세요</li>
 				</c:if>
-				<li><input type="button" value="예약하기" onclick="location.href='${pageContext.request.contextPath}/reservation/reserveForm.do'"></li>
+				<li>
+				<input class="reserve_doc" value="예약하기" onclick="location.href='${pageContext.request.contextPath}/reservation/reserveForm.do'">
+				<c:if test="${!empty user_num && user_auth == 1}">
+				<input class="modify_doc" value="수정" onclick="location.href='modifyDoctorForm.do?d_num=${doctor.m_num}'">
+				</c:if>
+				</li>
 			</ul>
 		</div>
-		<div class="align-right doc-end">
-		<c:if test="${!empty user_num && user_auth == 1}">
-			<input type="button" value="수정" onclick="location.href='modifyDoctorForm.do?d_num=${doctor.m_num}'">
-		</c:if>
-		</div>
+		<hr size="1" noshade="noshade" width="100%">
+		<div class="doc-end"></div>
 	</div>
 </div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
