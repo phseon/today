@@ -52,7 +52,7 @@ public class ReviewDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, review.getR_content());
 			pstmt.setString(2, review.getR_imgsrc());
-			pstmt.setInt(3, 1);
+			pstmt.setInt(3, review.getStar());
 			pstmt.setInt(4, rev_num);
 			pstmt.executeUpdate();
 			
@@ -87,13 +87,18 @@ public class ReviewDAO {
 				
 				if(keyword != null && !"".equals(keyword)) {
 					if(keyfield.equals("1")) sub_sql += "WHERE r.r_content LIKE ?";
-//					else if(keyfield.equals("2")) sub_sql += "WHERE m.id LIKE ?";
-//					else if(keyfield.equals("3")) sub_sql += "WHERE b.content LIKE ?";
+					else if(keyfield.equals("2")) sub_sql += "WHERE m.name LIKE ?";
+					else if(keyfield.equals("3")) sub_sql += "WHERE p.p_title LIKE ?";
 				}
 				
-				//SQL문 작성(count와 zmember가 같이 수정되는게 좋으므로 조인 사용.)
-//				sql = "SELECT COUNT(*) FROM review r JOIN member m USING(m_num) " + sub_sql;
-				sql = "SELECT COUNT(*) FROM review" + sub_sql;
+				//SQL문 작성
+				sql = "SELECT COUNT(*) " 
+					+ "FROM reservation v "
+					+ "JOIN procedure p ON v.p_num=p.p_num "
+					+ "JOIN review r ON v.rev_num=r.rev_num " 
+					+ "JOIN member_detail m ON p.m_num=m.m_num "
+					+ sub_sql;
+				 
 				//PreparedStatement 객체 생성
 				pstmt = conn.prepareStatement(sql);
 				if(keyword !=null && !"".equals(keyword)) {
@@ -130,16 +135,29 @@ public class ReviewDAO {
 			
 			if(keyword != null && !"".equals(keyword)) {
 				if(keyfield.equals("1")) sub_sql += "WHERE r.r_content LIKE ?";
-//				else if(keyfield.equals("2")) sub_sql += "WHERE m.id LIKE ?";
-//				else if(keyfield.equals("3")) sub_sql += "WHERE b.content LIKE ?";
+				else if(keyfield.equals("2")) sub_sql += "WHERE m.name LIKE ?";
+				else if(keyfield.equals("3")) sub_sql += "WHERE p.p_title LIKE ?";
 			}
 			
 			//SQL문 작성
-			sql = "SELECT * FROM (SELECT a.*, rownum rnum "
-				+ "FROM	(SELECT * FROM review r "
+//			sql = "SELECT * FROM (SELECT a.*, rownum rnum "
+//				+ "FROM	(SELECT * FROM review r "
+//				+ sub_sql
+//				+ "ORDER BY r.r_num DESC)a) "
+//				+ "WHERE rnum >= ? AND rnum <= ?";
+			
+			
+			
+			
+			sql = "SELECT r_content, name, p_title, r_num, r_date "
+				+ " FROM (SELECT a.*, rownum rnum "
+				+ "FROM (SELECT * FROM reservation v "
+				+ "JOIN procedure p ON v.p_num=p.p_num "
+				+ "JOIN review r ON v.rev_num=r.rev_num "
+				+ "JOIN member_detail m ON p.m_num=m.m_num "
 				+ sub_sql
 				+ "ORDER BY r.r_num DESC)a) "
-				+ "WHERE rnum >= ? AND rnum <= ?";
+				+ "WHERE rnum >=? AND rnum <=?";
 
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
@@ -159,6 +177,7 @@ public class ReviewDAO {
 				review.setR_content(StringUtil.useNoHtml(rs.getString("r_content")));
 //				review.setR_imgsrc(rs.getString("r_imgsrc"));
 				review.setR_date(rs.getDate("r_date"));
+				review.setDr_name(rs.getString("name"));
 //				review.setId(rs.getString("id"));
 				
 				list.add(review);
@@ -173,7 +192,7 @@ public class ReviewDAO {
 		}
 	
 	
-	//글상세
+	//리뷰상세
 	public ReviewVO getReview(int r_num)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -194,12 +213,21 @@ public class ReviewDAO {
 //			sql = "SELECT * FROM review r JOIN reservation v "
 //				+ "USING(rev_num) JOIN comments c USING(r_num) WHERE r.r_num=?";
 //			
-			sql = "SELECT * FROM review r LEFT JOIN reservation v " 
-				+ "ON r.rev_num=v.rev_num "
-				+ "LEFT JOIN comments c "
-				+ "ON r.r_num=c.r_num "
-				+ "WHERE r.r_num=?";
+			
+//			sql = "SELECT * FROM review r LEFT JOIN reservation v " 
+//				+ "ON r.rev_num=v.rev_num "
+//				+ "LEFT JOIN comments c "
+//				+ "ON r.r_num=c.r_num "
+//				+ "WHERE r.r_num=?";
 
+			//리뷰를 작성한 회원 예약 정보까지 출력
+			sql = "SELECT v.m_num, m.name, v.*,p.*, r.*, m.* "
+				+ "FROM reservation v "
+				+ "JOIN procedure p ON v.p_num=p.p_num "
+				+ "JOIN review r ON v.rev_num=r.rev_num "
+				+ "JOIN member_detail m ON p.m_num=m.m_num "
+				+ "WHERE r.r_num=?";
+			
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
@@ -215,6 +243,10 @@ public class ReviewDAO {
 				review.setR_date(rs.getDate("r_date"));
 				review.setRev_num(rs.getInt("rev_num"));
 				review.setM_num(rs.getInt("m_num"));
+				review.setDr_name(rs.getString("name"));
+				review.setP_title(rs.getString("p_title"));
+				review.setR_imgsrc(rs.getString("r_imgsrc"));
+				review.setStar(rs.getInt("star"));
 			}
 			
 //			sql = "SELECT * FROM review r JOIN comments c "
@@ -236,6 +268,32 @@ public class ReviewDAO {
 		return review;
 	}
 	
+	
+	//파일 삭제
+		public void deleteFile(int r_num)throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+				sql = "UPDATE review SET r_imgsrc='' WHERE r_num=?";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, r_num);
+				//SQL문 실행
+				pstmt.executeUpdate();
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(null, pstmt, conn);
+			}
+		}
+		
+		
 	//리뷰수정
 	public void updateReview(ReviewVO review)throws Exception{
 		Connection conn = null;
@@ -248,9 +306,9 @@ public class ReviewDAO {
 			conn = DBUtil.getConnection();
 			
 			//전송된 파일 여부 체크
-//			if(board.getFilename()!=null) {
-//				sub_sql += ",filename=?";
-//			}
+			if(review.getR_imgsrc()!=null) {
+				sub_sql += ",r_imgsrc=?";
+			}
 			
 			sql = "UPDATE review SET r_content=? "
 				+ sub_sql 
@@ -259,9 +317,9 @@ public class ReviewDAO {
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
 			pstmt.setString(++cnt, review.getR_content());
-//			if(review.getFilename()!=null) {
-//				pstmt.setString(++cnt, board.getFilename());
-//			}
+			if(review.getR_imgsrc()!=null) {
+				pstmt.setString(++cnt, review.getR_imgsrc());
+			}
 			pstmt.setInt(++cnt, review.getR_num());
 			
 			//SQL문 실행
@@ -288,21 +346,23 @@ public class ReviewDAO {
 			//오토커밋 해제
 			conn.setAutoCommit(false);
 			
+			sql = "UPDATE reservation "
+					+ "SET r_ox ='F' " 
+					+ "WHERE rev_num = (SELECT v.rev_num "
+					+ "FROM reservation v, review r "
+	                + "WHERE v.rev_num=r.rev_num "
+	                + "AND r.r_num=?)";
+	            pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, r_num);
+				pstmt.executeUpdate();
+				
 			//부모글 삭제
 			sql = "DELETE FROM review WHERE r_num=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, r_num);
-			pstmt.executeUpdate();
-			
-            sql = "UPDATE reservation "
-				+ "SET r_ox ='F' " 
-				+ "WHERE rev_num = (SELECT v.rev_num "
-				+ "FROM reservation v, review r "
-                + "WHERE v.rev_num=r.rev_num "
-                + "AND r.r_num=?)";
-            pstmt2 = conn.prepareStatement(sql);
+			pstmt2 = conn.prepareStatement(sql);
 			pstmt2.setInt(1, r_num);
 			pstmt2.executeUpdate();
+			
+            
 			
 			//예외 발생 없이 정상적으로 SQL문이 실행
 			conn.commit();
@@ -316,7 +376,60 @@ public class ReviewDAO {
 		}
 	}
 	
-// 예약 VO
+	//예약 정보(리뷰번호로 조희)
+		public ReservationVO getRevInfo(int r_num)
+	            throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ReviewVO review = null;
+			ReservationVO rez = null;
+			ProcedureVO proc = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션을 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+//				sql = "SELECT * FROM reservation v "
+//				    + "LEFT JOIN procedure p ON p.m_num=v.m_num "
+//				    + "LEFT JOIN review r ON v.rev_num=r.rev_num "
+//				    + "WHERE v.m_num=?";
+				
+				sql = "SELECT * FROM reservation v "
+					+ ", procedure p "
+					+ "WHERE p.m_num=v.m_num "
+					+ "AND v.m_num=?";			
+				
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터를 바인딩
+				pstmt.setInt(1, r_num);
+				//SQL문을 실행해서 결과행을 ResultSet에 담음
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					//r_num rev_num m_num 정리
+					rez = new ReservationVO();
+					rez.setRev_date(rs.getString("rev_date"));
+					rez.setRev_time(rs.getString("rev_time"));
+					rez.setRev_num(rs.getInt("rev_num"));
+					rez.setR_ox(rs.getString("r_ox"));
+					rez.setM_num(rs.getInt("m_num"));
+					rez.setP_num(rs.getInt("p_num"));
+				}
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(rs, pstmt, conn);
+				}
+			return rez;
+			}
+
+	
+/* 예약DAO 사용
+ 
+
 	//예약 정보
 	public ReservationVO getRevInfo(int member_num)
             throws Exception{
@@ -367,7 +480,7 @@ public class ReviewDAO {
 		return rez;
 		}
 
-	
+	 */
 	
 	//예약 개수
 		public int getRezCount(int member_num)

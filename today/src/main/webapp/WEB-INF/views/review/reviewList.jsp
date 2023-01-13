@@ -23,6 +23,13 @@
 		<form id="search_form" action="reviewPage.do" method="get">
 			<ul class="search">
 				<li>
+					<select name="keyfield">
+						<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>내용</option>
+						<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>의사</option>
+						<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>시술</option>
+					</select>
+				</li>
+				<li>
 					<input type="search" size="16" name="keyword"
 					       id="keyword" value="${param.keyword}">
 					<input type="submit" value="검색">

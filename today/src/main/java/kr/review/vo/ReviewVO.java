@@ -10,6 +10,8 @@ public class ReviewVO {
 	private int star;
 	private int rev_num;
 	private int m_num;
+	private String dr_name;
+	private String p_title;
 	
 	public int getR_num() {
 		return r_num;
@@ -52,5 +54,17 @@ public class ReviewVO {
 	}
 	public void setM_num(int m_num) {
 		this.m_num = m_num;
+	}		
+	public String getDr_name() {
+		return dr_name;
+	}
+	public void setDr_name(String name) {
+		this.dr_name = name;
+	}		
+	public String getP_title() {
+		return p_title;
+	}
+	public void setP_title(String p_title) {
+		this.p_title = p_title;
 	}		
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import kr.review.dao.ReviewDAO;
 import kr.review.vo.ReviewVO;
 import kr.controller.Action;
+import kr.reservation.dao.ReservationDAO;
 import kr.reservation.vo.ReservationVO;
 import kr.util.PagingUtil;
 
@@ -42,8 +43,9 @@ public class ReviewListAction implements Action{
 //			System.out.println("zz"+rez.getR_ox());
 //			System.out.println("dd"+rez.getRev_num());
 			
-			int count = dao.getReviewCount(keyfield, keyword);
+			System.out.println("iii"+dao.getReviewCount(keyfield, keyword));
 			
+			int count = dao.getReviewCount(keyfield, keyword);
 			//페이지 처리
 			//keyfield,keyword,currentPage,count,rowCount(한 화면 게시글 개수),
 			//pageCount,url
@@ -64,9 +66,11 @@ public class ReviewListAction implements Action{
 			request.setAttribute("page", page.getPage());
 			
 			if(user_num > 0) {
-			ReservationVO rez = dao.getRevInfo(user_num);
-			request.setAttribute("rez", rez);
-			}
+				System. out.println("usernum>0!!!!");
+				ReservationDAO rez_dao = ReservationDAO.getInstance();
+				ReservationVO rez = rez_dao.getReservation(user_num);
+				request.setAttribute("rez", rez);
+				}
 			}
 			return "/WEB-INF/views/review/reviewList.jsp";
 			
