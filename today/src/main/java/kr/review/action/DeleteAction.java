@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.review.dao.ReviewDAO;
+import kr.review.vo.ReviewVO;
 import kr.controller.Action;
 import kr.reservation.vo.ReservationVO;
 import kr.util.FileUtil;
@@ -23,8 +24,9 @@ public class DeleteAction implements Action{
 		int r_num = Integer.parseInt(
 				       request.getParameter("r_num"));
 		ReviewDAO dao = ReviewDAO.getInstance();
-		ReservationVO rez = dao.getRevInfo(user_num);
-		if(user_num != rez.getM_num()) {
+		
+		ReviewVO review = dao.getReview(r_num);
+		if(user_num != review.getM_num()) {
 			//로그인한 회원번호와 작성자 회원번호가 불일치
 			return "/WEB-INF/views/common/notice.jsp";
 		}

@@ -32,28 +32,29 @@ public class UpdateAction implements Action{
 				multi.getParameter("r_num"));
 //		int m_num = Integer.parseInt(
 //				multi.getParameter("m_num"));
-//		String filename = multi.getFilesystemName("filename");
+		String r_imgsrc = multi.getFilesystemName("r_imgsrc");
 		
 		ReviewDAO dao = ReviewDAO.getInstance();
 		
 		//수정전 데이터 호출
-		ReservationVO rez = dao.getRevInfo(user_num);
+//		ReservationVO rez = dao.getRevInfo(user_num);
 		ReviewVO review = dao.getReview(r_num);
 		
-		if(user_num != rez.getM_num()) {
+		if(user_num != review.getM_num()) {
 			//로그인한 회원번호와 작성자 회원번호가 불일치
-//			FileUtil.removeFile(request, filename);//업로드된 파일이 있으면 파일 삭제
+			FileUtil.removeFile(request, r_imgsrc);//업로드된 파일이 있으면 파일 삭제
 			return "/WEB-INF/views/common/notice.jsp";
 		}
 		
 		//현재 날짜를 sql에 사용하도록 변환
 		Date date = new Date();
-
+System.out.println("dhdhdhdh");
+System.out.println("q"+r_num);
         long timeInMilliSeconds = date.getTime();
         java.sql.Date nowdate = new java.sql.Date(timeInMilliSeconds); 
 		
 		//로그인한 회원번호와 작성자 회원번호가 일치
-		rez.setM_num(rez.getM_num());
+//		rez.setM_num(rez.getM_num());
 		review.setR_date(nowdate);
 		review.setR_num(r_num);
 		//textarea의 name 값으로 가져옴
@@ -62,11 +63,11 @@ public class UpdateAction implements Action{
 		dao.updateReview(review);
 //		dao.getRevInfo(m_num, r_num);
 		
-//		if(filename!=null) {
-//			//새파일로 교체할 때 원래 파일 제거
-//			FileUtil.removeFile(request, 
-//					             db_board.getFilename());
-//		}
+		if(r_imgsrc!=null) {
+			//새파일로 교체할 때 원래 파일 제거
+			FileUtil.removeFile(request, 
+					             review.getR_imgsrc());
+		}
 		
 		return "redirect:/review/detail.do?r_num="+r_num;
 	}

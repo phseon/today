@@ -27,16 +27,16 @@ public class UpdateFormAction implements Action{
 				
 				ReviewDAO dao = ReviewDAO.getInstance();
 				
-				ReservationVO rez = dao.getRevInfo(user_num);
+//				ReservationVO rez = dao.getRevInfo(user_num);
 				ReviewVO review = dao.getReview(r_num);
 				
-				if(user_num!=rez.getM_num()) {
+				if(user_num!=review.getM_num()) {
 					//로그인한 회원번호와 작성자, 회원번호가 불일치
 					return "/WEB-INF/views/common/notice.jsp";
 				}
 				
 //				로그인이 되어 있고 로그인한 회원번호와 작성자 회원번호가 일치
-				request.setAttribute("rez", rez);
+//				request.setAttribute("rez", rez);
 				request.setAttribute("review", review);
 				
 				return "/WEB-INF/views/review/updateForm.jsp";

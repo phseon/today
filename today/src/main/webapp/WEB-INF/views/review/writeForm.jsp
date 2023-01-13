@@ -7,7 +7,17 @@
 <title>리뷰 등록</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-
+<script type="text/javascript">
+	$(function(){
+		$('#write_form').submit(function(){
+			if($('#r_content').val().trim()==''){
+				alert('내용을 입력하세요!');
+				$('#r_content').val('').focus();
+				return false;
+			}
+		});
+	});
+</script>
 </head>
 <body>
 <div class="page-main">
@@ -52,9 +62,19 @@
 				</table>
 				
 				
+				<li>
+				<div class="star">
+				<label for="star-select">별점</label>
 				
-				
-				
+				<div class="star">
+				<label for="star-select">별점</label>
+					<input type="radio" name="star" value=0><label for="star0">☆☆☆☆☆</label>
+					<input type="radio" name="star" value=1><label for="star1">★☆☆☆☆</label>
+					<input type="radio" name="star" value=2><label for="star2">★★☆☆☆</label>
+					<input type="radio" name="star" value=3><label for="star3">★★★☆☆</label>
+					<input type="radio" name="star" value=4><label for="star4">★★★★☆</label>
+					<input type="radio" name="star" value=5 checked="checked"><label for="star5">★★★★★</label>
+				</div>
 				
 				<li>
 					<label for="r_content">내용</label>

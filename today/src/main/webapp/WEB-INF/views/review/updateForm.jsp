@@ -33,28 +33,57 @@
 			                       value="${review.r_num}">
 			<ul>
 				<li>
+					${review.r_num}
+					${review.m_num}
 					<label for="content">내용</label>
 					<textarea rows="5" cols="30" name="content" 
 					   id="content">${review.r_content}</textarea>
 				</li>
-				<!-- 파일 수정
 				<li>
 					<label for="filename">파일</label>
-					<input type="file" name="filename" id="filename"
+					<input type="file" name="r_imgsrc" id="r_imgsrc"
 					     accept="image/gif,image/png,image/jpeg">
-					<c:if test="${!empty board.filename}">
+					<c:if test="${!empty review.r_imgsrc}">
 					<div id="file_detail">
-						(${board.filename})파일이 등록되어 있습니다.
+						(${review.r_imgsrc})파일이 등록되어 있습니다.
 						<input type="button" value="파일삭제" id="file_del">
-					</div>
+					</div>	
+					<script type="text/javascript">
+						$(function(){
+							$('#file_del').click(function(){
+								let choice = confirm('삭제하시겠습니까?');
+								if(choice){
+									$.ajax({
+										url:'deleteFile.do',
+										type:'post',
+										data:{r_num:${review.r_num}},
+										dataType:'json',
+										success:function(param){
+											if(param.result == 'logout'){
+												alert('로그인 후 사용하세요!');
+											}else if(param.result == 'success'){
+												$('#file_detail').hide();
+											}else if(param.result == 'wrongAccess'){
+												alert('잘못된 접속입니다.');
+											}else{
+												alert('파일 삭제 오류 발생');
+											}
+										},
+										error:function(){
+											alert('네트워크 오류 발생');
+										}
+									});
+								}
+							});
+						});
+					</script>
 					</c:if>     
 				</li>
-				-->
 			</ul>  
 			<div class="align-center">
 				<input type="submit" value="수정">
 				<input type="button" value="취소"
-				  onclick="location.href='detail.do?review_num=${review.r_num}'">
+				  onclick="location.href='detail.do?r_num=${review.r_num}'">
 			</div>                     
 		</form>
 	</div>

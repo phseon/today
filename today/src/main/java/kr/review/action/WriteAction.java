@@ -29,12 +29,14 @@ public class WriteAction implements Action{
 		ReviewVO review = new ReviewVO();
 		
 		review.setR_content(multi.getParameter("r_content"));
-		review.setR_imgsrc(multi.getParameter("r_imgsrc"));
+		review.setR_imgsrc(multi.getFilesystemName("r_imgsrc"));
+		review.setStar(Integer.parseInt(multi.getParameter("star")));
+		System.out.println("startttt"+Integer.parseInt(multi.getParameter("star")));
 		
 		ReviewDAO dao = ReviewDAO.getInstance();
-		ReservationVO rez = dao.getRevInfo(user_num);
-
-		System.out.println("aa"+rez.getRev_num());
+		ReservationDAO rez_dao = ReservationDAO.getInstance();
+		ReservationVO rez = rez_dao.getReservation(user_num);
+		
 		dao.insertReivew(review,rez.getRev_num());
 		
 //		//예약번호 반환
