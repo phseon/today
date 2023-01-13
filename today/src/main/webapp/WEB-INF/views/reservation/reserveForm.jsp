@@ -49,14 +49,25 @@
 					</select>
 					<c:if test=""></c:if>
 				</li>-->
+				<!-- 
+				<c:forEach var="procedure" items="${list}">
+						<option value="${procedure.m_num}">${procedure.p_title}</option>
+				</c:forEach>
+				<c:if test="${dactor.m_num}!=(this.value)">
+					<option value="${procedure.m_num}" disabled>${procedure.p_title}</option>
+				
+				</c:if>
+				-->
+				
+				
 				<li>
 					 <label for="procedure">시술명</label>
 					<select id="p_num" name="p_num">
 					<c:forEach var="procedure" items="${list}">
 						<option value="${procedure.p_num}">${procedure.p_title}</option>
+						<h2>${procedure.p_num}</h2>
 					</c:forEach>
 					</select>
-					<c:if test=""></c:if>
 				</li>
 			
 				<li>

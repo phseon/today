@@ -30,7 +30,19 @@ public class ReservationDAO {
 		
 		try {
 			conn = DBUtil.getConnection();
-			sql = "SELECT * FROM procedure p JOIN member_detail d ON p.m_num=d.m_num ORDER BY p_num DESC";
+//			sql = "SELECT d.name, p.m_num, p.p_num, p.p_title "
+//				+ "FROM procedure p "
+//				+ "JOIN member_detail d "
+//				+ "ON p.m_num=d.m_num "
+//				+ "ORDER BY d.name, p.p_title";
+			
+			
+			
+			sql = "SELECT d.name, p.m_num, p.p_num, p.p_title "
+				+ "FROM procedure p "
+				+ "JOIN member_detail d "
+				+ "ON p.m_num=d.m_num "
+				+ "ORDER BY d.name, p.p_title";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			list = new ArrayList<DoctorVO>();
@@ -50,35 +62,6 @@ public class ReservationDAO {
 		}
 		return list;
 	}
-	//의사명 찾기
-	/*public List<MemberVO> getDoctorName()throws Exception{
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = null;
-		List<MemberVO> list = null;
-		
-		try {
-			conn = DBUtil.getConnection();
-			sql = "SELECT * FROM member m JOIN member_detail d "
-				+ "ON m.m_num=d.m_num WHERE m.auth=1";
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			list = new ArrayList<MemberVO>();
-			while(rs.next()) {
-				MemberVO member = new MemberVO();
-				member.setName(rs.getString("name"));
-				member.setM_num(Integer.parseInt(rs.getString("m_num")));
-				
-				list.add(member);
-			}
-		}catch(Exception e) {
-			throw new Exception(e);
-		}finally {
-			DBUtil.executeClose(rs, pstmt, conn);
-		}
-		return list;
-	}*/
 	//예약 등록
 	public void insertReservation(ReservationVO reserve)throws Exception{
 		Connection conn = null;
@@ -94,7 +77,6 @@ public class ReservationDAO {
 			pstmt.setString(2, reserve.getRev_time());
 			pstmt.setInt(3, reserve.getP_num());
 			pstmt.setInt(4, reserve.getM_num());
-			//pstmt.setInt(5, reserve.getDr_num());
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -114,7 +96,7 @@ public class ReservationDAO {
 		try {
 			conn = DBUtil.getConnection();
 			sql = "SELECT r.*, p.m_num AS dr_num "
-				+ "FROM reservation "
+				+ "FROM reservation r "
 				+ "JOIN procedure p "
 				+ "ON r.p_num=p.p_num "
 				+ "WHERE r.m_num=?";
@@ -130,6 +112,7 @@ public class ReservationDAO {
 				reserve.setRev_time(rs.getString("rev_time"));
 				reserve.setR_ox(rs.getString("r_ox"));
 				reserve.setP_num(rs.getInt("p_num"));
+//				reserve.setP_title(rs.getString("p_title"));
 				reserve.setDr_num(rs.getInt("dr_num"));
 			}
 		}catch(Exception e) {

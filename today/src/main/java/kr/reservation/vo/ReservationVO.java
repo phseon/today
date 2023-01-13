@@ -3,23 +3,31 @@ package kr.reservation.vo;
 public class ReservationVO {
 	private int rev_num;
 	private int p_num;
+	private String p_title;
 	private String rev_date;
 	private String rev_time;
 	private String r_ox;
 	private int m_num;
 	private int dr_num;
+	private String dr_name;
 	
-	public int getDr_num() {
-		return dr_num;
+	public String getDr_name() {
+		return dr_name;
 	}
-	public void setDr_num(int dr_num) {
-		this.dr_num = dr_num;
+	public void setDr_name(String dr_name) {
+		this.dr_name = dr_name;
 	}
 	public int getM_num() {
 		return m_num;
 	}
 	public void setM_num(int m_num) {
 		this.m_num = m_num;
+	}
+	public int getDr_num() {
+		return dr_num;
+	}
+	public void setDr_num(int dr_num) {
+		this.dr_num = dr_num;
 	}
 	public int getRev_num() {
 		return rev_num;
@@ -32,6 +40,12 @@ public class ReservationVO {
 	}
 	public void setP_num(int p_num) {
 		this.p_num = p_num;
+	}
+	public String getP_title() {
+		return p_title;
+	}
+	public void setP_title(String p_title) {
+		this.p_title = p_title;
 	}
 	public String getRev_date() {
 		return rev_date;
