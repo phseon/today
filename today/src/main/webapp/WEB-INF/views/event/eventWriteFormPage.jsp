@@ -73,7 +73,6 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<jsp:include page="/WEB-INF/views/event/event_header.jsp"/>
 	<div>                      
 		<form id = "eventwrite_form" action="eventWritePage.do?pageNum=${pageNum}}" method = "post" enctype = "multipart/form-data">

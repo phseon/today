@@ -24,7 +24,6 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<jsp:include page="/WEB-INF/views/event/event_header.jsp"/>
 	<div>
 		<div class = "event-detail-title">
