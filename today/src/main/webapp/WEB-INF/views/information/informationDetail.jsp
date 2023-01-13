@@ -6,22 +6,27 @@
 <head>
 <meta charset="UTF-8">
 <title>글상세</title>
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/informationDetailStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
-<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/member.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/footerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>	
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
+	<jsp:include page="/WEB-INF/views/information/information_header.jsp"/>
+	
 	<div class="content-main">
-		<h2>공지사항</h2>
-		<hr width="100%" size="1" noshade="noshade">
-		<ul>
+		
+		<ul class="content">
 			<li>제목 : ${info.info_title}<li>
 			<li>작성자 : ${info.id}<li>
 			<li>작성일 : ${info.info_date}<li>
-			<textarea readonly rows="10" cols="40">${info.info_content}</textarea>
+			<table>
+				<tr>
+					<td>${info.info_content}</td>
+				</tr>
+			</table>
 		
 		</ul>
 		
@@ -46,6 +51,8 @@
 		
 		
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	
 </div>
 </body>
 </html>

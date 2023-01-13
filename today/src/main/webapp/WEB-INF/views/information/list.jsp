@@ -7,17 +7,16 @@
 <meta charset="UTF-8">
 <title>공지사항 목록</title>
 
-<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/member.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/informationStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/footerStyle.css">
 </head>
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>	
+	<jsp:include page="/WEB-INF/views/information/information_header.jsp"/>
 	
 	<div class="content-main">
-		<h2>공지사항</h2>
-		<hr width="100%" size="1" noshade="noshade">
-		
 		<c:if test="${count == 0}">
 		<div class="result-display">
 			표시할 공지사항이 없습니다.
@@ -26,7 +25,7 @@
 		
 		<c:if test="${count>0}">
 		<table>
-			<tr>
+			<tr class="tr_title">
 				<th>No.</th>
 				<th>제목</th>
 				<th>작성자</th>
@@ -43,12 +42,17 @@
 		</table>
 		<div class="align-center">${page}</div>
 		</c:if>
-		<div class="list-space align-right">
-			<input type="button" value="글쓰기" onclick="location.href='writeForm.do'"
-				<c:if test="${empty user_num or user_auth==2}">disabled="disabled"</c:if> />
+		<div class="align-right">
+			
+		<c:if test="${!empty user_num and user_auth==1}">
+			<input type="button" value="글쓰기" onclick="location.href='writeForm.do'">
+		
+		</c:if>
 	
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	
 </div>
 </body>
 </html>
