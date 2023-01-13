@@ -49,7 +49,6 @@
 				</li>
 			</ul>
 		</div>
-		<hr size="1" noshade="noshade" width="100%">
 		<div class="doc-end"></div>
 	</div>
 </div>

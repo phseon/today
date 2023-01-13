@@ -37,7 +37,7 @@
 
 			<c:if test="${rez.r_ox=='T'}">
 			<input type="button" value="리뷰 내역"
-			   onclick="location.href='${pageContext.request.contextPath}/myinfo/myPage.do'"/>
+			   onclick="location.href='${pageContext.request.contextPath}/myinfo/reviewInfoList.do'"/>
 			</c:if>
 			
 			<c:if test="${rez.r_ox=='F'}">

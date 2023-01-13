@@ -7,6 +7,7 @@
 <title>오늘의치과 - 회원 탈퇴</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myInfoDetailStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -53,5 +54,7 @@ $(function(){
 			</form>
 		</div>
 	</div>
+	<br><br><br><br><br>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

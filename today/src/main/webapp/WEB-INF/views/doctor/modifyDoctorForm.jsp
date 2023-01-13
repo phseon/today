@@ -7,6 +7,7 @@
 <title>의사소개 수정</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/doctorDetail.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -31,7 +32,7 @@
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
 	<div class="result-display">
 	<br><br>
-		<h3>의사 상세정보 변경</h3>
+		<h2>의사 상세정보 변경</h2>
 		<div class="form-display">
 		<form id="doc-form" action="modifyDoctor.do" method="post" 
 										enctype="multipart/form-data">
@@ -42,8 +43,10 @@
 					<input type="text" name="d_name" id="d_name" maxlength="10" value="${doctor.name}" disabled>
 				</li>
 				<li>
-					<label for="d_content">의사소개</label>
-					<textarea rows="3" cols="50" name="d_content" id="d_content">${doctor.content}</textarea>
+					의사소개
+				</li>
+				<li>
+					<textarea rows="5" cols="50" name="d_content" id="d_content">${doctor.content}</textarea>
 				</li>
 				<li>
 					<label for="d_imgsrc">의사 이미지</label>
@@ -57,6 +60,7 @@
 		</form>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </div>
 </body>
 </html>
