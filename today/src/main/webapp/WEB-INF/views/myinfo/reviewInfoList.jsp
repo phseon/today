@@ -7,6 +7,7 @@
 <title>오늘의치과 - MY REVIEW</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myInfoDetailStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -35,5 +36,6 @@
 			</div>
 		</div>
 	</div>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
