@@ -7,6 +7,7 @@
 <title>회원가입 완료</title>
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/member.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/footerStyle.css">
 </head>
 <body>
 <div class="page-main"> 
@@ -21,6 +22,9 @@
 			</div>
 		</div>
 	</div>
+	
 </div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	
 </body>
 </html>

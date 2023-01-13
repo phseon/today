@@ -19,7 +19,9 @@ hr{
 	margin-bottom:20px;
 	
 }
-
+.page-main{
+	margin-bottom:200px;
+}
 .content-main{
 	width:800px;
 	margin:0 auto;

@@ -7,6 +7,7 @@
 <title>로그인</title>
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/member.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/footerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
  	$(function(){
@@ -51,6 +52,9 @@
 			</div>
 		</form>	
 	</div>
+	
 </div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	
 </body>
 </html>
