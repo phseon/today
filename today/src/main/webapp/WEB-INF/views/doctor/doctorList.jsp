@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/doctor.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/doctorHeader.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footerStyle.css">
 <!--<script type="text/javascript" src="${pageContext.request.contextPath}/js/doctor.page.js"></script>-->
 </head>
 <body>
@@ -60,5 +61,6 @@
 		</div>-->
 	</div>
 </div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
