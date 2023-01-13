@@ -39,17 +39,17 @@
 		
 		<form id="reserve_form" action="reserve.do" method="post">
 			<ul>
-				<li>
-					<label for="dr_num">시술명</label>
+				<!--<li>
+					<label for="dr_num">의사명</label>
 					<select id="dr_num" name="dr_num">
-					<c:forEach var="doctor" items="${list}">
-						<option value="${doctor.m_num}">${doctor.dr_name}</option>
+					<c:forEach var="doctor" items="${d_list}">
+						<option value="${doctor.m_num}">${doctor.name}</option>
 					</c:forEach>
 					</select>
 					<c:if test=""></c:if>
-				</li>
+				</li>-->
 				<li>
-					<label for="procedure">시술명</label>
+					 <label for="procedure">시술명</label>
 					<select id="p_num" name="p_num">
 					<c:forEach var="procedure" items="${list}">
 						<option value="${procedure.p_num}">${procedure.p_title}</option>

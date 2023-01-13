@@ -2,7 +2,7 @@
 /*의사 리스트
 ---------------------*/
 .doc-list{
-	width:1250px;
+	width:1200px;
 	margin-left:100px;
 }
 .doc{
@@ -39,9 +39,6 @@
 	clear:both;
 	padding-right:150px;
 }
-.align-right{
-	text-align:right;
-}
 .result-display{
 	width:400px;
 	height:200px;
@@ -50,4 +47,8 @@
 	display:flex;
 	align-items:center;
 	justify-content:center;	
+}
+.align-center{
+	text-align:center;
+	margin-right:120px;
 }

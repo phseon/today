@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import kr.controller.Action;
 import kr.doctor.vo.DoctorVO;
+//import kr.member.vo.MemberVO;
 import kr.reservation.dao.ReservationDAO;
 
 public class ReserveFormAction implements Action{
@@ -31,7 +32,11 @@ public class ReserveFormAction implements Action{
 		ReservationDAO dao = ReservationDAO.getInstance();
 		List<DoctorVO> list = null;
 		list = dao.getProcedureList();
+		//List<MemberVO> d_list = null;
+		//d_list = dao.getDoctorName();
+		
 		request.setAttribute("list", list);
+		//request.setAttribute("d_list", d_list);
 		return "/WEB-INF/views/reservation/reserveForm.jsp";
 	}
 

@@ -50,6 +50,35 @@ public class ReservationDAO {
 		}
 		return list;
 	}
+	//의사명 찾기
+	/*public List<MemberVO> getDoctorName()throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		List<MemberVO> list = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT * FROM member m JOIN member_detail d "
+				+ "ON m.m_num=d.m_num WHERE m.auth=1";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			list = new ArrayList<MemberVO>();
+			while(rs.next()) {
+				MemberVO member = new MemberVO();
+				member.setName(rs.getString("name"));
+				member.setM_num(Integer.parseInt(rs.getString("m_num")));
+				
+				list.add(member);
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return list;
+	}*/
 	//예약 등록
 	public void insertReservation(ReservationVO reserve)throws Exception{
 		Connection conn = null;
@@ -59,13 +88,13 @@ public class ReservationDAO {
 		try {
 			conn = DBUtil.getConnection();
 			sql = "INSERT INTO reservation (rev_num,rev_date,rev_time,p_num,"
-					+ "m_num,dr_num) VALUES (reservation_seq.nextval,?,?,?,?,?)";
+					+ "m_num) VALUES (reservation_seq.nextval,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, reserve.getRev_date());
 			pstmt.setString(2, reserve.getRev_time());
 			pstmt.setInt(3, reserve.getP_num());
 			pstmt.setInt(4, reserve.getM_num());
-			pstmt.setInt(5, reserve.getDr_num());
+			//pstmt.setInt(5, reserve.getDr_num());
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {

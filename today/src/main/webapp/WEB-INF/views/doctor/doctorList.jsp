@@ -9,10 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/doctor.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/doctorHeader.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-	
-</script>
+<!--<script type="text/javascript" src="${pageContext.request.contextPath}/js/doctor.page.js"></script>-->
 </head>
 <body>
 <div class="page-main">
@@ -51,10 +48,16 @@
 		</div>
 		</c:forEach>
 		<div class="align-center">
-		${page}
+		${pageNum}
 		</div>
 		</div>
 		</c:if>
+		<!--  <div class="doc-list">
+		<div id="output"></div>
+		</div>
+		<div class="paging-button" style="display:none;">
+			<input type="button" value="다음글 보기">
+		</div>-->
 	</div>
 </div>
 </body>
