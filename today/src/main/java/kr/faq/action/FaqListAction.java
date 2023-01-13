@@ -17,25 +17,27 @@ public class FaqListAction implements Action{
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum==null)pageNum = "1";
 		
-		String keyfield = request.getParameter("keyfield");
-		String keyword = request.getParameter("keyword");
+		/*
+		 * String keyfield = request.getParameter("keyfield"); String keyword =
+		 * request.getParameter("keyword");
+		 */
 
 		FaqDAO dao = FaqDAO.getInstance();
-		int count = dao.getFaqCount(keyfield, keyword);
+		int count = dao.getFaqCount();
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(Integer.parseInt(pageNum), count, 10, 10, "list.do"); 
+		PagingUtil page = new PagingUtil(Integer.parseInt(pageNum), count, 10, 10, "qnaPage.do"); 
 		
 		List<FaqVO> list = null;
 		if(count >0) {
-			list = dao.getListFaq(page.getStartRow(), page.getEndRow(), keyfield,keyword);
+			list = dao.getListFaq(page.getStartRow(), page.getEndRow());
 		}
 		request.setAttribute("list", list);
 		request.setAttribute("count", count);
 		request.setAttribute("page", page.getPage());
 		
 		
-		return "/WEB-INF/views/faq/list.jsp";
+		return "/WEB-INF/views/faq/faqlist.jsp";
 		
 
 	}
