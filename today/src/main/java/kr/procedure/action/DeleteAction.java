@@ -26,7 +26,7 @@ public class DeleteAction implements Action{
 		ProcedureVO pro = dao.getProcedure(p_num);
 		//사용자 패스워드
 		String pwd = dao.pwdProcedure(user_num);
-		if(passwd.equals(pwd)) {
+		if(passwd.equals(pwd) && user_num==pro.getM_num()) {
 			dao.deleteProcedure(p_num);
 			FileUtil.removeFile(request, pro.getP_imgsrc());
 			return "redirect:/procedure/list.do";

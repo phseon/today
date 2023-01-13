@@ -113,7 +113,11 @@ public class ReservationDAO {
 		
 		try {
 			conn = DBUtil.getConnection();
-			sql = "SELECT * FROM reservation WHERE m_num=?";
+			sql = "SELECT r.*, p.m_num AS dr_num "
+				+ "FROM reservation "
+				+ "JOIN procedure p "
+				+ "ON r.p_num=p.p_num "
+				+ "WHERE r.m_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, m_num);
 			
@@ -126,6 +130,7 @@ public class ReservationDAO {
 				reserve.setRev_time(rs.getString("rev_time"));
 				reserve.setR_ox(rs.getString("r_ox"));
 				reserve.setP_num(rs.getInt("p_num"));
+				reserve.setDr_num(rs.getInt("dr_num"));
 			}
 		}catch(Exception e) {
 			throw new Exception(e);

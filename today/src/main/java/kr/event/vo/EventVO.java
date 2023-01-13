@@ -15,7 +15,6 @@ public class EventVO {
 	private int cal_date;
 	private int m_num;
 	
-	
 	public int getCal_date() {
 		return cal_date;
 	}

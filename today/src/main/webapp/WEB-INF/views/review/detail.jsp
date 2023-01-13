@@ -33,7 +33,8 @@
 		</div>
 		<h2>로그인 중인 회원번호 : ${user_num}</h2>
 		<h2>리뷰번호 : ${review.r_num}</h2>
-		<h2>현재 리뷰 작성 회원번호: ${rez.m_num}</h2>
+		<h2>rez현재 리뷰 작성 회원번호: ${rez.m_num}</h2>
+		<h2>review현재 리뷰 작성 회원번호: ${review.m_num}</h2>
 		<!-- <h2>로그인한 회원의 예약번호: ${rezInfo.rev_num}</h2>
 		리뷰 작성 폼에서만 보이기. 여러개면 리스트로 가져오기? -->
 		
@@ -43,7 +44,7 @@
 			                       value="${review.r_num}">
 		</form>	
 			
-		<c:if test="${user_num == rez.m_num}">
+		<c:if test="${user_num == review.m_num}">
 				<input type="button" value="수정" 
 				onclick="location.href='updateForm.do?r_num=${review.r_num}'">
 				<input type="button" value="삭제" id="delete_btn">

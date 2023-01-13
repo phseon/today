@@ -90,6 +90,9 @@ input[type="radio"]:checked+label{
 input[type="text"],input[type="password"]{
 	width:310px;
 }*/
+#write_form li{
+	margin:10px;
+}
 #pro_bgcolor{
 	background-color: #ced6d7;
 }

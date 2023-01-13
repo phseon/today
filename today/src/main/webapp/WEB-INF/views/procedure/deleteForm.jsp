@@ -28,5 +28,6 @@
 	<input type="button" value="글상세" onclick="location.href='detail.do?p_num=${pro.p_num}'">
 	</div>
 </form>
+<br><br><br><br><br><br>
 </body>
 </html>

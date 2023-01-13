@@ -112,10 +112,9 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<jsp:include page="/WEB-INF/views/event/event_header.jsp"/>
 	<div>                      
-		<form id = "eventupdate_form" action="eventUpdatePage.do" method = "post" enctype = "multipart/form-data">
+		<form id = "eventupdate_form" action="eventUpdatePage.do?pageNum=${pageNum}" method = "post" enctype = "multipart/form-data">
 			<input type = "hidden"	name = "e_num" value = "${event.e_num}">
 			<div class = "event-detail-title">
 				<label for = "e_title">이벤트제목</label> : 

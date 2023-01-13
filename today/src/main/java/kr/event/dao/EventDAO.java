@@ -172,6 +172,9 @@ public class EventDAO {
 				event.setE_end(rs.getString("e_end"));
 				event.setE_date(rs.getDate("e_date"));
 				event.setCal_date(calDay(rs.getString("e_end")));
+				
+				System.out.println(calDay(rs.getString("e_end")));
+				
 				event.setE_imgsrc(rs.getString("e_imgsrc"));
 				event.setE_thumb(rs.getString("e_thumb"));
 				event.setE_resbtn(rs.getString("e_resbtn"));
@@ -261,6 +264,83 @@ public class EventDAO {
 			throw new Exception(e);
 		}finally {
 			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	//cal_date 업데이트
+	public void updateCalDate() throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		ResultSet rs = null;
+		ResultSet rs2 = null;
+		String sql = null;
+		int i = 0;
+		
+		try {
+			
+			conn = DBUtil.getConnection();
+			
+			conn.setAutoCommit(false);
+			
+			//먼저 e_end(끝나는 날짜 가져와서 배열에 담기)
+			sql = "SELECT e_end FROM event";
+			
+			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			rs = pstmt.executeQuery();
+			
+			int rowcount = 0;
+			
+			if (rs.last()) {
+			  rowcount = rs.getRow();
+			  rs.beforeFirst();
+			}
+
+			String[] end_date = new String[rowcount];
+			while(rs.next()) {
+				end_date[i] = rs.getString("e_end");
+				i++;
+			}
+			
+			int[] update_cal = new int[rowcount];
+			for(int j = 0; j < rowcount; j++) {
+				update_cal[j] = calDay(end_date[j]);
+			}
+			
+			//e_num 각 이벤트 글 번호 가져와서 배열에 담기
+			sql = "SELECT e_num FROM event";
+			pstmt2 = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			rs2 = pstmt2.executeQuery(); 
+			
+			i = 0;
+			
+			int[] e_num = new int[rowcount];
+			while(rs2.next()) {
+				e_num[i] = rs2.getInt("e_num");
+				i++;
+			}
+			
+			//e_num마다 e_end 업데이트
+			sql = "UPDATE event SET cal_date = ? WHERE e_num = ?";
+			
+			pstmt3 = conn.prepareStatement(sql);
+			for(int j = 0; j < rowcount; j++) {
+				pstmt3.setInt(1, update_cal[j]);
+				pstmt3.setInt(2, e_num[j]);
+				pstmt3.addBatch();
+				
+				if(j % 1000 == 0) {
+					pstmt3.executeBatch();
+				}
+			}
+			pstmt3.executeBatch();
+			
+		} catch (Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt3, null);
+			DBUtil.executeClose(rs2, pstmt2, null);
+			DBUtil.executeClose(rs, pstmt, conn);
 		}
 	}
 	//글삭제

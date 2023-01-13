@@ -8,21 +8,27 @@
 }
 
 /*푸터*/
-.main-f{
+.main{
+	margin: 15px;
 	width : 100%;
 	min-width : 1500px;
 	position : relative;
 	height: 160px;
 }
-.main_navf {
+.main_f {
 	font-weight : bold;
 	text-align : center;
 	justify-content: space-between;
 	font-size : 110%;
 	height : inherit;
+	color:red;
 }
-#menu_navf ul li a:hover{
-	color : gray;
+#menu_f a:hover{
+	color : black;
 }
+#menu_f, #menu_cf, #menu_f a{
+	color : #4f4f4f;
+}
+
 
 
