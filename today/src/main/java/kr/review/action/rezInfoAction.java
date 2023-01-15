@@ -19,14 +19,7 @@ public class rezInfoAction implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//전송된 데이터 인코딩 처리
 				request.setCharacterEncoding("utf-8");
-		
-//		String pageNum = request.getParameter("pageNum");
-//		if(pageNum == null) {
-//			pageNum = "1";
-//		}
-		
-//		System.out.println("rezpage : "+pageNum);
-		
+
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		if(user_num == null) {//로그인이 되지 않은 경우
@@ -44,7 +37,6 @@ public class rezInfoAction implements Action {
 		request.setAttribute("myProc", myProcedure); 
 
 		ReservationDAO rez_dao = ReservationDAO.getInstance();
-		System.out.println("uuu번호" + user_num);
 		ReservationVO rez = rez_dao.getReservation(user_num);
 		request.setAttribute("rez", rez);
 		

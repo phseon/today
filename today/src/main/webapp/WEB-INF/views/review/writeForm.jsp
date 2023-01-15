@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>리뷰 등록</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/review.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -16,86 +19,88 @@
 				return false;
 			}
 		});
+		
+		
+		let my_photo;
+
+		// 이미지 변경 시
+		$('#r_imgsrc').change(function(){
+				my_photo = this.files[0];
+				
+				if(my_photo.size > 1024*1024){
+					alert('1024kbytes까지만 업로드가 가능합니다.');
+					return;
+				}
+		});
 	});
 </script>
 </head>
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
+	<div id = "review_header">
+		<div id = "review_header_notice">오늘의 치과<br>리뷰</div>
+	</div>	
+</div>
 	<div class="content-main">
-		<h2>리뷰 등록</h2>
+		<div class="align-return">
+			<input type="button" class="return_btn"
+						  onclick="location.href='reviewPage.do'">
+		</div>
+		
 		<form id="write_form" action="write.do" method="post"
 		                       enctype="multipart/form-data">
-			<ul>
-			<!-- 
-				<li>
-					예약 날짜 : ${rez.rev_time} !!<br>
-					<h2>예약진료 내용 영역</h2>
-				
-					<h2>${myRez.rev_date}</h2>
-					<h2>${myRez.rev_num}</h2>
-					
-					<h2>${myProc.p_title}</h2>
-					<h2>${rez.rev_date}</h2>
-					<h2>${rez.rev_time}</h2>
-					<h2>${rez.m_num}</h2>
-				</li>
-			-->
 			
-			<div class="content-middle">
-				<table>
+			<div class="align-center">
+			<div class="align-top">
+			<table>
 					<tr class="table-title">
-						<td>예약 날짜</td>
-						<td>예약 시간</td>
-						<td>시술명</td>
-						<td>예약번호</td>
-						<td>예약회원번호</td>
+						<td>예약 날짜 | ${rez.rev_date}</td>
 					</tr>
-					<tr class="table-detail">
-						<td>${rez.rev_date}</td>
-						<td>${rez.rev_time}</td>
-						<td>${myProc.p_title}</td>
-						<td>${rez.rev_num}</td>
-						<td>${rez.m_num}</td>
+					<tr>
+						<td>예약 시간 | ${rez.rev_time}</td>
 					</tr>
-				</table>
-				
-				
+					<tr>
+					<td>시술명 | ${myProc.p_title}</td>
+					</tr>
+					<tr class="check">
+					<td>
+					<label for="star-select">별점</label>
+						<input type="radio" class="sel-star" name="star" value=0><label for="star0">☆☆☆☆☆</label>
+						<input type="radio" class="sel-star" name="star" value=1><label for="star1">★☆☆☆☆</label>
+						<input type="radio" class="sel-star" name="star" value=2><label for="star2">★★☆☆☆</label>
+					</td>
+					<tr class="check">
+					<td>
+					<label for="star-select" style="color:#fff;">별점</label>
+						<input type="radio" class="sel-star" name="star" value=3><label for="star3">★★★☆☆</label>
+						<input type="radio" class="sel-star" name="star" value=4><label for="star4">★★★★☆</label>
+						<input type="radio" class="sel-star" name="star" value=5 checked="checked"><label for="star5">★★★★★</label>
+					
+					</td>
+					</tr>
+					</tr>
+			</table>
+			</div>
+			
+			<hr class="write_hr"/>
+			<div class="align-bottom">
+			
 				<li>
-				<div class="star">
-				<label for="star-select">별점</label>
-				
-				<div class="star">
-				<label for="star-select">별점</label>
-					<input type="radio" name="star" value=0><label for="star0">☆☆☆☆☆</label>
-					<input type="radio" name="star" value=1><label for="star1">★☆☆☆☆</label>
-					<input type="radio" name="star" value=2><label for="star2">★★☆☆☆</label>
-					<input type="radio" name="star" value=3><label for="star3">★★★☆☆</label>
-					<input type="radio" name="star" value=4><label for="star4">★★★★☆</label>
-					<input type="radio" name="star" value=5 checked="checked"><label for="star5">★★★★★</label>
-				</div>
-				
-				<li>
-					<label for="r_content">내용</label>
+					<label for="r_content"></label>
 					<textarea rows="10" cols="50" 
 					name="r_content" id="r_content"></textarea>
 				</li>
-				<li>
-					<label for="r_imgsrc">파일</label>
-					<input type="file" name="r_imgsrc" 
+				<li class="write_li">
+					<label for="r_imgsrc" class="img_upload"></label>
+					<input type="file" name="r_imgsrc"
 					            id="r_imgsrc" 
 					 accept="image/gif,image/png,image/jpeg">
 				</li>
-			<!-- </ul> -->
-			<div class="align-center">
-				<input type="submit" value="등록">
-				<input type="button" value="취소"
-				            onclick="location.href='reviewPage.do'">
-			</div> 
-			</div>                     
-		</form>
-	</div>
-</div>
+				<div class="aling-return">
+				<input type="submit" value="등록" class="review_btn"></div>
+				</div>
+		</div>                     
+	</form>	
 </body>
 </html>

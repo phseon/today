@@ -31,24 +31,12 @@ public class WriteAction implements Action{
 		review.setR_content(multi.getParameter("r_content"));
 		review.setR_imgsrc(multi.getFilesystemName("r_imgsrc"));
 		review.setStar(Integer.parseInt(multi.getParameter("star")));
-		System.out.println("startttt"+Integer.parseInt(multi.getParameter("star")));
 		
 		ReviewDAO dao = ReviewDAO.getInstance();
 		ReservationDAO rez_dao = ReservationDAO.getInstance();
 		ReservationVO rez = rez_dao.getReservation(user_num);
 		
 		dao.insertReivew(review,rez.getRev_num());
-		
-//		//예약번호 반환
-//		int rev_num = Integer.parseInt(
-//						request.getParameter("rev_num"));
-//		ReservationDAO rez_dao = ReservationDAO.getInstance();
-//		int rev_num = Integer.parseInt(
-//				request.getParameter("rev_num"));
-////
-////		ReviewDAO dao = ReviewDAO.getInstance();
-//		ReservationVO rez = dao.getReservation(rev_num);
-//		request.setAttribute("rez", rez);
 		
 		return "/WEB-INF/views/review/write.jsp";
 	}

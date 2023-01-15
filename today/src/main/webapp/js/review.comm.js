@@ -17,16 +17,10 @@ $(function(){
 			dataType:'json',
 			success:function(param){
 				//로딩 이미지 감추기
-				
-				console.log("<<" + $('#r_num').val());
-				console.log("<<" + pageNum);
 				$('#loading').hide();
 				
 				count = param.count;
 				rowCount = param.rowCount;
-				
-				console.log("!!" + count);
-				console.log(rowCount);
 				
 				if(pageNum == 1){
 					//처음 호출시는 목록을 표시하는 div의 내부 내용물 제거
@@ -35,38 +29,32 @@ $(function(){
 				
 				$(param.list).each(function(index,item){
 					let output = '<div class="item">';
-					output += '<h4>' + item.c_num + '</h4>';
+
+					output += '<h4>' + item.m_num + '번 회원 | '
+							+ item.c_date + '</h4>';
 					output += '<div class="sub-item">';
 					output += '<p>' + item.c_content + '</p>';
-				/*	output += '<div class="sub-item">';
-					output += '<h4>' + item.r_num + '</h4>';
-					output += '<div class="sub-item">';
-					output += '<h4>' + item.m_num + '</h4>';
-				*/
-
-/*					if(item.re_modifydate){
-						output += '<span class="modify-date">최근 수정일 : ' + item.re_modifydate + '</span>';
-					}else{
-						output += '<span class="modify-date">등록일: ' + item.re_date + '</span>';
-					}
-*/
-					console.log("ㅇㅇ");
-					console.log("wwww" + item);
-						
+					
+					
 					//로그인한 회원번호와 작성자의 회원번호 일치 여부 체크
 					if(param.user_num == item.m_num){
 						//로그인한 회원번호와 작성자 회원번호 일치
-						console.log("ㅐㅐㅐ!!"+param.user_num + "wwww" + item.m_num);
-						output += ' <input type="button" data-cnum="' + item.c_num+'" value="수정" class="modify-btn">';
-						output += ' <input type="button" data-cnum="' + item.c_num+'" value="삭제" class="delete-btn">';
+						output += ' <input type="button" data-cnum="'+item.c_num+'" value="수정" class="modify-btn">';	
+						output += ' <input type="button" data-cnum="'+item.c_num+'" value="삭제" class="delete-btn">';						
 					}
+					let c_count = '<div id="c_count">' + param.count + '</div>';
+				
+					output += '<hr size="1" class="review_hr" noshade width="100%">';
+					output += '</div>';
+					output += '</div>';
 					
-					output += '<hr size="1" noshade width="100%">';
-					output += '</div>';
-					output += '</div>';
+
+
+
 
 					//문서 객체에 추가
 					$('#output').append(output);
+					$('#c_count').append(c_count);
 				});//end of each
 				
 				//page button 처리
@@ -78,19 +66,6 @@ $(function(){
 					$('.paging-button').show();
 				}
 			},
-			/*
-			error:function(param){
-				$('#loading').hide();
-				
-				console.log(">>" + $('#r_num').val());
-				console.log("?" + param);
-				console.log("!" + pageNum);
-				console.log("!!" + param.count);
-				console.log(param.rowCount);
-				alert('네트워크 오류 발생');
-				
-			}
-			*/
 			error:function(request,status,error){
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		 }
@@ -112,7 +87,7 @@ $(function(){
 			alert('내용을 입력하세요!');
 			$('#c_content').val('').focus();
 			return false;
-		}
+			}
 		
 		//form 이하의 태그에 입력한 데이터를 모두 읽어 옴
 		let form_data = $(this).serialize();
@@ -185,20 +160,20 @@ $(function(){
 	$(document).on('click','.modify-btn',function(){
 		//댓글 번호
 		let c_num = $(this).attr('data-cnum');
-		//댓글 내용	
+		//댓글 내용
+		//parent -> 원래 목록부분 태그 item, sub-item다시넣어서 계층 ㅁ맞나 비교해보기
 		let content = $(this).parent().find('p')
-				.html().replace(/<br>/gi,'\n');
-								//g:지정문자열 모두, i:대소문자 무시
-		//댓글 수정폼 UI
+		                     .html().replace(/<br>/gi,'\n');
+		//댓글 수정폼 U
 		let modifyUI = '<form id="mc_form">';
 			modifyUI += '<input type="hidden" name="c_num" id="c_num" value="'+c_num+'">';
-			modifyUI += '<textarea rows="3" cols="50" name="c_content" id="mc_content" class="comm-content">'+content+'</textarea>';
+			modifyUI += '<textarea rows="1" cols="50" name="c_content" id="mc_content" class="comm-content">'+content+'</textarea>';
 			modifyUI += '<div id="mc_first"><span class="letter-count">300/300</span></div>';
 			modifyUI += '<div id="mc_second" class="align-right">';
 			modifyUI += ' <input type="submit" value="수정">';				
 			modifyUI += ' <input type="button" value="취소" class="c-reset">';
 			modifyUI += '</div>';
-			modifyUI += '<hr size="1" noshade widht="96%">';
+			modifyUI += '<hr size="1" class="review_hr" noshade widht="96%">';
 			modifyUI += '</form>';				
 			
 			//이전에 이미 수정하는 댓글이 있을 경우 수정버튼을
@@ -249,7 +224,6 @@ $(function(){
 		
 		//폼에 입력한 데이터 반환
 		let form_data = $(this).serialize();
-		console.log(form_data);
 		//서버와 통신
 		$.ajax({
 			url:'updateComm.do',
@@ -259,25 +233,18 @@ $(function(){
 			success:function(param){
 					
 				if(param.result == 'logout'){
-					alert('로그인해야 수정할 수 있습니다 ');
+					alert('로그인해야 수정할 수 있습니다.');
 				}else if(param.result == 'success'){
-					console.log("alalal");
 					$('#mc_form').parent().find('p')
-							.html($('mc_content').val()
-							/*
-												  .replace(/</g,'&lt;')
-												  .replace(/>/g,'&gt;')
-												  .replace(/\n/g,'<br>')
-												  */
+							.html($('#mc_content').val()
+							
 												  );
-		/*			$('#mc_form').parent()
-								  .find('.modify-date').text('최근 수정일 : 5초 미만');
-			*/
+		
 					//수정폼 삭제 및 초기화
 					initModifyForm();
 					selectList(1);
 				}else if(param.result == 'wrongAccess'){
-					alert('타인의 글을 수정할 수 없습니다');
+					alert('타인의 글을 수정할 수 없습니다.');
 				}else{
 					alert('댓글 수정 오류 발생');
 				}
@@ -291,7 +258,7 @@ $(function(){
 	$(document).on('click','.delete-btn',function(){
 		//댓글 번호
 		let c_num = $(this).attr('data-cnum');
-		console.log("ddd"+c_num);
+		
 		//서버와 통신
 		$.ajax({
 			url:'deleteComm.do',
@@ -302,10 +269,10 @@ $(function(){
 				if(param.result == 'logout'){
 					alert('로그인해야 삭제할 수 있습니다.');
 				}else if(param.result == 'success'){
-					alert('삭제 완료!!');
+					alert('댓글이 삭제되었습니다.');
 					selectList(1);
 				}else if(param.result == 'wrongAccess'){
-					alert('타인의 글을 삭제할 수 없습니다.');
+					alert('타인의 댓글을 삭제할 수 없습니다.');
 				}else{
 					alert('댓글 삭제 오류 발생');
 				}

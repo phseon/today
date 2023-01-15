@@ -75,6 +75,7 @@
 	width : 1208px;
 	margin : 0 auto;
 	clear : both;
+	margin-bottom : 20px;
 }
 #event-searchform{
 	text-align : center;
@@ -106,6 +107,7 @@
 .e-buttons{
 	text-align : center;
 	margin : 0 5px;
+	margin-bottom : 20px;
 }
 .show-event-list a{
 	margin-top : 15px;

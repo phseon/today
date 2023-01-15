@@ -9,6 +9,7 @@
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventHeaderStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventBodyStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footerStyle.css">
 <script type="text/javascript" src = "${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -148,5 +149,6 @@
 			</span>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

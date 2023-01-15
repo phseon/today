@@ -149,7 +149,7 @@ public class ReviewDAO {
 			
 			
 			
-			sql = "SELECT r_content, name, p_title, r_num, r_date "
+			sql = "SELECT r_content, name, p_title, r_num, r_date, star "
 				+ " FROM (SELECT a.*, rownum rnum "
 				+ "FROM (SELECT * FROM reservation v "
 				+ "JOIN procedure p ON v.p_num=p.p_num "
@@ -178,7 +178,8 @@ public class ReviewDAO {
 //				review.setR_imgsrc(rs.getString("r_imgsrc"));
 				review.setR_date(rs.getDate("r_date"));
 				review.setDr_name(rs.getString("name"));
-//				review.setId(rs.getString("id"));
+				review.setP_title(rs.getString("p_title"));
+				review.setStar(rs.getInt("star"));
 				
 				list.add(review);
 			}
@@ -241,6 +242,9 @@ public class ReviewDAO {
 				review.setR_num(rs.getInt("r_num"));
 				review.setR_content(rs.getString("r_content"));
 				review.setR_date(rs.getDate("r_date"));
+				review.setRev_num(rs.getInt("rev_num"));
+				review.setRev_date(rs.getString("rev_date"));
+				review.setRev_time(rs.getString("rev_time"));
 				review.setRev_num(rs.getInt("rev_num"));
 				review.setM_num(rs.getInt("m_num"));
 				review.setDr_name(rs.getString("name"));
@@ -307,11 +311,12 @@ public class ReviewDAO {
 			
 			//전송된 파일 여부 체크
 			if(review.getR_imgsrc()!=null) {
-				sub_sql += ",r_imgsrc=?";
+				sub_sql += ",r_imgsrc=? ";
 			}
 			
 			sql = "UPDATE review SET r_content=? "
 				+ sub_sql 
+				+ ",star=?"
 				+ "WHERE r_num=?";
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
@@ -320,6 +325,7 @@ public class ReviewDAO {
 			if(review.getR_imgsrc()!=null) {
 				pstmt.setString(++cnt, review.getR_imgsrc());
 			}
+			pstmt.setInt(++cnt, review.getStar());
 			pstmt.setInt(++cnt, review.getR_num());
 			
 			//SQL문 실행
@@ -767,12 +773,12 @@ public class ReviewDAO {
 			list = new ArrayList<ReviewCommVO>();
 			while(rs.next()) {
 				ReviewCommVO comm = new ReviewCommVO();
-				MemberVO member = new MemberVO();
-				comm.setC_num((Integer)rs.getInt("c_num"));
-				comm.setC_content(rs.getString("c_content"));
-				comm.setR_num((Integer)rs.getInt("r_num"));
-				//이 값은 안 들어가나? 쿼리에서 빼서 없어도 될 듯
-				comm.setM_num((Integer)rs.getInt("m_num"));
+				comm.setC_num(rs.getInt("c_num"));
+				comm.setC_date(rs.getDate("c_date"));
+				comm.setC_content(StringUtil.useBrNoHtml(
+						rs.getString("c_content")));
+				comm.setR_num(rs.getInt("r_num"));
+				comm.setM_num(rs.getInt("m_num"));
 				
 				list.add(comm);
 			}

@@ -33,18 +33,7 @@ public class ReviewListAction implements Action{
 		String keyword = request.getParameter("keyword");
 		
 		ReviewDAO dao = ReviewDAO.getInstance();
-		System.out.println("접근??"+user_num);
-		System.out.println("응ㅁ"+dao.getRevInfo(user_num));
 		
-		
-			System.out.println("접근가능");
-
-			
-//			System.out.println("zz"+rez.getR_ox());
-//			System.out.println("dd"+rez.getRev_num());
-			
-			System.out.println("iii"+dao.getReviewCount(keyfield, keyword));
-			
 			int count = dao.getReviewCount(keyfield, keyword);
 			//페이지 처리
 			//keyfield,keyword,currentPage,count,rowCount(한 화면 게시글 개수),
@@ -66,7 +55,6 @@ public class ReviewListAction implements Action{
 			request.setAttribute("page", page.getPage());
 			
 			if(user_num > 0) {
-				System. out.println("usernum>0!!!!");
 				ReservationDAO rez_dao = ReservationDAO.getInstance();
 				ReservationVO rez = rez_dao.getReservation(user_num);
 				request.setAttribute("rez", rez);

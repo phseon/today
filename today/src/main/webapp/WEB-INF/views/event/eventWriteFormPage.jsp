@@ -10,6 +10,7 @@
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventHeaderStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventBodyStyle.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/eventDetailStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footerStyle.css">
 <script type="text/javascript" src = "${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	function submit_eventwrite_form() {
@@ -75,7 +76,7 @@
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
 	<jsp:include page="/WEB-INF/views/event/event_header.jsp"/>
 	<div>                      
-		<form id = "eventwrite_form" action="eventWritePage.do?pageNum=${pageNum}}" method = "post" enctype = "multipart/form-data">
+		<form id = "eventwrite_form" action="eventWritePage.do?pageNum=${pageNum}" method = "post" enctype = "multipart/form-data">
 			<div class = "event-detail-title">
 				<label for = "e_title">이벤트제목</label> : 
 				<input type = "text" id = "e_title" name = "e_title" placeholder="제목을 입력하세요" maxlength = "50">
@@ -130,6 +131,6 @@
 			<a href = "eventPage.do">목록</a>
 		</span>
 	</div>
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

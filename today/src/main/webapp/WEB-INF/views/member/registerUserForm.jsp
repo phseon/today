@@ -29,8 +29,8 @@
  				success:function(param){
  					if(param.result=='idNotFound'){
  						idChecked = 1;
- 						$('#message_id').css('color','#000000').text('등록 가능 ID');
- 						$('#register_form ul').css('margin','50px');
+ 						$('#message_id').css('color','#000000').text('등록가능 ID');
+ 						
  					}else if(param.result == 'idDuplicated'){
  						idChecked = 0;
  						$('#message_id').css('color','red').text('등록된 ID');
