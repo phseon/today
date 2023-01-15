@@ -26,6 +26,7 @@
 			<li><h2>A</h2>  ${faq.faq_content}</li>
 		</ul>
 		
+		<div class="align-center">
 		<input type="button" value="목록" onclick="location.href='qnaPage.do'">
 		
 		<%--관리자일 경우 수정 삭제 가능 --%>
@@ -41,14 +42,12 @@
 				if(choice){
 					location.replace('faqDelete.do?faq_num=${faq.faq_num}');
 				}
-				
-				
 			
 			};
-		
+				
 			</script>
 			</c:if>
-	 		
+	 		</div>
 			
 
 	
