@@ -164,23 +164,23 @@ public class FaqDAO {
 				Connection conn = null;
 				PreparedStatement pstmt = null;
 				String sql = null;
-	 //	   		 String sub_sql = "";
-				int cnt = 0;
+				
 			
 				try {
 					conn = DBUtil.getConnection();
 					
-					sql="UPDATE faq SET faq_content= "
-							+ "sub_sql WHERE faq_num";
+					sql="UPDATE faq SET faq_title=?, faq_type=?, "
+							+ "faq_content=? WHERE faq_num=?";
 					
 					pstmt = conn.prepareStatement(sql);
 					
-					pstmt.setString(++cnt, faq.getFaq_title());
-					pstmt.setString(++cnt, faq.getFaq_content());
-					pstmt.setInt(++cnt, faq.getFaq_num());
-					
+					pstmt.setString(1, faq.getFaq_title());
+					pstmt.setString(2, faq.getFaq_type());
+					pstmt.setString(3, faq.getFaq_content());
+					pstmt.setInt(4, faq.getFaq_num());
 					
 					pstmt.executeUpdate();
+					
 				}catch(Exception e) {
 					throw new Exception(e);
 				}finally {
