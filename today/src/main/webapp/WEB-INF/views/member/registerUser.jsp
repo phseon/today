@@ -12,9 +12,10 @@
 <body>
 <div class="page-main"> 
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>	
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
+
 	<div class="content-main">
 		<h2>회원가입 완료</h2>
+		<hr width="30%" size="1" noshade="noshade" >
 		<div class="result-display">
 			<div class="align-center">
 				회원가입이 완료되었습니다.<p>
