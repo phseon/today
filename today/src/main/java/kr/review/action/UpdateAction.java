@@ -29,9 +29,7 @@ public class UpdateAction implements Action{
 		MultipartRequest multi = 
 				            FileUtil.createFile(request);
 		int r_num = Integer.parseInt(
-				multi.getParameter("r_num"));
-//		int m_num = Integer.parseInt(
-//				multi.getParameter("m_num"));
+						multi.getParameter("r_num"));
 		String r_imgsrc = multi.getFilesystemName("r_imgsrc");
 		
 		ReviewDAO dao = ReviewDAO.getInstance();
@@ -46,19 +44,19 @@ public class UpdateAction implements Action{
 			return "/WEB-INF/views/common/notice.jsp";
 		}
 		
+		//로그인한 회원번호와 작성자 회원번호가 일치
 		//현재 날짜를 sql에 사용하도록 변환
 		Date date = new Date();
-System.out.println("dhdhdhdh");
-System.out.println("q"+r_num);
-        long timeInMilliSeconds = date.getTime();
+		long timeInMilliSeconds = date.getTime();
         java.sql.Date nowdate = new java.sql.Date(timeInMilliSeconds); 
 		
-		//로그인한 회원번호와 작성자 회원번호가 일치
-//		rez.setM_num(rez.getM_num());
+
 		review.setR_date(nowdate);
 		review.setR_num(r_num);
 		//textarea의 name 값으로 가져옴
 		review.setR_content(multi.getParameter("content"));
+		review.setR_imgsrc(r_imgsrc);
+		review.setStar(Integer.parseInt(multi.getParameter("star")));
 		
 		dao.updateReview(review);
 //		dao.getRevInfo(m_num, r_num);

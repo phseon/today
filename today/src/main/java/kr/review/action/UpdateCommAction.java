@@ -51,9 +51,7 @@ public class UpdateCommAction implements Action{
 			
 			mapAjax.put("result", "success");
 		}else {//로그인이 되어 있고 로그인한 회원번호와 작성자 회원번호 불일치
-			mapAjax.put("result", "wrongAccess");			
-
-			System.out.println("no,..,.,,");
+			mapAjax.put("result", "wrongAccess");
 		}
 		
 		//JSON 데이터로 변환

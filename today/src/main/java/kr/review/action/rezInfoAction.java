@@ -44,7 +44,6 @@ public class rezInfoAction implements Action {
 		request.setAttribute("myProc", myProcedure); 
 
 		ReservationDAO rez_dao = ReservationDAO.getInstance();
-		System.out.println("uuu번호" + user_num);
 		ReservationVO rez = rez_dao.getReservation(user_num);
 		request.setAttribute("rez", rez);
 		

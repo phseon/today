@@ -20,14 +20,12 @@ public class UpdateFormAction implements Action{
 			return "redirect:/member/loginForm.do";
 		}
 		
-		//로그인 된 경우		
-		//예약테이블의 회원번호 반환
+		//로그인 된 경우	회원번호 반환
 				int r_num = Integer.parseInt(
 								request.getParameter("r_num"));
 				
 				ReviewDAO dao = ReviewDAO.getInstance();
 				
-//				ReservationVO rez = dao.getRevInfo(user_num);
 				ReviewVO review = dao.getReview(r_num);
 				
 				if(user_num!=review.getM_num()) {
@@ -36,7 +34,6 @@ public class UpdateFormAction implements Action{
 				}
 				
 //				로그인이 되어 있고 로그인한 회원번호와 작성자 회원번호가 일치
-//				request.setAttribute("rez", rez);
 				request.setAttribute("review", review);
 				
 				return "/WEB-INF/views/review/updateForm.jsp";
