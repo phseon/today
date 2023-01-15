@@ -7,21 +7,22 @@
 <meta charset="UTF-8">
 <title>faq 내용</title>
 <link rel = "stylesheet" href ="style.css" type="text/css"> 
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/faq.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/faqHeader.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/footerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 
 </head>
 <body>
 <div class="page-main">
-	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>	 
+	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>	
+	<jsp:include page="/WEB-INF/views/faq/faqHeader.jsp"/> 
 	
 	<div class="content-main">
-		<h1>FAQ</h1>
-		<h3>자주 묻는 질문</h3>
-		
-		<ul class="faq_content">
-			<li><h2>Q</h2>  ${faq.faq_title}</li>
+	
+		<ul class="content">
+			<li><h2>Q</h2>  ${faq.faq_title}</li><br><br>
 			<li><h2>A</h2>  ${faq.faq_content}</li>
 		</ul>
 		

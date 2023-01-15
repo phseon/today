@@ -5,8 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>FAQ 글쓰기</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel = "stylesheet" href ="style.css" type="text/css"> 
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/faq.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/faqHeader.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/footerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+
 <script type="text/javascript">
 	$(function(){
 		$('#register_form').submit(function(){
@@ -35,22 +40,22 @@
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
-<%-- 	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/> --%>
+	<jsp:include page="/WEB-INF/views/faq/faqHeader.jsp"/> 
 	<div class="content-main">
-		<h1>FAQ 쓰기</h1>
-		<h3>자주 묻는 질문</h3>
+		
+		<h2 class="align-center">FAQ 쓰기</h2>
 		<form id="write_form" action="faqWrite.do" method="post"
 		                       enctype="multipart/form-data">
 		                     
 		                     
-			<ul>
+			<ul class="content">
 				<li>
 					<label for="faq_title">제목</label>
 					<input type="text" name="faq_title" id="faq_title"
 					                          maxlength="50">
 				</li>
 				<li class="radiobt">
-						<label>문의종류</label>
+						<label for="faq_type">문의종류</label>
 						
 						<input type="radio" id="chk_type1" name="faq_type" value="시술문의">시술문의
 				 
@@ -75,8 +80,7 @@
 		</form>
 		
 	</div>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </div>
-
-
 </body>
 </html>
