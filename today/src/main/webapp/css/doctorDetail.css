@@ -63,6 +63,18 @@
 	padding-right:150px;
 }
 
+/*의사 정보변경 비밀번호 체크
+---------------------*/
+.check-display{
+	width:800px;
+	height:200px;
+	margin:70px auto;
+	border:1px solid #000;
+	display:flex;
+	align-items:center;
+	justify-content:center;	
+}
+
 /*의사 정보변경
 ---------------------*/
 .page-main{

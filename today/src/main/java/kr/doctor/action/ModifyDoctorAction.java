@@ -8,7 +8,6 @@ import com.oreilly.servlet.MultipartRequest;
 
 import kr.controller.Action;
 import kr.doctor.dao.DoctorDAO;
-import kr.doctor.vo.DoctorVO;
 import kr.member.vo.MemberVO;
 import kr.util.FileUtil;
 

@@ -44,7 +44,7 @@
 				<li>
 				<input class="reserve_doc" value="예약하기" onclick="location.href='${pageContext.request.contextPath}/reservation/reserveForm.do'">
 				<c:if test="${!empty user_num && user_auth == 1}">
-				<input class="modify_doc" value="수정" onclick="location.href='modifyDoctorForm.do?d_num=${doctor.m_num}'">
+				<input class="modify_doc" value="수정" onclick="location.href='checkedPasswdForm.do?d_num=${doctor.m_num}'">
 				</c:if>
 				</li>
 			</ul>

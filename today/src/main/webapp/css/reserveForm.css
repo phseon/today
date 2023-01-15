@@ -1,4 +1,6 @@
 @charset "UTF-8";
+/*예약 폼
+---------------------*/
 .page-main{
 	margin: 0 auto;
 	text-align:center;
@@ -41,4 +43,22 @@ form ul li{
 .timeSelect input[type=radio]:checked+label{
     background-color:#333;
     color:#fff;
+}
+
+/*예약 결과
+---------------------*/
+.result-display{
+	width:600px;
+	height:350px;
+	margin:50px auto;
+	border:1px solid #000;
+	display:flex;
+	align-items:center;
+	justify-content:center;	
+}
+input{
+	margin:20px auto;
+}
+.align-center{
+	text-align:center;
 }

@@ -29,19 +29,24 @@ public class ReserveAction implements Action{
 		
 		ReservationDAO dao = ReservationDAO.getInstance();
 		ReservationVO reserve = new ReservationVO();
-		reserve.setM_num(user_num);
-		reserve.setP_num(Integer.parseInt(request.getParameter("p_num")));
-		reserve.setRev_date(request.getParameter("date"));
-		reserve.setRev_time(request.getParameter("time"));
-		//reserve.setDr_num(Integer.parseInt(request.getParameter("dr_num")));
-		
-		dao.insertReservation(reserve);
-		
-		request.setAttribute("accessMsg", "예약이 완료되었습니다.");
-		request.setAttribute("accessUrl",
-						request.getContextPath() + "/myinfo/myPage.do");
-				
-		return "/WEB-INF/views/common/notice.jsp";
+		if(dao.getReservation(user_num)!=null) {
+			request.setAttribute("accessMsg", "이미 예약기록이 존재합니다.");
+			request.setAttribute("accessUrl",
+					request.getContextPath() + "/myinfo/myPage.do");
+		}else {
+			reserve.setM_num(user_num);
+			reserve.setP_num(Integer.parseInt(request.getParameter("p_num")));
+			reserve.setRev_date(request.getParameter("date"));
+			reserve.setRev_time(request.getParameter("time"));
+			//reserve.setDr_num(Integer.parseInt(request.getParameter("dr_num")));
+			
+			dao.insertReservation(reserve);
+			
+			request.setAttribute("accessMsg", "예약이 완료되었습니다.");
+			request.setAttribute("accessUrl",
+							request.getContextPath() + "/myinfo/myPage.do");
+		}		
+		return "/WEB-INF/views/reservation/reserve.jsp";
 	}
 
 }

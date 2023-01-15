@@ -36,13 +36,9 @@ public class ReservationDAO {
 //				+ "ON p.m_num=d.m_num "
 //				+ "ORDER BY d.name, p.p_title";
 			
-			
-			
 			sql = "SELECT d.name, p.m_num, p.p_num, p.p_title "
-				+ "FROM procedure p "
-				+ "JOIN member_detail d "
-				+ "ON p.m_num=d.m_num "
-				+ "ORDER BY d.name, p.p_title";
+				+ "FROM procedure p JOIN member_detail d "
+				+ "ON p.m_num=d.m_num ORDER BY p.p_title";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			list = new ArrayList<DoctorVO>();
