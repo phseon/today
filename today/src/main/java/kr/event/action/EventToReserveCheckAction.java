@@ -23,7 +23,7 @@ public class EventToReserveCheckAction implements Action{
 			return "/WEB-INF/views/common/notice.jsp";
 		}
 		
-		return "/WEB-INF/views/main/main.jsp";//나중에 예약페이지로 넘겨주기
+		return "redirect:/reservation/reserveForm.do";//나중에 예약페이지로 넘겨주기
 	}
 
 }
