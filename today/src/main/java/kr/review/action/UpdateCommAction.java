@@ -38,8 +38,6 @@ public class UpdateCommAction implements Action{
 		}else if(user_num!=null && 
 				      user_num == db_comm.getM_num()) {
 			//로그인이 되어 있고 로그인한 회원번호와 작성자 회원번호 일치
-//여기는new -27
-			System.out.println("ok");
 			ReviewCommVO comm = new ReviewCommVO();
 			comm.setC_num(c_num);
 			comm.setM_num(db_comm.getM_num());
