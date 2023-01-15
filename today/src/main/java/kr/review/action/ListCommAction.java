@@ -29,30 +29,6 @@ public class ListCommAction implements Action{
 			pageNum = "1";
 		}
 		
-		System.out.println("page:"+pageNum);
-//		ReviewDAO dao = ReviewDAO.getInstance();
-//		int count = dao.getReviewCount(keyfield, keyword);
-//		
-//		int a = Integer.parseInt(
-//				request.getParameter("review_num"));
-//		
-//			
-//		int r_num = Integer.parseInt(
-//				request.getParameter("r_num"));
-//		
-//		System.out.println("mm");
-//		System.out.println(Integer.parseInt(request.getParameter("review_num")));
-//		
-//		System.out.println("ggg" + request.getParameter("r_num"));
-//		int r_num = Integer.parseInt(
-//				request.getParameter("r_num"));
-//		
-//		
-//		
-//		
-//		System.out.println(r_num);//61
-//		
-//		int r_num = (Integer)request.getAttribute("r_num");
 		int r_num = Integer.parseInt(
 		         request.getParameter("r_num"));
 		
@@ -61,20 +37,6 @@ public class ListCommAction implements Action{
 		
 		int count = dao.getCommReviewCount(r_num);
 
-		
-//		ReviewDAO dao = ReviewDAO.getInstance();
-//		ReviewVO review = dao.getr
-//		
-////		String rr_num = 
-////				request.getParameter("review_num");
-////		System.out.println("qqq" + rr_num);//2
-//		
-//		int num = review.r_num;
-//		int count = dao.getReview(review.r_num);
-		
-//		System.out.println(r_num);//2
-		System.out.println(count);//2
-		
 		/*
 		 * ajax 방식으로 목록을 표시하기 때문에 PagingUtil은 페이지수
 		 * 표시가 목적이 아니라 목록 데이터 페이지 처리를 위한 rownum

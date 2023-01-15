@@ -29,32 +29,9 @@ $(function(){
 				
 				$(param.list).each(function(index,item){
 					let output = '<div class="item">';
-					
-					/*
-					//로그인한 회원번호와 작성자의 회원번호 일치 여부 체크
-					if(param.user_num != item.m_num){		
-					output += '<h4>' + item.m_num + '번 회원'
-							+ ' | ' + item.c_date
-							+ '</h4>';
-					}else{
-					output += '<h4>' + item.m_num + '번 회원'
-							+ ' | ' + item.c_date
-							+ ' <input type="button" data-cnum="' + item.c_num+'" value="수정" class="modify-btn">'
-							+ ' <input type="button" data-cnum="' + item.c_num+'" value="삭제" class="delete-btn">'
-							+ '</h4>';
-							}
-					
-					output += '<p>' + item.c_content + '</p>';
-					
-					let c_count = '<div id="c_count">' + param.count + '</div>';
-				
-					output += '<hr size="1" class="comm_hr" noshade width="100%">';
-				
-					output += '</div>';
-*/
 
 					output += '<h4>' + item.m_num + '번 회원 | '
-							+ item.c_num + '</h4>';
+							+ item.c_date + '</h4>';
 					output += '<div class="sub-item">';
 					output += '<p>' + item.c_content + '</p>';
 					
@@ -106,12 +83,6 @@ $(function(){
 		//기본 이벤트 제거
 		event.preventDefault();
 		
-		console.log(event.c_content);
-		console.log($('#c_content').val());
-		console.log($('#c_content').val().trim());
-		console.log('ss not a string');
-		
-		
 		if($('#c_content').val().trim()==''){
 			alert('내용을 입력하세요!');
 			$('#c_content').val('').focus();
@@ -120,7 +91,6 @@ $(function(){
 		
 		//form 이하의 태그에 입력한 데이터를 모두 읽어 옴
 		let form_data = $(this).serialize();
-		console.log("form_data : " + form_data);
 		
 		//댓글 등록
 		$.ajax({

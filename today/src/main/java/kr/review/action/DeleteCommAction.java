@@ -38,8 +38,6 @@ public class DeleteCommAction implements Action{
 				&& user_num == db_comm.getM_num()) {
 			//로그인이 되어 있고 로그인 한 회원번호와 작성자 회원번호가
 			//일치
-			System.out.println("ccc"+db_comm.getM_num());
-			System.out.println("vvv"+c_num);
 			dao.deleteCommReview(c_num);
 			
 			mapAjax.put("result", "success");

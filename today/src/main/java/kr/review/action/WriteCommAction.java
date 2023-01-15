@@ -37,11 +37,7 @@ public class WriteCommAction implements Action{
 			ReviewCommVO comm = new ReviewCommVO();
 			ReviewVO review = new ReviewVO();
 			
-//			int r_num = Integer.parseInt(
-//			         request.getParameter("r_num"));
-			System.out.println(request.getParameter("c_content"));
 			String com = request.getParameter("c_content");
-			System.out.println(com);
 			
 			//현재 날짜를 sql에 사용하도록 변환
 			Date date = new Date();
@@ -58,10 +54,6 @@ public class WriteCommAction implements Action{
 			ReviewDAO dao = ReviewDAO.getInstance();
 			dao.insertCommReview(member,review,comm);
 			
-					
-			System.out.println("zzz"+request.getParameter("c_content"));
-			
-//			dao.insertCommReview(member,review,comm);
 			
 			mapAjax.put("result", "success");
 		}

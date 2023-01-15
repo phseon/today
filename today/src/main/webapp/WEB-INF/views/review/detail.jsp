@@ -81,11 +81,6 @@
 		</div>
 		</c:if>
 			
-		
-		<!-- 
-		<form action="update.do" method="post" id="update_form"
-		              enctype="multipart/form-data">
-		-->
 			<input type="hidden" name="r_num" 
 			                       value="${review.r_num}">
 			<input type="hidden" name="m_num" 
@@ -97,17 +92,11 @@
 			<div id="c_count"></div>
 			</div>
 			<form id="c_form" enctype="multipart/form-data">
-			<!-- <form action="listComm.do" method="post" id="c_form" enctype="multipart/form-data">
-			-->
+			
 			<!-- DetailRevAction에 넘어가는 r_num -->
 			<input type="hidden" name="r_num" 
 			       value="${review.r_num}" id="r_num">
-			<!-- 
-			<input type="hidden" name="review_num" 
-			       value="${review.r_num}" id="r_num">
-			<input type="hidden" name="review_num" 
-			       value="${comm.r_num}" id="r_num">
-			       -->
+			
 			        <textarea rows="3" cols="50" name="c_content" 
 				  id="c_content" class="comm-content"
 				  <c:if test="${empty user_num}">disabled="disabled"</c:if>
