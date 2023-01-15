@@ -6,12 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>FAQ 수정</title>
+<link rel = "stylesheet" href ="style.css" type="text/css"> 
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/headerStyle.css">
+<link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/faq.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/faqHeader.css">
 <link rel = "stylesheet" href = "${pageContext.request.contextPath}/css/footerStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <!-- <script type="text/javascript">
 	$(function(){
-		$('#register_form').submit(function(){
+		$('#update_form').submit(function(){
 			if($('#faq_title').val().trim()==''){
 				alert('제목을 입력하세요');
 				$('#faq_title').val('').focus();
@@ -38,11 +41,11 @@
 <div class="page-main">
 
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>
+	<jsp:include page="/WEB-INF/views/faq/faqHeader.jsp"/> 
+	
 	<div class="content-main">
-	<h1>FAQ 쓰기</h1>
-	<h3>자주 묻는 질문</h3>
-		<br>
-		<h2>FAQ 글수정</h2>
+	<br>
+		<h2 class="align-center">FAQ 수정</h2>
 		<form action="faqUpdate.do" method="post" id="update_form"
 		              enctype="multipart/form-data">
 		              
@@ -54,7 +57,7 @@
 					    value="${faq.faq_title}" maxlength="50">
 				</li>
 				<li class="radiobt">
-						<label>문의종류</label>
+						<label for="faq_type">문의종류</label>
 						
 						<input type="radio" id="chk_type1" name="faq_type" value="시술문의">시술문의
 				 
@@ -62,8 +65,7 @@
 				 
 				        <input type="radio" id="chk_type3" name="faq_type" value="기타">기타
 												
-					</li>
-				
+				</li>
 				<li>
 					<label for="faq_content">내용</label>
 					<textarea rows="5" cols="30" name="faq_content" 

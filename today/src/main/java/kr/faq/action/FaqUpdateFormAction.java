@@ -22,10 +22,7 @@ public class FaqUpdateFormAction implements Action{
 		
 		Integer user_auth = (Integer)session.getAttribute("user_auth");
 		
-		/*
-		 * //일반회원인 경우 if(user_auth ==2) {// 1:의사 2:일반 return
-		 * "/WEB-INF/views/common/notice.jsp"; }
-		 */
+		
 	
 		//글번호 반환
 		int faq_num = Integer.parseInt(
