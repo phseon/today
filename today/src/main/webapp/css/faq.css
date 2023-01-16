@@ -18,6 +18,29 @@
 	text-align:right;
 }
 
+.write_btn{
+   height:35px;
+   width:100px;
+   color :ㅣblack;
+   font-weight : bold;
+   padding : 10px 30px;
+   border-radius: 5px;
+   border-width:0.5px;
+   cursor : pointer;
+   border-color:rgb(184, 184, 184);
+   border-style:solid;
+}
+.write_btn:active{
+   background : #008d62;
+}
+
+.content-main{
+   width:1200px;
+   margin:0 auto;
+   position : relative;
+   margin-top:20px;
+   margin-bottom: 300px;
+}
 
 
 

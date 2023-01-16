@@ -72,8 +72,10 @@
 				
 			</ul> 
 			<div class="align-center">
-				<input type="submit" value="등록">
-				<input type="button" value="취소" 
+				<input class="write_btn" 
+				type="submit" value="등록">
+				<input class="write_btn" 
+				type="button" value="취소" 
 					onclick="location.href='qnaPage.do'">
 			</div>  
 			                 

@@ -22,7 +22,8 @@
 		<div class="list-space align-right">
 			<c:if test="${user_auth == 1}">
 			
-			<input type="button" value="글쓰기" onclick="location.href='faqWriteForm.do'"/>
+			<input class="write_btn" 
+			type="button" value="글쓰기" onclick="location.href='faqWriteForm.do'"/>
 			</c:if> 
 		</div>
 		<c:if test="${count == 0}">

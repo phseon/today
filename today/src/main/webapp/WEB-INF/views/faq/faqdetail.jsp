@@ -27,12 +27,15 @@
 		</ul>
 		
 		<div class="align-center">
-		<input type="button" value="목록" onclick="location.href='qnaPage.do'">
+		<input class="write_btn" 
+		 type="button" value="목록" onclick="location.href='qnaPage.do'">
 		
 		<%--관리자일 경우 수정 삭제 가능 --%>
 		<c:if test="${user_auth == 1}">
-		<input type="button" value="수정" onclick="location.href='faqUpdateForm.do?faq_num=${faq.faq_num}'">
-		<input type="button" value="삭제" id="delete_btn"> 
+		<input class="write_btn" 
+		type="button" value="수정" onclick="location.href='faqUpdateForm.do?faq_num=${faq.faq_num}'">
+		<input class="write_btn" 
+		type="button" value="삭제" id="delete_btn"> 
 		<script type="text/javascript">
 		
 			let delete_btn = document.getElementById('delete_btn')
