@@ -48,7 +48,7 @@
 				<input type="submit" value="로그인">
 			</div>
 			<div class="align-center">
-				<p><a href="${pageContext.request.contextPath}/member/registerUserForm.do">회원가입</a></p>
+				<p><a class="register_link" href="${pageContext.request.contextPath}/member/registerUserForm.do">회원가입</a></p>
 			</div>
 		</form>	
 	</div>
