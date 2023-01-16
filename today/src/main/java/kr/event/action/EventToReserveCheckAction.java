@@ -19,7 +19,7 @@ public class EventToReserveCheckAction implements Action{
 		Integer user_auth = (Integer) session.getAttribute("user_auth");
 		if (user_auth == 1) {// 0 : 탈퇴 1 : 의사 2 :일반
 			request.setAttribute("accessMsg", "관리자는 예약할 수 없습니다.");
-			request.setAttribute("accessUrl", "/WEB-INF/views/event/eventMainPage.jsp");
+			request.setAttribute("accessUrl", request.getContextPath() + "/event/eventPage.do");
 			return "/WEB-INF/views/common/notice.jsp";
 		}
 		

@@ -27,7 +27,7 @@
 					<a href="${pageContext.request.contextPath}/procedure/list.do">시술</a>
 				</li>
 				<li>
-					<a href="${pageContext.request.contextPath}/qna/qnaPage.do">QnA</a>
+					<a href="${pageContext.request.contextPath}/qna/qnaPage.do">FAQ</a>
 				</li>
 				<li>
 					<a href="${pageContext.request.contextPath}/review/reviewPage.do">리뷰</a>

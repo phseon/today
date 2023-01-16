@@ -10,7 +10,6 @@
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/headersample.jsp"/>	
-	<jsp:include page="/WEB-INF/views/common/navBar.jsp"/>
 	<div class="content-main">
 		<h2>안내</h2>
 		<div class="result-display">
