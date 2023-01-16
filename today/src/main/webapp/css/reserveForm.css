@@ -44,6 +44,19 @@ form ul li{
     background-color:#333;
     color:#fff;
 }
+.button input{
+	border-style:solid;
+	border-color:rgb(184, 184, 184);
+	border-radius: 5px;
+	border-width:0.5px;
+	color:white;
+	cursor:pointer;
+	background-color:gray;
+	width:80px;
+}
+.button input:hover{
+	background:rgba(122,122,122,0.4);
+}
 
 /*예약 결과
 ---------------------*/
@@ -58,6 +71,19 @@ form ul li{
 }
 input{
 	margin:20px auto;
+}
+input[type=button]{
+	border-style:solid;
+	border-color:rgb(184, 184, 184);
+	border-radius: 5px;
+	border-width:0.5px;
+	color:white;
+	cursor:pointer;
+	background-color:gray;
+	width:80px;
+}
+input[type=button]:hover{
+	background:rgba(122,122,122,0.4);
 }
 .align-center{
 	text-align:center;

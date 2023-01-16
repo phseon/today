@@ -102,7 +102,7 @@
 				</div>
 				</li>
 			</ul>
-		<div class="align-center">
+		<div class="align-center button">
 			<input type="submit" value="예약">
 			<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 		</div>

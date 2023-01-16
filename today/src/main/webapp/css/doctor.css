@@ -1,14 +1,27 @@
 @charset "UTF-8";
 /*의사 리스트
 ---------------------*/
+.page-main{
+	margin:0 auto;
+	text-align:center;
+}
+.content-main{
+	width:1250px;
+	margin:0 auto;
+	position:relative;
+	text-align:center;
+	margin-top:35px;
+	margin-bottom:100px;
+}
 .doc-list{
-	width:1200px;
-	margin-left:100px;
+	width:100%;
+	margin:20px auto;
+	margin-left:75px;
 }
 .doc{
 	width:88%;
 	float:left;
-	margin:auto;
+	margin:0 auto;
 	cursor:pointer;
 }
 .doc:hover{
@@ -16,12 +29,11 @@
 }
 .doc_photo{
 	float:left;
-	margin:20px 0 0 10px;
+	margin:20px auto;
 }
 .doc-name{
 	display:inline-block;
-	margin-left:80px;
-	margin-top:130px;
+	margin-top:150px;
 	font-size:25px;
 	color:#4a4a4a;
 }
@@ -50,5 +62,5 @@
 }
 .align-center{
 	text-align:center;
-	margin-right:120px;
+	margin:10px 120px 10px 0;
 }

@@ -36,7 +36,7 @@
 				<input type="password" name="passwd" id="passwd" size="12" maxlength="12">
 			</li>
 		</ul>
-		<div class="align-center">
+		<div class="align-center button">
 			<input type="submit" value="수정하기">
 			<input type="button" value="목록보기" onclick="location.href='doctorList.do'">
 		</div>

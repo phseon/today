@@ -3,11 +3,15 @@
 /*의사 상세정보
 ---------------------*/
 .content-main{
-	margin-bottom:30px;
+	margin:30px auto;
+	padding-left:250px;
+	text-align:center;
 }
 .doc-detail{
-	width:1200px;
-	margin-left:150px;
+	margin:60px auto;
+	position:relative;
+	height:360px;
+	width:1300px;
 }
 .doc{
 	width:85%;
@@ -16,7 +20,6 @@
 	cursor:pointer;
 }
 .doc-detail-photo{
-	width:500px;
 	float:left;
 	margin:0 50px 0 10px;
 }
@@ -74,7 +77,19 @@
 	align-items:center;
 	justify-content:center;	
 }
-
+.button input{
+	border-style:solid;
+	border-color:rgb(184, 184, 184);
+	border-radius: 5px;
+	border-width:0.5px;
+	color:white;
+	cursor:pointer;
+	background-color:gray;
+	width:80px;
+}
+.button input:hover{
+	background:rgba(122,122,122,0.4);
+}
 /*의사 정보변경
 ---------------------*/
 .page-main{

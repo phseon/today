@@ -53,7 +53,7 @@
 					<input type="file" id="d_imgsrc" name="d_imgsrc" accept="image/gif,image/png,image/jpeg">
 				</li>
 			</ul>
-			<div class="align-center">
+			<div class="align-center button">
 				<input type="submit" value="등록">
 				<input type="button" value="취소" onclick="location.href='doctorList.do'">
 			</div>

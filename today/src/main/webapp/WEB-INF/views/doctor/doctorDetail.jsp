@@ -22,8 +22,8 @@
 	<h1>의료진 소개</h1>
 	<img src = "${pageContext.request.contextPath}/images/dividing_line.png">
 </div>
+<hr size="1" noshade="noshade" width="100%">
 	<div class="content-main">
-	<hr size="1" noshade="noshade" width="100%">
 		<div class="doc-detail">
 			<ul class="doc-detail-photo">
 			<c:if test="${empty doctor.imgsrc}">
