@@ -1,5 +1,5 @@
 # 오늘의 치과
-+ :clipboard: [오늘의치과 프로젝트 포트폴리오](https://docs.google.com/presentation/d/1_KpBjNWRplLo0JJH9v_WntLJOPVSi9XF/edit?usp=sharing&ouid=117089576470902145888&rtpof=true&sd=true)
++ :clipboard: [오늘의치과 프로젝트 포트폴리오](https://docs.google.com/presentation/d/1EAnOOY26kkDoRSWhWd47gh2B62cDktbV/edit?usp=sharing&ouid=117089576470902145888&rtpof=true&sd=true)
 
 ## 프로젝트 소개
 + 이가아플때마다 전문의가 언제나 상주하고 있는 이 곳 오늘의 치과로 오세요! :wave:
@@ -10,7 +10,7 @@
 + 김나영
 + 민경준
 + 손희원
-+ [신서영](https://github.com/ssy2253)
++ 신서영
 + 원여경
 + 최영민
 
