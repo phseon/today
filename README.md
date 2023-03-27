@@ -23,6 +23,19 @@
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=ssy2253)](https://github.com/ssy2253/soso/github-readme-stats)
 
+
+## 모듈명 정리
++ main : 메인페이지 관련
++ member : 회원 관련
++ myinfo : 마이페이지 관련
++ dactor : 의사 소개페이지 관련
++ procedure : 시술 소개페이지 관련
++ reservation : 시술 예약페이지 관련
++ event : 이벤트페이지 관련
++ information : 공지사항페이지 관련 
++ review : 후기게시판 관련
++ faq : faq페이지 관련
+
 ## 구현 기능
 ### 기능 1
 
